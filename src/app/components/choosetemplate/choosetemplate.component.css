@@ -1,0 +1,45 @@
+.cards{
+    display:flex;
+    flex-wrap:wrap;
+  }
+  .cards .card{
+    margin-right: 20px;
+    cursor:pointer;
+  }
+  .cards .card img{
+    width: 350px;
+  }
+  .cards .card .card-header{
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+  }
+  .cards .card .card-body p{
+    margin-top: -10px;
+  }
+  .main1{
+    margin: 20px;
+    margin-top: 80px;
+    display:flex;
+    flex-direction:column;
+    justify-content:left;
+    align-items:left;
+  }
+  .main2{
+    margin: 20px;
+    margin-top: 80px;
+    
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+  }
+  .main3{
+    margin: 20px;
+    margin-top: 80px;
+    display:flex;
+    flex-direction:column;
+    justify-content:right;
+    align-items:right;
+  }
+  

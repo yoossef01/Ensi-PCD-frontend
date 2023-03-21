@@ -1,0 +1,27 @@
+
+
+.nav-link:hover{
+    background-color:#525252 !important;
+}
+
+.nav-link .fa{
+    transition:all 1s;
+}
+
+.nav-link:hover .fa{
+    transform:rotate(360deg);
+}
+a[data-toggle="collapse"]{position: relative}
+.nav-link::after{display: block;position: absolute;top:50%;right:0px;transform: translateY(-50%)}
+
+ .icone .item-show-1 li .fa  {
+    display: none;
+  } 
+   .icone .item-show-1 li .Ajout {
+    display: inline;
+  }  
+  
+  .icone .item-show-1 li:hover .fa {
+display:inline;
+
+}

@@ -1,0 +1,152 @@
+<div class="px-0 bg-light">
+  <div class="d-md-flex" > 
+  <div class="d-flex flex-column vh-00 flex-shrink-0 p-3 text-white bg-dark  " style="width: 250px;"> 
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" > 
+    <svg class="bi me-2" width="40" height="32"> </svg> <span class="fs-4">Boutique</span>
+   </a> 
+   <hr>
+     <ul class="nav nav-pills flex-column mb-auto" >
+       <li class="nav-item"> <a href="#" class="nav-link active" aria-current="page">
+          <i class="fa fa-home"></i>
+          <span class="ms-2">Home</span>
+         </a> </li>
+    <li> <a href="#" class="nav-link text-white">
+               <i class="fa fa-dashboard"></i>
+               <span class="ms-2">Dashboard</span> </a> </li> 
+               <li> <a type="button" class="nav-link text-white dropdown-toggle" data-toggle="collapse" (click)="collapse.toggle()" 
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample"> <i class="fa fa-first-order"></i>
+               <span class="ms-2">Categories</span> </a>
+               <div class="icone" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+               <ul class="item-show-1"  >
+                
+                <li  (click)="selectCategorie($event)" type="button"  class="nav-link text-white" *ngFor="let cat of categories" [value]="cat.id" ><i type="button" class="fa fa-trash" style="color: red;" (click)="deletecat(cat)" ></i>  {{ cat.nom }}</li>
+               <li type="button"  class="nav-link text-white dropdown-toggle"  data-toggle="collapse" (click)="isCollapsed2 = !isCollapsed2"
+                [attr.aria-expanded]="!isCollapsed2" aria-controls="collapseExample2">
+                 <i  class="Ajout fa fa-plus-square "></i>
+                 <span class=" ms-2">Ajouter</span> 
+               </li>
+                 <div id="collapseExample2" [ngbCollapse]="isCollapsed2">
+                                    <label for="nom">Nom</label> 
+                  <input type="text" id="nom" name="nom" [(ngModel)]="this.nomNewCat"
+                   required>
+                   <button (click)="createNewCategory()" (click)="isCollapsed2 = !isCollapsed2">Ajouter</button>
+</div>
+             </ul>
+         </div> 
+               </li>
+                
+                <li> <a href="#" class="nav-link text-white">
+                    <i class="fa fa-cog"></i><span class="ms-2">Mes commandes</span> </a> </li> <li>
+                         <a href="#" class="nav-link text-white"> <i class="fa fa-bookmark"></i>
+                         <span class="ms-2">Bookmarks</span> </a> </li> </ul> <hr> 
+                                  
+</div> <div class="container">
+    <div class="row  ">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Key Word</span>
+        </div>
+        <input type="text"  [(ngModel)]="texte" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+      </div>
+    </div>
+    
+    <div class="row ">
+        <div class="col-sm-4 my-2"  *ngFor="let p of produitF">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="http://localhost:8080/apiproduit/getimage/{{p.id}}" width="50" height= "170" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{p.nom}}</h5>
+                  <h6 style="color:red">
+    
+                    {{p.prix}} DT
+                  </h6>
+                  <h6 style="color: green" *ngIf="p.quantite>0; else repture">
+                    En Stock
+                  </h6>
+                  <p><button class="btn btn-danger m-2" (click)=delete(p)>
+                    <span class="fa fa-trash"></span>
+                  </button>
+                  <!--  routerLink="/products/{{p.id}}"  -->
+                    <a (click)="openDialogUpdate(p.id)" class ="btn btn-primary m-2">
+                    <span class="fa fa-info"></span>
+                  </a>
+                 
+                </p>
+    
+                </div>
+              </div>
+    
+        </div>
+        <button mat-raised-button (click)="openDialog()">
+        <div class="col-sm-4 my-2">
+          <div  class="card" style="width: 18rem;"> 
+            
+            <img  class="card-img-top" src=".\assets\image\ajout.png"  width="50" height= "350" alt="Card image cap"  >
+           
+           
+            
+        </div> <i class="fa fa-plus-square fa-2x " aria-hidden="true" style="display:flex;justify-content:center;align-items:center;position: relative; top: -190px; left:-40px;"> 
+            </i> <h4  style="display:flex;justify-content:center;align-items:center;position: relative; top: -190px; left:-35px;">Ajouter un nouveau <br>produit</h4>
+    </div>
+   </button>
+
+      
+  
+    
+   <section>
+      <h2> Ajouter un categorie</h2>
+    
+       <form #produitForm="ngForm" (submit)="createNewCategory()">
+       <div>
+          <label for="nom">Nom</label> 
+          <input type="text" id="nom" name="nom" [(ngModel)]="this.nomNewCat"
+           required>
+        </div>
+    
+        
+        <button type="submit">Ajouter</button>
+       </form> 
+    
+    </section> 
+    
+    
+    
+    
+    
+    <ng-template #repture><h6 style="color: brown"> Rupture de Stock</h6>
+    </ng-template>
+    
+ </div>   
+</div></div>
+<form #produitForm="ngForm" (submit)="updateProduit()">
+  <div>
+     <label for="nom">Nom</label>
+     <input type="text" id="nom" name="nom" [(ngModel)]="prod.nom"
+      required>
+   </div>
+
+   <div>
+     <label for="prix">Prix</label>
+     <input type="number" id="prix" name="prix" [(ngModel)]="prod.prix" required>
+   </div>
+
+   <div>
+     <label for="quantite">Quantité</label>
+     <input type="number" id="quantite" name="quantite" [(ngModel)]="prod.quantite" required>
+   </div>
+
+   
+
+   <div>
+     <label for="categorie">Catégorie</label>
+     <select id="categorie" name="categorie"(change)="selectCat($event)" [(ngModel)]="prod.categorie.id" required >
+       <option *ngFor="let cat of categories" [value]="cat.id" >{{ cat.nom }}</option>
+     </select>
+   </div>
+<div>
+     <label for="photo">Photo</label>
+     <input #myInput type="file" id="photo" name="photo" (change)="onPhotoSelected($event)" [(ngModel)]="photo" required>
+   </div>
+   <button type="submit"  >Ajouter</button>
+
+    

@@ -76,6 +76,7 @@ photo:File;
     // setInterval(() => {
     //   this.Catadded();
     // }, 1000);
+    ;
    }
   added(){
     if(this.service.added==true){

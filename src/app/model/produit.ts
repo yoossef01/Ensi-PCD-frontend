@@ -8,4 +8,6 @@ export class Produit {
     photo:string;
     categorie: Categorie;
     prix_achat:number;
+    //
 }
+

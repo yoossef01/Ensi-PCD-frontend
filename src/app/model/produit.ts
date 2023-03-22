@@ -10,3 +10,4 @@ export class Produit {
     prix_achat:number;
     //
 }
+

@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { HomeComponent } from '../home/home.component';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { DetailsComponent } from '../details/details.component';
+import { UpdateProductDialogComponent } from '../update-product-dialog/update-product-dialog.component';
 
 
 @Component({
@@ -232,7 +233,6 @@ this.id=parseInt(event.target.value);
 this.sc.getCategory(this.id).subscribe(data=>{this.categorie=data;  this.cat.id=this.categorie.id;  this.cat.nom=this.categorie.nom;
   this.produitF=this.produits.filter(x=>x.categorie.nom.indexOf(this.cat.nom)!=-1)
 });
- //this.produitF=this.produits.filter(x=>x.categorie.nom.indexOf(this.cat.nom)!=-1)
 
  
 
@@ -243,7 +243,7 @@ this.sc.getCategory(this.id).subscribe(data=>{this.categorie=data;  this.cat.id=
   });
 }
 openDialogUpdate(id:string){
-  let dialogRef = this.dialog.open(DetailsComponent, {
+  let dialogRef = this.dialog.open(UpdateProductDialogComponent, {
     width: '250px',
     data: {id}
     

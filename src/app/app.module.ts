@@ -30,6 +30,7 @@ import {MatButtonToggleModule}from '@angular/material/button-toggle';
    import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
 import { Template1Component } from './components/template1/template1.component';
+import { UpdateProductDialogComponent } from './components/update-product-dialog/update-product-dialog.component';
    // import{} from '@angular/material/slide-toggle';
 //import {  } from '@angular/material/badge';
 
@@ -48,7 +49,8 @@ const materiel=[
     ListeproduitsComponent,
         DetailsComponent,
       DialogBoxComponent,
-      Template1Component
+      Template1Component,
+      UpdateProductDialogComponent
     
   ],
    entryComponents:[DialogBoxComponent],

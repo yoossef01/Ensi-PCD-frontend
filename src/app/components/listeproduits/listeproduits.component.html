@@ -67,15 +67,18 @@
                     <span class="fa fa-trash"></span>
                   </button>
                   <!--  routerLink="/products/{{p.id}}"  -->
-                    <a (click)="openDialogUpdate(p.id)" class ="btn btn-primary m-2">
+                    <a routerLink="/products/{{p.id}}" class ="btn btn-primary m-2">
                     <span class="fa fa-info"></span>
                   </a>
-                 
+                  <p><button class="btn btn-primary m-2" (click)="openDialogUpdate(p.id)">
+                    <span class="fa fa-trash"></span>
+                  </button>
                 </p>
     
                 </div>
               </div>
-    
+    <ng-template #repture><h6 style="color: brown"> Rupture de Stock</h6>
+    </ng-template>
         </div>
         <button mat-raised-button (click)="openDialog()">
         <div class="col-sm-4 my-2">
@@ -93,60 +96,4 @@
       
   
     
-   <section>
-      <h2> Ajouter un categorie</h2>
-    
-       <form #produitForm="ngForm" (submit)="createNewCategory()">
-       <div>
-          <label for="nom">Nom</label> 
-          <input type="text" id="nom" name="nom" [(ngModel)]="this.nomNewCat"
-           required>
-        </div>
-    
-        
-        <button type="submit">Ajouter</button>
-       </form> 
-    
-    </section> 
-    
-    
-    
-    
-    
-    <ng-template #repture><h6 style="color: brown"> Rupture de Stock</h6>
-    </ng-template>
-    
- </div>   
-</div></div>
-<form #produitForm="ngForm" (submit)="updateProduit()">
-  <div>
-     <label for="nom">Nom</label>
-     <input type="text" id="nom" name="nom" [(ngModel)]="prod.nom"
-      required>
-   </div>
-
-   <div>
-     <label for="prix">Prix</label>
-     <input type="number" id="prix" name="prix" [(ngModel)]="prod.prix" required>
-   </div>
-
-   <div>
-     <label for="quantite">Quantité</label>
-     <input type="number" id="quantite" name="quantite" [(ngModel)]="prod.quantite" required>
-   </div>
-
    
-
-   <div>
-     <label for="categorie">Catégorie</label>
-     <select id="categorie" name="categorie"(change)="selectCat($event)" [(ngModel)]="prod.categorie.id" required >
-       <option *ngFor="let cat of categories" [value]="cat.id" >{{ cat.nom }}</option>
-     </select>
-   </div>
-<div>
-     <label for="photo">Photo</label>
-     <input #myInput type="file" id="photo" name="photo" (change)="onPhotoSelected($event)" [(ngModel)]="photo" required>
-   </div>
-   <button type="submit"  >Ajouter</button>
-
-    

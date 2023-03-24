@@ -36,6 +36,12 @@ ProduitDetails(id:string):void{
 this.idProduit=id;
 console.log(this.idProduit);
 this.Buttons=3;
-this.service.getProduct(id!).subscribe(data =>this.produit=data)
+this.service.getProduct(id!).subscribe(data =>{
+  this.produit = data;
+  console.log(this.produit);
+
+
+});
+
 }
 }

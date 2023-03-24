@@ -1,16 +1,35 @@
-<p>template1 works!</p>
-<header>
-
-    <h1>Ma Boutique en Ligne</h1>
-    <nav>
-      <ul>
-        <li><a type="button" (click)="HomePage()">Accueil</a></li>
-        <li><a type="button" (click)="ProduitsPage()">Produits</a></li>
-        <li><a routerLink="/a-propos">À propos</a></li>
-        <li><a routerLink="/contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#">My shop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page"  type="button" (click)="HomePage()">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                <li ngbDropdown class="dropdown">
+                    <a  ngbDropdownToggle class="nav-link dropdown-toggle"type="button" id="dropdownMenuButton1" aria-expanded="false">Shop</a>
+                    <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+                        <li><a ngbDropdownItem type="button" (click)="ProduitsPage()">All Products</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a ngbDropdownItem href="#">Popular Items </a></li>
+                        <li><a ngbDropdownItem href="#">New Arrivals </a></li>
+                      </ul>
+                </li>
+            </ul>
+            
+            <form class="d-flex">
+                <button class="btn btn-outline-dark" type="submit">
+                    <i class="bi-cart-fill me-1"></i>
+                    Cart
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+  
   <div [ngSwitch]="Buttons">
     <div *ngSwitchCase="1">
   <section class="hero-image">
@@ -129,7 +148,8 @@
                 </div>
             </div>
         </div>
-    </div></footer></div>
+    </div></footer>
+</div>
 
 
 
@@ -144,21 +164,21 @@
           <svg class="bi me-2" width="40" height="32"> </svg> <span class="fs-4">Boutique</span>
          </a> 
          <hr>
-         <ul class="nav nav-pills flex-column mb-auto" >
-         <li> <a type="button" class="nav-link text-white dropdown-toggle" data-toggle="collapse" (click)="collapse.toggle()" 
-            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample"> <i class="fa fa-first-order"></i>
+         <ul class="nav nav-pills flex-column mb-auto" id="nav ul">
+         <li id="nav li"> <a type="button" class="nav-link text-white dropdown-toggle" data-toggle="collapse" (click)="collapse.toggle()" 
+            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample" id="nav a"> <i class="fa fa-first-order"></i>
            <span class="ms-2">Categories</span> </a>
            <div class="icone" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
            <ul class="item-show-1"  >
             
-            <li   type="button"  class="nav-link text-white" *ngFor="let cat of categories" [value]="cat.id" >
+            <li   type="button"  class="nav-link text-white" *ngFor="let cat of categories" [value]="cat.id" id="nav li">
                 {{ cat.nom }}</li>
             </ul>
         </div> 
         </li></ul>  </div>
-        <div class="d-flex flex-wrap">
-    <div class="product-card " *ngFor="let p of produitF">
-      <img src="https://via.placeholder.com/150x150" alt="Produit 1">
+        <div class="d-flex flex-wrap"> 
+    <div class="product-card " *ngFor="let p of produitF" >
+      <img src="https://via.placeholder.com/150x150" alt="Produit 1" >
       <h3>{{p.nom}}</h3>
       <p>{{p.prix}}</p>
       <a href="#" class="btn">Acheter Maintenant</a>
@@ -166,22 +186,11 @@
         <span class="fa fa-info"></span>
       </a>
     </div>
-    <div class="product-card">
-      <img src="https://via.placeholder.com/150x150" alt="Produit 2">
-      <h3>Produit 2</h3>
-      <p>Description du Produit 2</p>
-      <a href="#" class="btn">Acheter Maintenant</a>
+   
     </div>
-    <div class="product-card">
-      <img src="https://via.placeholder.com/150x150" alt="Produit 3">
-      <h3>Produit 3</h3>
-      <p>Description du Produit 3</p>
-      <a href="#" class="btn">Acheter Maintenant</a>
-    </div> </div> </div></div>
-  </section>
-    </div>
-    <div *ngSwitchCase="3">  
-       
+</div>
+</div></section></div>
+     <div *ngSwitchCase="3">   
        <section class="py-5"  style="padding-top: 3rem;padding-bottom: 3rem ;">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center">

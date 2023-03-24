@@ -8,19 +8,20 @@ header {
     padding: 20px;
     background-color: #f5f5f5;
   }
-  nav ul {
+  #nav ul {
     display: flex;
     list-style: none;
   }
-  nav li {
+  #nav li {
     margin-right: 20px;
   }
-  nav a {
+  #nav a {
     text-decoration: none;
     color: #333;
     font-weight: bold;
     font-size: 18px;
   }
+ 
   .hero-image {
     background-image: url("https://via.placeholder.com/800x400");
     background-size: cover;
@@ -53,13 +54,15 @@ header {
     padding: 30px;
     display: flex;
     flex-wrap: wrap;
+
     /* justify-content: center; */
     
   }
   .product-card {
-    margin: 20px;
-    /* width: 300px; */
-    flex-basis: calc(33.33% - 40px); 
+    margin: 40px;
+    width: 300px;
+    /* width: 70%; */
+    /* flex-basis: calc(33.33% - 40px);  */
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
@@ -67,9 +70,12 @@ header {
     display: flex;
     flex-direction: column;
   }
-  .d-flex {
+  
+  
+  
+ .d-flex {
     flex-wrap: wrap; /* Pour permettre aux éléments de revenir à la ligne */
-  }
+   } 
   .product-card img {
     height: 150px;
     width: 100%;

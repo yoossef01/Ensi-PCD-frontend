@@ -11,7 +11,9 @@ import { TemplateComponent } from './components/template/template.component';
 import { ListeproduitsComponent } from './components/listeproduits/listeproduits.component';
 import { DetailsComponent } from './components/details/details.component';
 import { Template1Component } from './components/template1/template1.component';
-import { ThreetestComponent } from './components/threetest/threetest.component';
+import { InscriptionComponent } from './components/inscription/inscription.component';
+import { LoginComponent } from './components/login/login.component';
+
 
 const routes: Routes = [
   {path:'home',component: HomeComponent}
@@ -22,7 +24,9 @@ const routes: Routes = [
   {path:'template',component:TemplateComponent},{
   path:'liste',component:ListeproduitsComponent
   },{path:'template1',component:Template1Component},{
-    path:'3d',component:ThreetestComponent
+   path:'insc',component:InscriptionComponent
+  },{
+    path:'login', component:LoginComponent
   }
   
 ];

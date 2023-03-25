@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { SignupComponent } from './components/signup/signup.component';
 
 import { HomeComponent } from './components/home/home.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChoosetemplateComponent } from './components/choosetemplate/choosetemplate.component';
 import { TemplateComponent } from './components/template/template.component';
 import { ListeproduitsComponent } from './components/listeproduits/listeproduits.component';
@@ -31,7 +31,8 @@ import {MatButtonToggleModule}from '@angular/material/button-toggle';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
 import { Template1Component } from './components/template1/template1.component';
 import { UpdateProductDialogComponent } from './components/update-product-dialog/update-product-dialog.component';
-import { ThreetestComponent } from './components/threetest/threetest.component';
+import { InscriptionComponent } from './components/inscription/inscription.component';
+import { LoginComponent } from './components/login/login.component';
    // import{} from '@angular/material/slide-toggle';
 //import {  } from '@angular/material/badge';
 
@@ -52,7 +53,9 @@ const materiel=[
       DialogBoxComponent,
       Template1Component,
       UpdateProductDialogComponent,
-      ThreetestComponent,
+      
+      InscriptionComponent,
+      LoginComponent,
     
   ],
    schemas:[CUSTOM_ELEMENTS_SCHEMA]
@@ -63,7 +66,7 @@ const materiel=[
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule,materiel,CommonModule,
+    NgbModule,materiel,CommonModule,ReactiveFormsModule
   
     
   ],

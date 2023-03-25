@@ -27,9 +27,9 @@
               "node_modules/bootstrap/dist/css/bootstrap.css","node_modules/sweetalert2/dist/sweetalert2.css","node_modules/font-awesome/css/font-awesome.min.css"
             ],
             "scripts":  ["node_modules/jquery/dist/jquery.js","node_modules/bootstrap/dist/js/bootstrap.js",
-            "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+            "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js","node_modules/three/src/core/Object3D.js","node_modules/three/examples/jsm/loaders/OBJLoader.js",
             "node_modules/bootstrap/dist/js/bootstrap.bundle.js","node_modules/sweetalert2/dist/sweetalert2.js",
-            "node_modules/angularjs-sweetalert2/SweetAlert2.js"
+            "node_modules/angularjs-sweetalert2/SweetAlert2.js","node_modules/three/src/cameras/PerspectiveCamera.js"
  ]
           },
           "configurations": {

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +31,7 @@ import {MatButtonToggleModule}from '@angular/material/button-toggle';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
 import { Template1Component } from './components/template1/template1.component';
 import { UpdateProductDialogComponent } from './components/update-product-dialog/update-product-dialog.component';
+import { ThreetestComponent } from './components/threetest/threetest.component';
    // import{} from '@angular/material/slide-toggle';
 //import {  } from '@angular/material/badge';
 
@@ -50,16 +51,20 @@ const materiel=[
         DetailsComponent,
       DialogBoxComponent,
       Template1Component,
-      UpdateProductDialogComponent
+      UpdateProductDialogComponent,
+      ThreetestComponent,
     
   ],
+   schemas:[CUSTOM_ELEMENTS_SCHEMA]
+,
    entryComponents:[DialogBoxComponent],
   imports: [BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule,materiel,CommonModule
+    NgbModule,materiel,CommonModule,
+  
     
   ],
   

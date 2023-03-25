@@ -11,6 +11,7 @@ import { TemplateComponent } from './components/template/template.component';
 import { ListeproduitsComponent } from './components/listeproduits/listeproduits.component';
 import { DetailsComponent } from './components/details/details.component';
 import { Template1Component } from './components/template1/template1.component';
+import { ThreetestComponent } from './components/threetest/threetest.component';
 
 const routes: Routes = [
   {path:'home',component: HomeComponent}
@@ -20,7 +21,9 @@ const routes: Routes = [
   {path:'choose',component:ChoosetemplateComponent},
   {path:'template',component:TemplateComponent},{
   path:'liste',component:ListeproduitsComponent
-  },{path:'template1',component:Template1Component}
+  },{path:'template1',component:Template1Component},{
+    path:'3d',component:ThreetestComponent
+  }
   
 ];
 

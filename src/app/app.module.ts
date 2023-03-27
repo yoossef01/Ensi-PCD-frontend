@@ -33,6 +33,7 @@ import { Template1Component } from './components/template1/template1.component';
 import { UpdateProductDialogComponent } from './components/update-product-dialog/update-product-dialog.component';
 import { InscriptionComponent } from './components/inscription/inscription.component';
 import { LoginComponent } from './components/login/login.component';
+import { FormTemplateComponent } from './components/form-template/form-template.component';
    // import{} from '@angular/material/slide-toggle';
 //import {  } from '@angular/material/badge';
 
@@ -56,6 +57,7 @@ const materiel=[
       
       InscriptionComponent,
       LoginComponent,
+      FormTemplateComponent,
     
   ],
    schemas:[CUSTOM_ELEMENTS_SCHEMA]

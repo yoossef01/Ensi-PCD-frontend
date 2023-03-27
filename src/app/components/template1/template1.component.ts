@@ -18,7 +18,7 @@ export class Template1Component implements OnInit {
   produitF!:Produit[];
   produits: Produit[] ;
  Buttons:number;
- selectedValue = 'Client';
+ selectedValue = 'Vendeur';
  Client = 'Client';
  
 Vendeur='Vendeur';

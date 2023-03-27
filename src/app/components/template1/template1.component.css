@@ -282,13 +282,15 @@ display:inline;
 
 }
 #container {
-  margin: 50px auto;
+  margin: 5px auto;
   width: 280px;
+  height: 20px;
   text-align: center;
+  display: flex;
 }
 #container > .switch {
   display: block;
-  margin: 22px auto;
+  margin: 2px auto;
 }
 
 .switch {
@@ -301,7 +303,11 @@ display:inline;
   border-radius: 3px;
   cursor: pointer;
 }
-
+#container p {
+position: relative;
+top: 30%;
+right: 10%;
+}
 .switch-input {
   position: absolute;
   top: 0;

@@ -16,7 +16,7 @@ export class UpdateProductDialogComponent implements OnInit {
   @ViewChild('myInput')
   myInputVariable: ElementRef;
    id:number;
-   
+   img:string;
     categories!:Categorie[];
     categorie: Categorie = new Categorie();
     photo:File;
@@ -26,6 +26,8 @@ export class UpdateProductDialogComponent implements OnInit {
 
   ngOnInit(): void { this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
   this.service.getProduct(this.data.id).subscribe(data =>this.prod=data);
+ 
+  
   console.log(this.prod);
   }
   getCategoryById(id:number){
@@ -33,9 +35,17 @@ export class UpdateProductDialogComponent implements OnInit {
       this.prod.categorie.nom=this.categorie.nom;});
    
   }
-  onPhotoSelected(event: any) {
-    this.photo = event.target.files[0];
-  }
+  onPhotoSelected(event: any): void {
+     
+    this.photo =event.target.files[0];
+     if (this.photo) {
+       const reader = new FileReader();
+       reader.readAsDataURL(this.photo);
+       reader.onload = () => {
+         this.img = reader.result as string;
+       };
+     }
+   }
   reset() {
     console.log(this.myInputVariable.nativeElement.files);
     this.myInputVariable.nativeElement.value = "";

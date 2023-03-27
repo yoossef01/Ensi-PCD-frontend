@@ -18,9 +18,17 @@
                       </ul>
                 </li>
             </ul>
-            
+            <div id="container">
+                <label class="switch">
+                  <input type="checkbox" class="switch-input" (change)="onChange($event)">
+                  <!--<i class="icon-play"></i>-->
+                  <span class="switch-label" [attr.data-on]="selectedValue" [attr.data-off]="selectedValue"></span>
+                  <span class="switch-handle"></span>
+                </label>
+                <p>Mode: {{ selectedValue }}</p>
+            </div>
             <form class="d-flex">
-                <button class="btn btn-outline-dark" type="submit">
+                <button class="btn btn-outline-dark" id="btn" type="submit">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
@@ -32,11 +40,12 @@
   
   <div [ngSwitch]="Buttons">
     <div *ngSwitchCase="1">
+
   <section class="hero-image">
     <div class="hero-text">
       <h2>Les Meilleurs Produits</h2>
       <p>Achetez les produits les plus en vogue sur notre site</p>
-      <a (click)="ProduitsPage()" class="btn">Acheter Maintenant</a>
+      <a (click)="ProduitsPage()" class="btn" id="btn" >Acheter Maintenant</a>
     </div>
   </section>
   <div class="container" id="product-cards">
@@ -155,6 +164,8 @@
 
   
     <div *ngSwitchCase="2">
+        <div [ngSwitch]="this.selectedValue">
+            <div *ngSwitchCase="Client">
   <section class="featured-products">
     
     <div class="px-0 bg-light" >
@@ -181,15 +192,118 @@
       <img src="https://via.placeholder.com/150x150" alt="Produit 1" >
       <h3>{{p.nom}}</h3>
       <p>{{p.prix}}</p>
-      <a href="#" class="btn">Acheter Maintenant</a>
-      <a (click)="ProduitDetails(p.id)" class ="btn btn-primary m-2">
+      <a href="#" class="btn" id="btn">Acheter Maintenant</a>
+      <a (click)="ProduitDetails(p.id)" class ="btn btn-primary m-2"  >
         <span class="fa fa-info"></span>
       </a>
     </div>
    
     </div>
 </div>
-</div></section></div>
+</div></section>
+            </div>
+            <div *ngSwitchCase="Vendeur">
+                <div class="px-0 bg-light">
+                    <div class="d-md-flex" > 
+                    <div class="d-flex flex-column vh-00 flex-shrink-0 p-3 text-white bg-dark  " style="width: 250px;"> 
+                      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" > 
+                      <svg class="bi me-2" width="40" height="32"> </svg> <span class="fs-4">Boutique</span>
+                     </a> 
+                     <hr>
+                       <ul class="nav nav-pills flex-column mb-auto" >
+                         <li class="nav-item"> <a href="#" class="nav-link active" aria-current="page">
+                            <i class="fa fa-home"></i>
+                            <span class="ms-2">Home</span>
+                           </a> </li>
+                      <li> <a href="#" class="nav-link text-white">
+                                 <i class="fa fa-dashboard"></i>
+                                 <span class="ms-2">Dashboard</span> </a> </li> 
+                                 <li> <a type="button" class="nav-link text-white dropdown-toggle" data-toggle="collapse" (click)="collapse.toggle()" 
+                                  [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample"> <i class="fa fa-first-order"></i>
+                                 <span class="ms-2">Categories</span> </a>
+                                 <div class="icone" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+                                 <ul class="item-show-1"  >
+                                  
+                                  <li  (click)="selectCategorie($event)" type="button"  class="nav-link text-white" *ngFor="let cat of categories" [value]="cat.id" ><i type="button" class="fa fa-trash" style="color: red;" (click)="deletecat(cat)" ></i>  {{ cat.nom }}</li>
+                                 <li type="button"  class="nav-link text-white dropdown-toggle"  data-toggle="collapse" (click)="isCollapsed2 = !isCollapsed2"
+                                  [attr.aria-expanded]="!isCollapsed2" aria-controls="collapseExample2">
+                                   <i  class="Ajout fa fa-plus-square "></i>
+                                   <span class=" ms-2">Ajouter</span> 
+                                 </li>
+                                   <div id="collapseExample2" [ngbCollapse]="isCollapsed2">
+                                                      <label for="nom">Nom</label> 
+                                    <input type="text" id="nom" name="nom" [(ngModel)]="this.nomNewCat"
+                                     required>
+                                     <button (click)="createNewCategory()" (click)="isCollapsed2 = !isCollapsed2">Ajouter</button>
+                  </div>
+                               </ul>
+                           </div> 
+                                 </li>
+                                  
+                                  <li> <a href="#" class="nav-link text-white">
+                                      <i class="fa fa-cog"></i><span class="ms-2">Mes commandes</span> </a> </li> <li>
+                                           <a href="#" class="nav-link text-white"> <i class="fa fa-bookmark"></i>
+                                           <span class="ms-2">Bookmarks</span> </a> </li> </ul> <hr> 
+                                                    
+                  </div> 
+                 
+                  
+                  
+                  <div class="container">
+                      <div class="row  ">
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Key Word</span>
+                          </div>
+                          <input type="text"  [(ngModel)]="texte" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                      </div>
+                      
+                      <div class="row ">
+                          <div class="col-sm-4 my-2"  *ngFor="let p of produitF">
+                              <div class="card" style="width: 18rem;">
+                                  <img class="card-img-top" src="http://localhost:8080/apiproduit/getimage/{{p.id}}" width="50" height= "170" alt="Card image cap">
+                                  <div class="card-body">
+                                    <h5 class="card-title">{{p.nom}}</h5>
+                                    <h6 style="color:red">
+                      
+                                      {{p.prix}} DT
+                                    </h6>
+                                    <h6 style="color: green" *ngIf="p.quantite>0; else repture">
+                                      En Stock
+                                    </h6>
+                                    <p><button class="btn btn-danger m-2" (click)=delete(p)>
+                                      <span class="fa fa-trash"></span>
+                                    </button>
+                                    <!--  routerLink="/products/{{p.id}}"  -->
+                                      <a routerLink="/products/{{p.id}}" class ="btn btn-primary m-2">
+                                      <span class="fa fa-info"></span>
+                                    </a>
+                                    <button class="btn btn-primary m-2" (click)="openDialogUpdate(p.id)">
+                                      <span class="fa-solid fa-pen"></span>
+                                    </button>
+                                  </p>
+                      
+                                  </div>
+                                </div>
+                      <ng-template #repture><h6 style="color: brown"> Rupture de Stock</h6>
+                      </ng-template>
+                          </div>
+                          <button mat-raised-button (click)="openDialog()">
+                          <div class="col-sm-4 my-2">
+                            <div  class="card" style="width: 18rem;"> 
+                              
+                              <img  class="card-img-top" src=".\assets\image\ajout.png"  width="50" height= "350" alt="Card image cap"  >
+                             
+                             
+                              
+                          </div> <i class="fa fa-plus-square fa-2x " aria-hidden="true" style="display:flex;justify-content:center;align-items:center;position: relative; top: -190px; left:-40px;"> 
+                              </i> <h4  style="display:flex;justify-content:center;align-items:center;position: relative; top: -190px; left:-35px;">Ajouter un nouveau <br>produit</h4>
+                      </div>
+                     </button>
+            </div></div>
+        </div></div>
+    </div></div></div>
      <div *ngSwitchCase="3">   
        <section class="py-5"  style="padding-top: 3rem;padding-bottom: 3rem ;">
         <div class="container px-4 px-lg-5 my-5">
@@ -205,7 +319,7 @@
                     <p class="lead" style="font-size: 1.25rem;font-weight: 300;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
                     <div class="d-flex" style="display: flex;">
                         <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                        <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                        <button class="btn btn-outline-dark flex-shrink-0" id="btn" type="button">
                             <i class="bi-cart-fill me-1"></i>
                             Add to cart
                         </button>
@@ -244,7 +358,7 @@
                   </div>
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                      <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                      <div class="text-center"><a class="btn btn-outline-dark mt-auto" id="btn" >Add to cart</a></div>
                   </div>
               </div>
           </div></div></div></section>

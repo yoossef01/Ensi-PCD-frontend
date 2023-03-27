@@ -14,6 +14,9 @@ import { ViewChild } from '@angular/core';
 export class DialogBoxComponent implements OnInit {
   @ViewChild('myInput')
 myInputVariable: ElementRef;
+img:string;
+isNomEmpty: boolean;
+
   p: Produit = {
     id: '',
     nom: '',
@@ -30,16 +33,26 @@ myInputVariable: ElementRef;
     public dialogRef: MatDialogRef<DialogBoxComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,private service:ProduitService,private sc:CategorieService) { }
 
-  ngOnInit(): void {this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
+  ngOnInit(): void {
+    this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
+  this.img="./assets/150x150.png";
   }
   getCategoryById(id:number){
     this.sc.getCategory(id).subscribe(data=>{this.categorie=data; this.p.categorie.id=this.categorie.id;
       this.p.categorie.nom=this.categorie.nom;});
    
   }
-  onPhotoSelected(event: any) {
-    this.photo = event.target.files[0];
-  }
+  onPhotoSelected(event: any): void {
+     
+    this.photo =event.target.files[0];
+     if (this.photo) {
+       const reader = new FileReader();
+       reader.readAsDataURL(this.photo);
+       reader.onload = () => {
+         this.img = reader.result as string;
+       };
+     }
+   }
   reset() {
     console.log(this.myInputVariable.nativeElement.files);
     this.myInputVariable.nativeElement.value = "";
@@ -85,6 +98,8 @@ myInputVariable: ElementRef;
      },
     
    );
+   this.isNomEmpty = this.p.nom.trim() === '';
+
  }
 
   onCancel(): void {

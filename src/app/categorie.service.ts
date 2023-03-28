@@ -26,4 +26,10 @@ public addCategorie(cat:Categorie): Observable<Categorie>{
 public deletecat(id:number):Observable<void>{
   return this.client.delete<void>(this.host+"/del/"+id)
 }
+modifierCategorie(id: number, categorieModifiee: Categorie): Observable<Categorie> {
+  const url = `${this.host+"/update"}/${id}`;
+
+  return this.client.put<Categorie>(url, categorieModifiee);
+}
+
 }

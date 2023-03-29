@@ -1,4 +1,5 @@
 import {Categorie} from "./categorie"
+import { Magasin } from "./magasin";
 export class Produit {
    
     id: string;
@@ -8,6 +9,8 @@ export class Produit {
     photo:string;
     categorie: Categorie;
     prix_achat:number;
+    magasin:Magasin;
+
     //
 }
 

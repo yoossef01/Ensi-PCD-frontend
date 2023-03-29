@@ -41,6 +41,8 @@ public isCollapsed2 = false;
     photo: "",
     categorie: {id:0,nom:""},
     prix_achat:0
+    ,
+    magasin:{id:0,nom:""}
   };
   photo:File;
 

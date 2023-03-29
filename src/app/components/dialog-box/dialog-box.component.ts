@@ -24,7 +24,8 @@ isNomEmpty: boolean;
     quantite: 0,
     photo: "",
     categorie: {id:1,nom:"informatique"},
-    prix_achat:0
+    prix_achat:0,
+    magasin:{id:0,nom:""}
   };id:number;
   categories!:Categorie[];
   categorie: Categorie = new Categorie();
@@ -87,7 +88,8 @@ isNomEmpty: boolean;
          quantite: 0,
          photo: "",
      categorie: {id:0,nom:""},
-     prix_achat:0
+     prix_achat:0,
+     magasin:{id:0,nom:""}
        };
        this.reset();
       this.photo=new File([], '');

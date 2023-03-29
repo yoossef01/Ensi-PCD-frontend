@@ -40,7 +40,8 @@ id:number;
     quantite: 0,
     photo: "",
     categorie: {id:1,nom:"informatique"},
-    prix_achat:0
+    prix_achat:0,
+    magasin:{id:0,nom:""}
   };
  
   categories!:Categorie[];
@@ -57,7 +58,7 @@ photo:File;
    constructor(private service:ProduitService,private sc:CategorieService,public dialog:MatDialog) { }
  getAll()
  {
-   this.service.getAllProducts().subscribe(data=>{this.produits=data; this.produitF=this.produits})
+   this.service.getAllProducts().subscribe(data=>{this.produits=data; this.produitF=this.produits ;console.log(this.produitF)})
    this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
  }
    ngOnInit(): void {
@@ -71,6 +72,7 @@ photo:File;
     //   this.Catadded();
     // }, 1000);
     ;
+    
    }
   added(){
     if(this.service.added==true){

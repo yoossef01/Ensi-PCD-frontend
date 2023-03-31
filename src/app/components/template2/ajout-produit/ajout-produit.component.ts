@@ -1,34 +1,43 @@
+
 import { Component, ElementRef, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CategorieService } from 'src/app/categorie.service';
-import { Categorie } from 'src/app/model/categorie';
+
+import { CategorieService } from '../../../categorie.service';
 import { Produit } from 'src/app/model/produit';
-import { ProduitService } from 'src/app/produit.service';
+import { Categorie } from 'src/app/model/categorie';
+
+import { ProduitService } from '../../../produit.service';
 import { ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-dialog-box',
-  templateUrl: './dialog-box.component.html',
-  styleUrls: ['./dialog-box.component.css']
+  selector: 'app-ajout-produit',
+  templateUrl: './ajout-produit.component.html',
+  styleUrls: ['./ajout-produit.component.css']
 })
-export class DialogBoxComponent implements OnInit {
+export class AjoutProduitComponent implements OnInit {
+
+  
+
+
+
+
   @ViewChild('myInput')
-myInputVariable: ElementRef;
+myInputVariable!: ElementRef;
   p: Produit = {
     id: '',
     nom: '',
     prix: 0,
     quantite: 0,
     photo: "",
-    categorie: {id:0,nom:""},
+    categorie: {id:1,nom:"informatique"},
     prix_achat:0
-  };id:number;
+  };id!:number;
   categories!:Categorie[];
   categorie: Categorie = new Categorie();
-  photo:File;
+  photo!:File;
   constructor(
-    public dialogRef: MatDialogRef<DialogBoxComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,private service:ProduitService,private sc:CategorieService) { }
+    
+   private service:ProduitService,private sc:CategorieService,private router: Router) { }
 
   ngOnInit(): void {this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
   }
@@ -46,7 +55,7 @@ myInputVariable: ElementRef;
     console.log(this.myInputVariable.nativeElement.files);
 }
   selectCat(event:any){
-    console.log(''+this.id)
+
     this.id=(parseInt(event.target.value));
     this.getCategoryById(this.id);
    
@@ -75,6 +84,7 @@ myInputVariable: ElementRef;
          photo: "",
      categorie: {id:0,nom:""},
      prix_achat:0
+    
        };
        this.reset();
       this.photo=new File([], '');
@@ -83,11 +93,10 @@ myInputVariable: ElementRef;
        // Charger la liste des produits
        // this.listeProduits = this.serviceProduit.getListeProduits();
      },
-    
+     
    );
+   this.router.navigate(['/template2home']);
  }
 
-  onCancel(): void {
-    this.dialogRef.close();
-  }
+ 
 }

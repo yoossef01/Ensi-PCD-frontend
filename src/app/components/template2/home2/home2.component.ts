@@ -40,7 +40,8 @@ id:number;
     quantite: 0,
     photo: "",
     categorie: {id:1,nom:"informatique"},
-    prix_achat:0
+    prix_achat:0,
+    magasin:{id:0,nom:""}
   };
   prod: Produit = {
     id: '38df45e4-e155-426e-ba81-2ea4128c15da',
@@ -49,7 +50,8 @@ id:number;
     quantite: 0,
     photo: "",
     categorie: {id:1,nom:"informatique"},
-    prix_achat:0
+    prix_achat:0,
+    magasin:{id:0,nom:""}
   };
   categories!:Categorie[];
 photo:File;
@@ -210,7 +212,8 @@ updateProduit(): void {
         quantite: 0,
         photo: "",
     categorie: {id:0,nom:""},
-    prix_achat:0
+    prix_achat:0,
+    magasin:{id:0,nom:""}
       };
      this.photo=new File([], '');
 

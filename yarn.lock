@@ -1896,10 +1896,22 @@ ajv@^8.0.0, ajv@^8.8.0, ajv@^8.8.2, ajv@8.12.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
+<<<<<<< HEAD
 angular@^1.3.14:
   version "1.8.3"
   resolved "https://registry.npmjs.org/angular/-/angular-1.8.3.tgz"
   integrity sha512-5qjkWIQQVsHj4Sb5TcEs4WZWpFeVFHXwxEBHUhrny41D8UrBAd6T/6nPPAsLngJCReIOqi95W3mxdveveutpZw==
+=======
+"angular-bootstrap-toggle@^0.4.2":
+  "integrity" "sha512-C+3qAkulDff8uYZKHnJDgIJndaLB6McWzcJSy31RVN19sUKmax1DpCEAz9gAtv69O8XVi9wQWtlWjv/zC8s0pw=="
+  "resolved" "https://registry.npmjs.org/angular-bootstrap-toggle/-/angular-bootstrap-toggle-0.4.2.tgz"
+  "version" "0.4.2"
+
+"angular@^1.3.14":
+  "integrity" "sha512-5qjkWIQQVsHj4Sb5TcEs4WZWpFeVFHXwxEBHUhrny41D8UrBAd6T/6nPPAsLngJCReIOqi95W3mxdveveutpZw=="
+  "resolved" "https://registry.npmjs.org/angular/-/angular-1.8.3.tgz"
+  "version" "1.8.3"
+>>>>>>> 3a386e36455b0eae3a1d78152188c69c1685ce65
 
 angularjs-sweetalert2@^1.0.0:
   version "1.0.0"

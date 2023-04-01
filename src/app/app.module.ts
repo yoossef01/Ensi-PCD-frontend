@@ -36,6 +36,7 @@ import { LoginComponent } from './components/login/login.component';
 import { Home2Component } from './components/template2/home2/home2.component';
 import { AjoutProduitComponent } from './components/template2/ajout-produit/ajout-produit.component';
 import { AjoutCategorieComponent } from './components/template2/ajout-categorie/ajout-categorie.component';
+import { FormTemplateComponent } from './components/form-template/form-template.component';
    // import{} from '@angular/material/slide-toggle';
 //import {  } from '@angular/material/badge';
 
@@ -62,6 +63,7 @@ const materiel=[
       Home2Component,
       AjoutProduitComponent,
       AjoutCategorieComponent,
+      FormTemplateComponent,
     
   ],
    schemas:[CUSTOM_ELEMENTS_SCHEMA]

@@ -28,7 +28,8 @@ export class ListeproduitsComponent implements OnInit {
   produitF!:Produit[];
   nomNewCat:string;
   newCategory: Categorie;
-  
+  selectedValue = 'Vendeur';
+
    categorie: Categorie = new Categorie();
   cat:Categorie = new Categorie();
 id:number;
@@ -39,17 +40,10 @@ id:number;
     quantite: 0,
     photo: "",
     categorie: {id:1,nom:"informatique"},
-    prix_achat:0
+    prix_achat:0,
+    magasin:{id:0,nom:""}
   };
-  prod: Produit = {
-    id: '38df45e4-e155-426e-ba81-2ea4128c15da',
-    nom: 'aziz',
-    prix: 0,
-    quantite: 0,
-    photo: "",
-    categorie: {id:1,nom:"informatique"},
-    prix_achat:0
-  };
+ 
   categories!:Categorie[];
 photo:File;
 
@@ -64,7 +58,7 @@ photo:File;
    constructor(private service:ProduitService,private sc:CategorieService,public dialog:MatDialog) { }
  getAll()
  {
-   this.service.getAllProducts().subscribe(data=>{this.produits=data; this.produitF=this.produits})
+   this.service.getAllProducts().subscribe(data=>{this.produits=data; this.produitF=this.produits ;console.log(this.produitF)})
    this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
  }
    ngOnInit(): void {
@@ -78,6 +72,7 @@ photo:File;
     //   this.Catadded();
     // }, 1000);
     ;
+    
    }
   added(){
     if(this.service.added==true){
@@ -90,6 +85,9 @@ photo:File;
       this.getAll();
     }
     this.catadded=false;
+  }
+  onChange(event:any) {
+    this.selectedValue = event.target.checked ? 'Client' : 'Vendeur';
   }
  delete(p:Produit)
  {
@@ -134,6 +132,9 @@ photo:File;
 
   
 }
+
+
+
 deletecat(cat:Categorie)
  {
    const swalWithBootstrapButtons = Swal.mixin({
@@ -190,44 +191,10 @@ getCategoryById(id:number){
 updateProduit(): void {
    this.getCategoryById(this.id);
    
-   
-  // const pp:string="{\"nom\":\""+this.p.nom+
-  //   "\",\"prix\":"+this.p.prix+",\"quantite\":"+this.p.quantite+",\"prix_achat\":"+this.p.prix_achat+
-  //   ",\"categorie\":{\"id\":"+this.p.categorie.id+" ,\"nom\":\""+this.p.categorie.nom+"\"}}";
-    
- this.service.updateProduct(this.photo,this.prod).subscribe(
-    response => {
-      console.log(response);
-      //console.log(JSON.stringify(this.newProduit));
-      console.log(this.prod);
-      
-      // Vider le formulaire et recharger la liste des produits
-      this.prod = {
-        id: '',
-        nom: '',
-        prix: 0,
-        quantite: 0,
-        photo: "",
-    categorie: {id:0,nom:""},
-    prix_achat:0
-      };
-     this.photo=new File([], '');
-
-
-      // Charger la liste des produits
-      // this.listeProduits = this.serviceProduit.getListeProduits();
-    },
-   
-  );
 }
-
- selectCat(event:any){
-
-   this.id=(parseInt(event.target.value));
-   this.getCategoryById(this.id);
   
 
-}
+ 
 selectCategorie(event:any){
 this.id=parseInt(event.target.value);
 this.sc.getCategory(this.id).subscribe(data=>{this.categorie=data;  this.cat.id=this.categorie.id;  this.cat.nom=this.categorie.nom;
@@ -239,12 +206,12 @@ this.sc.getCategory(this.id).subscribe(data=>{this.categorie=data;  this.cat.id=
   }
  openDialog(){
   let dialogRef = this.dialog.open(DialogBoxComponent, {
-    width: '250px'
+    width: '700px'
   });
 }
 openDialogUpdate(id:string){
   let dialogRef = this.dialog.open(UpdateProductDialogComponent, {
-    width: '250px',
+    width: '700px',
     data: {id}
     
   });

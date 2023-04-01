@@ -13,6 +13,8 @@ import { DetailsComponent } from './components/details/details.component';
 import { Template1Component } from './components/template1/template1.component';
 import { InscriptionComponent } from './components/inscription/inscription.component';
 import { LoginComponent } from './components/login/login.component';
+import { FormTemplateComponent } from './components/form-template/form-template.component';
+
 
 
 const routes: Routes = [
@@ -27,7 +29,10 @@ const routes: Routes = [
    path:'insc',component:InscriptionComponent
   },{
     path:'login', component:LoginComponent
-  }
+  },
+  {
+    path:'formTempl', component:FormTemplateComponent
+  },
   
 ];
 

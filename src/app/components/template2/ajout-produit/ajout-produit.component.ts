@@ -1,66 +1,62 @@
+
 import { Component, ElementRef, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CategorieService } from 'src/app/categorie.service';
-import { Categorie } from 'src/app/model/categorie';
+
+import { CategorieService } from '../../../categorie.service';
 import { Produit } from 'src/app/model/produit';
-import { ProduitService } from 'src/app/produit.service';
+import { Categorie } from 'src/app/model/categorie';
+
+import { ProduitService } from '../../../produit.service';
 import { ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-dialog-box',
-  templateUrl: './dialog-box.component.html',
-  styleUrls: ['./dialog-box.component.css']
+  selector: 'app-ajout-produit',
+  templateUrl: './ajout-produit.component.html',
+  styleUrls: ['./ajout-produit.component.css']
 })
-export class DialogBoxComponent implements OnInit {
-  @ViewChild('myInput')
-myInputVariable: ElementRef;
-img:string;
-isNomEmpty: boolean;
+export class AjoutProduitComponent implements OnInit {
 
+  
+
+
+
+
+  @ViewChild('myInput')
+myInputVariable!: ElementRef;
   p: Produit = {
     id: '',
     nom: '',
     prix: 0,
     quantite: 0,
     photo: "",
-    categorie: {id:0,nom:""},
+    categorie: {id:1,nom:"informatique"},
     prix_achat:0,
     magasin:{id:0,nom:""}
-  };id:number;
+  };id!:number;
   categories!:Categorie[];
   categorie: Categorie = new Categorie();
-  photo:File;
+  photo!:File;
   constructor(
-    public dialogRef: MatDialogRef<DialogBoxComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,private service:ProduitService,private sc:CategorieService) { }
+    
+   private service:ProduitService,private sc:CategorieService,private router: Router) { }
 
-  ngOnInit(): void {
-    this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
-  this.img="./assets/150x150.png";
+  ngOnInit(): void {this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
   }
   getCategoryById(id:number){
     this.sc.getCategory(id).subscribe(data=>{this.categorie=data; this.p.categorie.id=this.categorie.id;
       this.p.categorie.nom=this.categorie.nom;});
    
   }
-  onPhotoSelected(event: any): void {
-     
-    this.photo =event.target.files[0];
-     if (this.photo) {
-       const reader = new FileReader();
-       reader.readAsDataURL(this.photo);
-       reader.onload = () => {
-         this.img = reader.result as string;
-       };
-     }
-   }
+  onPhotoSelected(event: any) {
+    this.photo = event.target.files[0];
+  }
   reset() {
     console.log(this.myInputVariable.nativeElement.files);
     this.myInputVariable.nativeElement.value = "";
     console.log(this.myInputVariable.nativeElement.files);
 }
   selectCat(event:any){
-    console.log(''+this.id)
+
     this.id=(parseInt(event.target.value));
     this.getCategoryById(this.id);
    
@@ -90,6 +86,7 @@ isNomEmpty: boolean;
      categorie: {id:0,nom:""},
      prix_achat:0,
      magasin:{id:0,nom:""}
+    
        };
        this.reset();
       this.photo=new File([], '');
@@ -98,13 +95,10 @@ isNomEmpty: boolean;
        // Charger la liste des produits
        // this.listeProduits = this.serviceProduit.getListeProduits();
      },
-    
+     
    );
-   this.isNomEmpty = this.p.nom.trim() === '';
-
+   this.router.navigate(['/template2home']);
  }
 
-  onCancel(): void {
-    this.dialogRef.close();
-  }
+ 
 }

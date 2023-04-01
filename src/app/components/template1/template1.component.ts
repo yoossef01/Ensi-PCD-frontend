@@ -19,6 +19,7 @@ export class Template1Component implements OnInit {
   produits: Produit[] ;
  Buttons:number;
  selectedValue = 'Vendeur';
+ isEditMode = false;
  Client = 'Client';
  
 Vendeur='Vendeur';
@@ -40,6 +41,8 @@ public isCollapsed2 = false;
     photo: "",
     categorie: {id:0,nom:""},
     prix_achat:0
+    ,
+    magasin:{id:0,nom:""}
   };
   photo:File;
 
@@ -91,6 +94,14 @@ this.service.getProduct(id!).subscribe(data =>{
 });
 
 }
+enableEditMode(id: number): void {
+  this.isEditMode = true;
+}
+
+cancelEditMode(): void {
+  this.isEditMode = false;
+}
+
 added(){
   if(this.service.added==true){
     this.getAll();
@@ -195,6 +206,11 @@ this.sc.getCategory(id).subscribe(data=>{this.categorie=data; this.p.categorie.i
 
 }
 
+modifierCategorie(id:number ,nom:string): void {
+  const cat :Categorie={id:id ,nom:nom}
+  this.sc.modifierCategorie(id, cat)
+    .subscribe(cat => this.categorie = cat);
+}
 
 onPhotoSelected(event: any) {
 this.photo = event.target.files[0];

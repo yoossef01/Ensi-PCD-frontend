@@ -213,29 +213,46 @@
             </div>
             <div *ngSwitchCase="Vendeur">
                 <div class="px-0 bg-light">
-                    <div class="d-md-flex" > 
-                    <div class="d-flex flex-column h-100 flex-shrink-0 p-3 text-white bg-dark  " style="width: 250px;"> 
+                    <div class="d-md-flex"  > 
+                    <div class="d-flex flex-column h-100 flex-shrink-0 p-3 text-white bg-dark  " style="width: 300px;"> 
                       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" > 
                       <svg class="bi me-2" width="40" height="32"> </svg> <span class="fs-4">Boutique</span>
                      </a> 
                      <hr>
-                       <ul class="nav nav-pills flex-column mb-auto"   id="nav ul">
-                         <li class="nav-item"  id="nav li"> <a href="#" class="nav-link active" aria-current="page"  id="nav a">
+                       <ul class="nav nav-pills flex-column mb-auto"   id="navul">
+                         <li class="nav-item"  id="navli"> <a href="#" class="nav-link active" aria-current="page"  id="nava">
                             <i class="fa fa-home"></i>
                             <span class="ms-2">Home</span>
                            </a> </li>
-                      <li> <a href="#" class="nav-link text-white"  id="nav a">
+                      <li> <a href="#" class="nav-link text-white"  id="nava">
                                  <i class="fa fa-dashboard"></i>
                                  <span class="ms-2">Dashboard</span> </a> </li> 
                                  <li> <a type="button" class="nav-link text-white dropdown-toggle" data-toggle="collapse" (click)="collapse.toggle()" 
-                                  [attr.aria-expanded]="!isCollapsed"  id="nav a" aria-controls="collapseExample"> <i class="fa fa-first-order"></i>
+                                  [attr.aria-expanded]="!isCollapsed"  id="nava" aria-controls="collapseExample"> <i class="fa fa-first-order"></i>
                                  <span class="ms-2">Categories</span> </a>
                                  <div class="icone" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
                                  <ul class="item-show-1"  >
                                   
-                                  <li  (click)="selectCategorie($event)" type="button"  class="nav-link text-white"  id="nav li" *ngFor="let cat of categories" [value]="cat.id" ><i type="button" class="fa fa-trash" style="color: red;" (click)="deletecat(cat)" ></i>  {{ cat.nom }}</li>
+                                  <li  (click)="selectCategorie($event)" type="button"  class="nav-link text-white"  id="navli" *ngFor="let cat of categories" [value]="cat.id" >
+                                    <i class="fa fa-trash" style="color: red;" (click)="deletecat(categorie)"></i>
+        <span>&nbsp;&nbsp;</span>
+     <ng-container classe="ng" *ngIf="!isEditMode; else editMode">
+                <i class="fa fa-edit" style="color: rgb(42, 42, 255);" (click)="enableEditMode(cat.id)"></i> {{ cat.nom }}
+            </ng-container>
+            <ng-template #editMode>
+                <div class="edit-mode-container">
+                  <input class="input-narrow" type="text" [(ngModel)]="cat.nom">
+                  <div class="edit-mode-icons">
+                    <i class="fa fa-check" style="color: green;" (click)="modifierCategorie(cat.id,cat.nom); cancelEditMode()"></i>
+                    <i class="fa fa-times" style="color: red;" (click)="cancelEditMode()"></i>
+                  </div>
+                </div>
+              </ng-template>
+        </li>
+
+        
                                  <li type="button"  class="nav-link text-white dropdown-toggle"  data-toggle="collapse" (click)="isCollapsed2 = !isCollapsed2"
-                                  [attr.aria-expanded]="!isCollapsed2" aria-controls="collapseExample2">
+                                  [attr.aria-expanded]="!isCollapsed2" aria-controls="collapseExample2"id="navli" >
                                    <i  class="Ajout fa fa-plus-square "></i>
                                    <span class=" ms-2">Ajouter</span> 
                                  </li>
@@ -249,7 +266,7 @@
                            </div> 
                                  </li>
                                   
-                                  <li> <a href="#" class="nav-link text-white"  id="nav a">
+                                  <li> <a href="#" class="nav-link text-white"  id="nava">
                                       <i class="fa fa-cog"></i><span class="ms-2">Mes commandes</span> </a> </li> <li>
                                            <a href="#" class="nav-link text-white"  id="nav a"> <i class="fa fa-bookmark"></i>
                                            <span class="ms-2">Bookmarks</span> </a> </li> </ul> <hr> 
@@ -378,3 +395,4 @@
  
     </div>
   </div>
+  

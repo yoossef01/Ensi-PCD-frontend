@@ -45,8 +45,7 @@ isNomEmpty: boolean;
   this.img="./assets/150x150.png";
   }
   getCategoryById(id:number){
-    this.sc.getCategory(id).subscribe(data=>{this.categorie=data; this.p.categorie.id=this.categorie.id;
-      this.p.categorie.nom=this.categorie.nom;});
+    this.sc.getCategory(id).subscribe(data=>{this.categorie=data; this.p.categorie=this.categorie});
    
   }
   getMagasinById(id:number){

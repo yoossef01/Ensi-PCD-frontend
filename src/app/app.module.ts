@@ -33,6 +33,9 @@ import { Template1Component } from './components/template1/template1.component';
 import { UpdateProductDialogComponent } from './components/update-product-dialog/update-product-dialog.component';
 import { InscriptionComponent } from './components/inscription/inscription.component';
 import { LoginComponent } from './components/login/login.component';
+import { Home2Component } from './components/template2/home2/home2.component';
+import { AjoutProduitComponent } from './components/template2/ajout-produit/ajout-produit.component';
+import { AjoutCategorieComponent } from './components/template2/ajout-categorie/ajout-categorie.component';
 import { FormTemplateComponent } from './components/form-template/form-template.component';
    // import{} from '@angular/material/slide-toggle';
 //import {  } from '@angular/material/badge';
@@ -57,6 +60,9 @@ const materiel=[
       
       InscriptionComponent,
       LoginComponent,
+      Home2Component,
+      AjoutProduitComponent,
+      AjoutCategorieComponent,
       FormTemplateComponent,
     
   ],

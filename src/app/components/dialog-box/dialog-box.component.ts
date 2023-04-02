@@ -25,7 +25,7 @@ isNomEmpty: boolean;
     prix: 0,
     quantite: 0,
     photo: "",
-    categorie: {id:1,nom:"informatique"},
+    categorie: {id:0,nom:""},
     prix_achat:0,
     magasin:{id:0,nom:""}
   };id:number;
@@ -71,7 +71,7 @@ isNomEmpty: boolean;
     console.log(this.myInputVariable.nativeElement.files);
 }
   selectCat(event:any){
-
+    console.log(''+this.id)
     this.id=(parseInt(event.target.value));
     this.getCategoryById(this.id);
    

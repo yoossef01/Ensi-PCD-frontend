@@ -5,6 +5,8 @@ import { Categorie } from 'src/app/model/categorie';
 import { Produit } from 'src/app/model/produit';
 import { ProduitService } from 'src/app/produit.service';
 import { ViewChild } from '@angular/core';
+import { Magasin } from 'src/app/model/magasin';
+import { MagasinService } from 'src/app/magasin.service';
 
 @Component({
   selector: 'app-dialog-box',
@@ -28,19 +30,28 @@ isNomEmpty: boolean;
     magasin:{id:0,nom:""}
   };id:number;
   categories!:Categorie[];
+  magasins!:Magasin[];
   categorie: Categorie = new Categorie();
+  magasin:Magasin=new Magasin();
   photo:File;
   constructor(
     public dialogRef: MatDialogRef<DialogBoxComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,private service:ProduitService,private sc:CategorieService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,private service:ProduitService,private sc:CategorieService,private ms:MagasinService) { }
 
   ngOnInit(): void {
     this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
+    this.ms.getAllMagasins().subscribe(data=>{this.magasins=data; this.magasins=this.magasins})
+
   this.img="./assets/150x150.png";
   }
   getCategoryById(id:number){
     this.sc.getCategory(id).subscribe(data=>{this.categorie=data; this.p.categorie.id=this.categorie.id;
       this.p.categorie.nom=this.categorie.nom;});
+   
+  }
+  getMagasinById(id:number){
+    this.ms.getMagasin(id).subscribe(data=>{this.magasin=data; this.p.magasin=this.categorie;
+      });
    
   }
   onPhotoSelected(event: any): void {
@@ -66,13 +77,21 @@ isNomEmpty: boolean;
    
  
  }
+ selectMag(event:any){
+
+  this.id=(parseInt(event.target.value));
+  this.getMagasinById(this.id);
+ 
+
+}
   addProduit(): void {
     this.getCategoryById(this.id);
-    
+    this.getMagasinById(this.id);
     
    const pp:string="{\"nom\":\""+this.p.nom+
      "\",\"prix\":"+this.p.prix+",\"quantite\":"+this.p.quantite+",\"prix_achat\":"+this.p.prix_achat+
-     ",\"categorie\":{\"id\":"+this.p.categorie.id+" ,\"nom\":\""+this.p.categorie.nom+"\"}}";
+     ",\"categorie\":{\"id\":"+this.p.categorie.id+" ,\"nom\":\""+this.p.categorie.nom+"\"}" +
+     ",\"magasin\":{\"id\":"+this.p.magasin.id+" ,\"nom\":\""+this.p.magasin.nom+"\"}}";
      
   this.service.addProduit(pp,this.photo).subscribe(()=>
       {this.service.added=true;

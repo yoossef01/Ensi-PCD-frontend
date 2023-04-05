@@ -32,7 +32,9 @@ const routes: Routes = [
    path:'insc',component:InscriptionComponent
   },{
     path:'login', component:LoginComponent
-  }
+  },{path:'formTempl', component:FormTemplateComponent},
+  {path:'template2home', component:Home2Component}
+  
   
 ];
 

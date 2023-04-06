@@ -16,7 +16,8 @@ import { LoginComponent } from './components/login/login.component';
 import { Home2Component } from './components/template2/home2/home2.component';
 import { AjoutProduitComponent } from './components/template2/ajout-produit/ajout-produit.component';
 import { AjoutCategorieComponent } from './components/template2/ajout-categorie/ajout-categorie.component';
-import { FormTemplateComponent } from './components/form-template/form-template.component';
+import { SignupVendeurComponent } from './components/signup-vendeur/signup-vendeur.component';
+import { LoginVendeurComponent } from './components/login-vendeur/login-vendeur.component';
 
 
 
@@ -30,10 +31,10 @@ const routes: Routes = [
   path:'liste',component:ListeproduitsComponent
   },{path:'template1',component:Template1Component},{
    path:'insc',component:InscriptionComponent
-  },{
-    path:'login', component:LoginComponent
-  },{path:'formTempl', component:FormTemplateComponent},
-  {path:'template2home', component:Home2Component}
+  },{path:'login', component:LoginComponent},
+  {path:'template2home', component:Home2Component},
+  {path:'signupVendeur',component:SignupVendeurComponent},
+  {path:'loginVendeur',component:LoginVendeurComponent}
   
   
 ];

@@ -18,6 +18,8 @@ import { AjoutProduitComponent } from './components/template2/ajout-produit/ajou
 import { AjoutCategorieComponent } from './components/template2/ajout-categorie/ajout-categorie.component';
 import { FormTemplateComponent } from './components/form-template/form-template.component';
 import { PanierComponent } from './components/panier/panier.component';
+import { SignupVendeurComponent } from './components/signup-vendeur/signup-vendeur.component';
+import { LoginVendeurComponent } from './components/login-vendeur/login-vendeur.component';
 
 
 
@@ -34,6 +36,11 @@ const routes: Routes = [
   },{
     path:'login', component:LoginComponent
   },{path:'Panier',component:PanierComponent}
+  ,{path:'login', component:LoginComponent},
+  {path:'template2home', component:Home2Component},
+  {path:'signupVendeur',component:SignupVendeurComponent},
+  {path:'loginVendeur',component:LoginVendeurComponent}
+  
   
 ];
 

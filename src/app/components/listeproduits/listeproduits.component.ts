@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NonNullAssert } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material';
-
+import { v4 as uuidv4 } from 'uuid';
 import { FormGroup, NgForm } from '@angular/forms';
 import { CategorieService } from 'src/app/categorie.service';
 import { Categorie } from 'src/app/model/categorie';
@@ -13,6 +13,8 @@ import { HomeComponent } from '../home/home.component';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { DetailsComponent } from '../details/details.component';
 import { UpdateProductDialogComponent } from '../update-product-dialog/update-product-dialog.component';
+import { AchatService } from 'src/app/achat.service';
+import { Achat } from 'src/app/model/achat';
 
 
 @Component({
@@ -21,7 +23,7 @@ import { UpdateProductDialogComponent } from '../update-product-dialog/update-pr
   styleUrls: ['./listeproduits.component.css']
 })
 export class ListeproduitsComponent implements OnInit {
-  produits: Produit[] ;
+  produits: Produit[] ;achats: Achat[];
   public isCollapsed = false;
   public isCollapsed2 = false;
   private catadded =false;
@@ -29,6 +31,7 @@ export class ListeproduitsComponent implements OnInit {
   nomNewCat:string;
   newCategory: Categorie;
   selectedValue = 'Vendeur';
+ 
 
    categorie: Categorie = new Categorie();
   cat:Categorie = new Categorie();
@@ -43,9 +46,23 @@ id:number;
     prix_achat:0,
     magasin:{id:0,nom:""}
   };
- 
   categories!:Categorie[];
 photo:File;
+achat: Achat = {
+  id:'' ,
+  montant: 0,quantite:0,
+  date: new Date(),
+  product: {
+    id: '',
+    nom: '',
+    prix: 0,
+    quantite: 0,
+    photo: "",
+    categorie: {id:1,nom:"informatique"},
+    prix_achat:0,
+    magasin:{id:0,nom:""}
+  }
+};
 
   set texte(ch:string)
   {
@@ -55,16 +72,17 @@ photo:File;
   {
    return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
   }
-   constructor(private service:ProduitService,private sc:CategorieService,public dialog:MatDialog) { }
+   constructor(private service:ProduitService,private sc:CategorieService,public dialog:MatDialog,private achatService: AchatService) { }
  getAll()
  {
    this.service.getAllProducts().subscribe(data=>{this.produits=data; this.produitF=this.produits ;console.log(this.produitF)})
    this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
  }
    ngOnInit(): void {
-     
+    console.log(this.achat);
      this.getAll()
      this.sc.getCategory(1).subscribe(data=>{this.categorie=data;  this.categorie=this.categorie;});
+     this.getAchats();
     //  setInterval(() => {
     //   this.added();
     // }, 1000);
@@ -230,5 +248,37 @@ createNewCategory() {
   this.sc.addCategorie(this.newCategory).subscribe(() => {
        this.catadded=true;
           this.nomNewCat = "";},);
+}
+
+
+
+
+
+getAchats() {
+  this.achatService.getAllAchats().subscribe(
+    data => {
+      this.achats = data;
+    }
+  );
+}
+
+deleteAchat(id: string) {
+  this.achatService.deleteAchat(id).subscribe(
+    data => {
+      console.log(data);
+      this.getAchats();
+    }
+  );
+}
+addAchat() {
+  
+ // const a:string="{\"montant\":"+this.achat.montant+",\"date\":\""+this.achat.date+"\",\"product\":{"+"\"id\":"+this.achat.product.id+"}}"
+if(this.achat.id==''){
+  this.achat.id=uuidv4();
+}
+  this.achatService.addAchat(this.achat)
+    .subscribe(data => console.log(data));
+   
+     
 }
 }

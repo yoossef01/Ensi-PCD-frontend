@@ -17,6 +17,7 @@ import { Home2Component } from './components/template2/home2/home2.component';
 import { AjoutProduitComponent } from './components/template2/ajout-produit/ajout-produit.component';
 import { AjoutCategorieComponent } from './components/template2/ajout-categorie/ajout-categorie.component';
 import { FormTemplateComponent } from './components/form-template/form-template.component';
+import { PanierComponent } from './components/panier/panier.component';
 
 
 
@@ -32,7 +33,7 @@ const routes: Routes = [
    path:'insc',component:InscriptionComponent
   },{
     path:'login', component:LoginComponent
-  }
+  },{path:'Panier',component:PanierComponent}
   
 ];
 

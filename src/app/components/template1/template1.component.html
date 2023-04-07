@@ -28,11 +28,11 @@
                     <p>Mode: {{ selectedValue }}</p>
                 </div>
             <form class="d-flex">
-                <button class="btn btn-outline-dark" id="btn" type="submit">
+              <a class="btn btn-outline-dark" href="/Panier">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                </button>
+              </a>
             </form>
         </div>
     </div>
@@ -201,7 +201,7 @@
       <img src="https://via.placeholder.com/150x150" alt="Produit 1" >
       <h3>{{p.nom}}</h3>
       <p>{{p.prix}}</p>
-      <a href="#" class="btn" id="btn">Acheter Maintenant</a>
+      <a (click)="addAchat(p.id)" class="btn" id="btn">Acheter Maintenant</a>
       <a (click)="ProduitDetails(p.id)" class ="btn btn-primary m-2"  >
         <span class="fa fa-info"></span>
       </a>

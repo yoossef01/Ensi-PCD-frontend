@@ -7,6 +7,9 @@ import { ProduitService } from 'src/app/produit.service';
 import Swal from 'sweetalert2';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { UpdateProductDialogComponent } from '../update-product-dialog/update-product-dialog.component';
+import { v4 as uuidv4 } from 'uuid';
+import { Achat } from 'src/app/model/achat';
+import { AchatService } from 'src/app/achat.service';
 
 @Component({
   selector: 'app-template1',
@@ -45,7 +48,21 @@ public isCollapsed2 = false;
     magasin:{id:0,nom:""}
   };
   photo:File;
-
+  achat: Achat = {
+    id:'' ,
+    montant: 0,quantite:2,
+    date: new Date(),
+    product: {
+      id: '',
+      nom: '',
+      prix: 0,
+      quantite: 0,
+      photo: "",
+      categorie: {id:1,nom:"informatique"},
+      prix_achat:0,
+      magasin:{id:0,nom:""}
+    }
+  };
   set texte(ch:string)
   {
  this.produitF=this.filtrer(ch);
@@ -54,7 +71,7 @@ public isCollapsed2 = false;
   {
    return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
   }
-  constructor(private sc:CategorieService,private service:ProduitService,public dialog:MatDialog) { }
+  constructor(private sc:CategorieService,private service:ProduitService,public dialog:MatDialog,private achatService: AchatService) { }
  getAll()
  {
    this.service.getAllProducts().subscribe(data=>{this.produits=data; this.produitF=this.produits})
@@ -257,4 +274,25 @@ console.log(this.newCategory);
 this.sc.addCategorie(this.newCategory).subscribe(() => {
      this.catadded=true;
         this.nomNewCat = "";},);
-}}
+}
+addAchat(id:string) {
+ this.service.getProduct(id).subscribe(data => {
+  this.produit = data;
+
+  // const a:string="{\"montant\":"+this.achat.montant+",\"date\":\""+this.achat.date+"\",\"product\":{"+"\"id\":"+this.achat.product.id+"}}"
+//  if(this.achat.id==''){
+//    this.achat.id=uuidv4();
+//  }
+ this.achat.montant=this.produit.prix*this.achat.quantite;
+ this.produit.quantite=this.produit.quantite-this.achat.quantite;
+ this.achat.date=new Date();
+ this.achat.product.id=id;
+ this.achat.id=uuidv4();
+ this.service.saveP(this.produit).subscribe(data=>{this.produit=data})
+   this.achatService.addAchat(this.achat)
+     .subscribe(data => console.log(data));
+    })
+      
+ }
+
+}

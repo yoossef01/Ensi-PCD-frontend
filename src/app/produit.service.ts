@@ -9,6 +9,7 @@ import { Produit } from './model/produit';
 })
 export class ProduitService {
   public added:boolean=false;
+ 
 
   host="http://localhost:8080/apiproduit"
   constructor( private client:HttpClient) {}
@@ -53,5 +54,8 @@ updateProduct(file: File, product: Produit): Observable<any> {
   formData.append('file', file);
   formData.append('product', JSON.stringify(product));
   return this.client.post<Produit>(this.host+"/update", formData);
+}
+saveP(p:Produit):Observable<Produit>{
+  return this.client.post<Produit>(this.host+"/save", p);
 }
 }

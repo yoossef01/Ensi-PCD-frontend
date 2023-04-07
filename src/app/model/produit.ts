@@ -10,7 +10,8 @@ export class Produit {
     categorie: Categorie;
     prix_achat:number;
     magasin:Magasin;
+    
 
-    //
+    
 }
 

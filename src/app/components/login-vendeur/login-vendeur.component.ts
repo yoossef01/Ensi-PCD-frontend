@@ -36,8 +36,9 @@ loginUser() {
       console.log('res',res)
       localStorage.setItem('token',res.token)
       this.vendeurservice.getVendeurByEmail(vendeur).subscribe(data=>{
-        const NumTemplate :number=data.idTemplate;console.log("0"+NumTemplate)
-      this.router.navigate(['/template'+NumTemplate])
+        const NumTemplate :number=data.idTemplate;console.log("0"+NumTemplate);
+        const idVendeur:number=data.id;
+      this.router.navigate(['/template'+NumTemplate+"/"+idVendeur])
     })
     },
     (error: HttpErrorResponse) => {

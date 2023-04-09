@@ -38,8 +38,9 @@ const routes: Routes = [
   ,{path:'login', component:LoginComponent},
   {path:'template2/:id',component:Home2Component},
   {path:'signupVendeur',component:SignupVendeurComponent},
-  {path:'loginVendeur',component:LoginVendeurComponent}
-  
+  {path:'loginVendeur',component:LoginVendeurComponent},
+  {path:'template2ajoutproduit',component:AjoutProduitComponent},
+{path:'template2ajoutcategorie',component:AjoutCategorieComponent}
   
 ];
 

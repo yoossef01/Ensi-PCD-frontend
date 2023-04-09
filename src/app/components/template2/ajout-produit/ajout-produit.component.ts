@@ -97,7 +97,7 @@ myInputVariable!: ElementRef;
      },
      
    );
-   this.router.navigate(['/template2home']);
+   this.router.navigate(['/template2/152']);
  }
 
  

@@ -91,6 +91,8 @@ photo:File;
     //   this.Catadded();
     // }, 1000);
     ;
+    this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
+
    }
   added(){
     if(this.service.added==true){

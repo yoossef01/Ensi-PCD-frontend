@@ -35,8 +35,10 @@ loginUser() {
       
       console.log('res',res)
       localStorage.setItem('token',res.token)
-      
-      this.router.navigate(['/home'])
+      this.vendeurservice.getVendeurByEmail(vendeur).subscribe(data=>{
+        const NumTemplate :number=data.idTemplate;console.log("0"+NumTemplate)
+      this.router.navigate(['/template'+NumTemplate])
+    })
     },
     (error: HttpErrorResponse) => {
       alert("invalid user");

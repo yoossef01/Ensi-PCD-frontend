@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Vendeur } from 'src/app/model/vendeur';
 import { VendeurService } from 'src/app/vendeur.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { VendeurService } from 'src/app/vendeur.service';
 export class SignupVendeurComponent implements OnInit{
   constructor(private service: VendeurService, private router: Router) { }
   ngOnInit(): void {}
-
+v:Vendeur=new Vendeur();
   data: any
 
   formVendeur = new FormGroup({
@@ -36,6 +37,12 @@ export class SignupVendeurComponent implements OnInit{
     
     this.router.navigate(['/loginVendeur']);
   }
+  click(){
+    this.service.getVendeurById(3).subscribe(data=>{this.v=data;
+    this.v.idTemplate=10;
+    this.service.UpdateVendeur(this.v).subscribe(data=>{this.v=data;console.log(this.v)})})
+  }
+
 
 }
 

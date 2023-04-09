@@ -58,4 +58,11 @@ updateProduct(file: File, product: Produit): Observable<any> {
 saveP(p:Produit):Observable<Produit>{
   return this.client.post<Produit>(this.host+"/save", p);
 }
+
+getProductsByCat(id:number):Observable<Produit[]>{
+  return this.client.get<Produit[]>(this.host+"/productByCat/"+id);
+}
+getProductsByVendeur(id:number):Observable<Produit[]>{
+  return this.client.get<Produit[]>(this.host+"/productsByVendeur/"+id);
+}
 }

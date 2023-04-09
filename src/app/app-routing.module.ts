@@ -36,7 +36,8 @@ const routes: Routes = [
     path:'login', component:LoginComponent
   },{path:'Panier',component:PanierComponent}
   ,{path:'login', component:LoginComponent},
-  {path:'template2home', component:Home2Component},
+  {path:'template2', component:Home2Component},
+  {path:'template2/2/:id',component:Home2Component},
   {path:'signupVendeur',component:SignupVendeurComponent},
   {path:'loginVendeur',component:LoginVendeurComponent}
   

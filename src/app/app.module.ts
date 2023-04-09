@@ -66,7 +66,7 @@ const materiel=[
       Home2Component,
       AjoutProduitComponent,
       AjoutCategorieComponent,
-      
+     
       PanierComponent,
      
      

@@ -215,8 +215,9 @@ updateProduit(): void {
  
 selectCategorie(event:any){
 this.id=parseInt(event.target.value);
-this.sc.getCategory(this.id).subscribe(data=>{this.categorie=data;  this.cat.id=this.categorie.id;  this.cat.nom=this.categorie.nom;
-  this.produitF=this.produits.filter(x=>x.categorie.nom.indexOf(this.cat.nom)!=-1)
+this.service.getProductsByCat(this.id).subscribe(data=>{this.produitF=data
+// this.sc.getCategory(this.id).subscribe(data=>{this.categorie=data;  this.cat.id=this.categorie.id;  this.cat.nom=this.categorie.nom;
+//   this.produitF=this.produits.filter(x=>x.categorie.nom.indexOf(this.cat.nom)!=-1)
 });
 
  

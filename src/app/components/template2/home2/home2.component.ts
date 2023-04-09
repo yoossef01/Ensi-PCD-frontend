@@ -10,6 +10,7 @@ import { Categorie } from 'src/app/model/categorie';
 import { Produit } from 'src/app/model/produit';
 import { ProduitService } from 'src/app/produit.service';
 import Swal from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -64,15 +65,24 @@ photo:File;
   {
    return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
   }
-   constructor(private service:ProduitService,private sc:CategorieService,public dialog:MatDialog) { }
+   constructor(private ar:ActivatedRoute,private service:ProduitService,private sc:CategorieService,public dialog:MatDialog) { }
  getAll()
  {
    this.service.getAllProducts().subscribe(data=>{this.produits=data; this.produitF=this.produits})
    this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
  }
    ngOnInit(): void {
-     
-     this.getAll()
+    
+    let idStr = this.ar.snapshot.paramMap.get('id');
+    if (idStr) {
+      let id = parseInt(idStr);
+      console.log(id);
+      this.service.getProductsByVendeur(id).subscribe(data=>this.produitF=data);
+
+      
+    } else {
+      console.log('id is null');
+    }
      this.sc.getCategory(1).subscribe(data=>{this.categorie=data;  this.categorie=this.categorie;});
     //  setInterval(() => {
     //   this.added();

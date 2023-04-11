@@ -34,8 +34,6 @@ export class ListeproduitsComponent implements OnInit {
   nomNewCat:string;
   newCategory: Categorie;
   selectedValue = 'Vendeur';
- 
-
    categorie: Categorie = new Categorie();
   cat:Categorie = new Categorie();
 id:number;

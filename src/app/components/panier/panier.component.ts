@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AchatService } from 'src/app/achat.service';
-import { Achat } from 'src/app/model/achat';
+import { AchatService } from 'src/app/commande.service';
+import { Achat } from 'src/app/model/commande';
 import Swal from 'sweetalert2';
 
 @Component({

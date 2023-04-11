@@ -8,8 +8,8 @@ import Swal from 'sweetalert2';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { UpdateProductDialogComponent } from '../update-product-dialog/update-product-dialog.component';
 import { v4 as uuidv4 } from 'uuid';
-import { Achat } from 'src/app/model/achat';
-import { AchatService } from 'src/app/achat.service';
+import { Achat } from 'src/app/model/commande';
+import { AchatService } from 'src/app/commande.service';
 
 @Component({
   selector: 'app-template1',

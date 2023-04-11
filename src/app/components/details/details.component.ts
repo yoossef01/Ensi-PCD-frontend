@@ -1,9 +1,9 @@
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AchatService } from 'src/app/achat.service';
+import { AchatService } from 'src/app/commande.service';
 import { CategorieService } from 'src/app/categorie.service';
-import { Achat } from 'src/app/model/achat';
+import { Achat } from 'src/app/model/commande';
 import { Categorie } from 'src/app/model/categorie';
 import { Produit } from 'src/app/model/produit';
 import { ProduitService } from 'src/app/produit.service';

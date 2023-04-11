@@ -13,8 +13,8 @@ import { HomeComponent } from '../home/home.component';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { DetailsComponent } from '../details/details.component';
 import { UpdateProductDialogComponent } from '../update-product-dialog/update-product-dialog.component';
-import { AchatService } from 'src/app/achat.service';
-import { Achat } from 'src/app/model/achat';
+import { AchatService } from 'src/app/commande.service';
+import { Achat } from 'src/app/model/commande';
 
 
 @Component({

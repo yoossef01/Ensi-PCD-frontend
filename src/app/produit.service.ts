@@ -28,16 +28,12 @@ public getProduct(id:string):Observable<Produit>
   return this.client.get<Produit>(this.host+"/productById/"+id)
 }
 
-public ToString(p:Produit): string   {
-  return "{\"nom\":"+p.nom+",\"photo\":"+p.photo+
-  ",\"prix\":"+p.prix+",\"quantite\":"+p.quantite+
-  ",\"category\":{\"id\":"+p.categorie.id+" ,\"nom\":"+p.categorie.nom+"}"
-}
-  public addProduit(p: string, file: File): Observable<Produit> {
+
+  public addProduit(p: Produit, file: File): Observable<Produit> {
     const formData = new FormData();
     formData.append('file', file);
-    console.log(p);
-    formData.append('product', p );
+    console.log(JSON.stringify(p));
+    formData.append('product', JSON.stringify(p));
     console.log(formData);
 
     return this.client.post<Produit>(this.host+"/add", formData);

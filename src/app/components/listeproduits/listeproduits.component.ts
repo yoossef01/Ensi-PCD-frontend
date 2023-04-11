@@ -13,8 +13,10 @@ import { HomeComponent } from '../home/home.component';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { DetailsComponent } from '../details/details.component';
 import { UpdateProductDialogComponent } from '../update-product-dialog/update-product-dialog.component';
-import { AchatService } from 'src/app/achat.service';
-import { Achat } from 'src/app/model/achat';
+import { CommandeService } from 'src/app/commande.service';
+import { VendeurService } from 'src/app/vendeur.service';
+import { Vendeur } from 'src/app/model/vendeur';
+import { Commande } from 'src/app/model/commande';
 
 
 @Component({
@@ -23,7 +25,8 @@ import { Achat } from 'src/app/model/achat';
   styleUrls: ['./listeproduits.component.css']
 })
 export class ListeproduitsComponent implements OnInit {
-  produits: Produit[] ;achats: Achat[];
+  produits: Produit[] ;
+  commandes: Commande[];
   public isCollapsed = false;
   public isCollapsed2 = false;
   private catadded =false;
@@ -43,12 +46,11 @@ id:number;
     quantite: 0,
     photo: "",
     categorie: {id:1,nom:"informatique"},
-    prix_achat:0,
-    magasin:{id:0,nom:""}
+    prix_achat:0,vendeur:{id:0}
   };
   categories!:Categorie[];
 photo:File;
-achat: Achat = {
+commande: Commande = {
   id:'' ,
   montant: 0,quantite:0,
   date: new Date(),
@@ -59,11 +61,10 @@ achat: Achat = {
     quantite: 0,
     photo: "",
     categorie: {id:1,nom:"informatique"},
-    prix_achat:0,
-    magasin:{id:0,nom:""}
+    prix_achat:0,vendeur:{id:0}
   }
 };
-
+v:Vendeur;
   set texte(ch:string)
   {
  this.produitF=this.filtrer(ch);
@@ -72,17 +73,22 @@ achat: Achat = {
   {
    return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
   }
-   constructor(private service:ProduitService,private sc:CategorieService,public dialog:MatDialog,private achatService: AchatService) { }
+   constructor(private service:ProduitService,private sc:CategorieService,public dialog:MatDialog,
+    private commandeService: CommandeService
+    ,private vendeurservice :VendeurService) { }
  getAll()
  {
-   this.service.getAllProducts().subscribe(data=>{this.produits=data; this.produitF=this.produits ;console.log(this.produitF)})
+   this.service.getAllProducts().subscribe(data=>{this.produitF=data; })
    this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
  }
    ngOnInit(): void {
-    console.log(this.achat);
+    console.log(this.commande);
      this.getAll()
      this.sc.getCategory(1).subscribe(data=>{this.categorie=data;  this.categorie=this.categorie;});
-     this.getAchats();
+     this.getCommandes();
+     this.vendeurservice.getCurrentVendeur().subscribe(vendeur =>
+       {if(vendeur) this.v=vendeur;console.log("le vendeur"+this.v.nom+"est connecté")});
+
     //  setInterval(() => {
     //   this.added();
     // }, 1000);
@@ -216,14 +222,14 @@ updateProduit(): void {
 selectCategorie(event:any){
 this.id=parseInt(event.target.value);
 this.service.getProductsByCat(this.id).subscribe(data=>{this.produitF=data
-// this.sc.getCategory(this.id).subscribe(data=>{this.categorie=data;  this.cat.id=this.categorie.id;  this.cat.nom=this.categorie.nom;
-//   this.produitF=this.produits.filter(x=>x.categorie.nom.indexOf(this.cat.nom)!=-1)
-});
+ this.sc.getCategory(this.id).subscribe(data=>{this.categorie=data;  this.cat.id=this.categorie.id;  this.cat.nom=this.categorie.nom;
+  this.produitF=this.produits.filter(x=>x.categorie.nom.indexOf(this.cat.nom)!=-1)
+});})
+}
 
  
 
-  }
- openDialog(){
+  openDialog(){
   let dialogRef = this.dialog.open(DialogBoxComponent, {
     width: '700px'
   });
@@ -243,7 +249,7 @@ createNewCategory() {
   }
   this.newCategory = new Categorie();
   this.newCategory.nom = this.nomNewCat;
- 
+ // this.idVendeur=this.v.id;
  console.log(this.newCategory);
 
   this.sc.addCategorie(this.newCategory).subscribe(() => {
@@ -255,29 +261,28 @@ createNewCategory() {
 
 
 
-getAchats() {
-  this.achatService.getAllAchats().subscribe(
+getCommandes() {
+  this.commandeService.getAllCommandes().subscribe(
     data => {
-      this.achats = data;
+      this.commandes = data;
     }
   );
 }
 
-deleteAchat(id: string) {
-  this.achatService.deleteAchat(id).subscribe(
+deleteCommande(id: string) {
+  this.commandeService.deleteCommande(id).subscribe(
     data => {
       console.log(data);
-      this.getAchats();
+      this.getCommandes();
     }
   );
 }
-addAchat() {
+addCommande() {
   
- // const a:string="{\"montant\":"+this.achat.montant+",\"date\":\""+this.achat.date+"\",\"product\":{"+"\"id\":"+this.achat.product.id+"}}"
-if(this.achat.id==''){
-  this.achat.id=uuidv4();
+if(this.commande.id==''){
+  this.commande.id=uuidv4();
 }
-  this.achatService.addAchat(this.achat)
+  this.commandeService.addCommande(this.commande)
     .subscribe(data => console.log(data));
    
      

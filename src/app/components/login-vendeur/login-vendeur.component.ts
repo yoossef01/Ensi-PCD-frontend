@@ -19,10 +19,6 @@ constructor(
 ) {}
 
 
-
-
-
-
 loginUser() {
 
   var vendeur = this.model.email;
@@ -35,6 +31,8 @@ loginUser() {
       
       console.log('res',res)
       localStorage.setItem('token',res.token)
+      this.vendeurservice.isLoggedIn.next(true);
+
       this.vendeurservice.getVendeurByEmail(vendeur).subscribe(data=>{
         const NumTemplate :number=data.idTemplate;console.log("0"+NumTemplate);
         const idVendeur:number=data.id;

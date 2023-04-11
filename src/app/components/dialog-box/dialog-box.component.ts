@@ -5,8 +5,10 @@ import { Categorie } from 'src/app/model/categorie';
 import { Produit } from 'src/app/model/produit';
 import { ProduitService } from 'src/app/produit.service';
 import { ViewChild } from '@angular/core';
-import { Magasin } from 'src/app/model/magasin';
-import { MagasinService } from 'src/app/magasin.service';
+import { VendeurService } from 'src/app/vendeur.service';
+import { Vendeur } from 'src/app/model/vendeur';
+import { v4 as uuidv4 } from 'uuid';
+
 
 @Component({
   selector: 'app-dialog-box',
@@ -26,21 +28,21 @@ isNomEmpty: boolean;
     quantite: 0,
     photo: "",
     categorie: {id:0,nom:""},
-    prix_achat:0,
-    magasin:{id:0,nom:""}
+    prix_achat:0,vendeur:{id:0}
   };id:number;
   categories!:Categorie[];
-  magasins!:Magasin[];
+  v:Vendeur;
   categorie: Categorie = new Categorie();
-  magasin:Magasin=new Magasin();
+  
   photo:File;
   constructor(
     public dialogRef: MatDialogRef<DialogBoxComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,private service:ProduitService,private sc:CategorieService,private ms:MagasinService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,private service:ProduitService,private sc:CategorieService,private vendeurservice :VendeurService) { }
 
   ngOnInit(): void {
     this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
-    this.ms.getAllMagasins().subscribe(data=>{this.magasins=data; this.magasins=this.magasins})
+    this.vendeurservice.getCurrentVendeur().subscribe(vendeur => {if(vendeur) this.v=vendeur;console.log("le vendeur"+this.v.nom+"est connecté")});
+
 
   this.img="./assets/150x150.png";
   }
@@ -48,11 +50,8 @@ isNomEmpty: boolean;
     this.sc.getCategory(id).subscribe(data=>{this.categorie=data; this.p.categorie=this.categorie});
    
   }
-  getMagasinById(id:number){
-    this.ms.getMagasin(id).subscribe(data=>{this.magasin=data; this.p.magasin=this.categorie;
-      });
-   
-  }
+  
+  
   onPhotoSelected(event: any): void {
      
     this.photo =event.target.files[0];
@@ -72,27 +71,19 @@ isNomEmpty: boolean;
   selectCat(event:any){
     console.log(''+this.id)
     this.id=(parseInt(event.target.value));
+    
     this.getCategoryById(this.id);
    
  
  }
- selectMag(event:any){
-
-  this.id=(parseInt(event.target.value));
-  this.getMagasinById(this.id);
  
-
-}
   addProduit(): void {
-    this.getCategoryById(this.id);
-    this.getMagasinById(this.id);
-    
-   const pp:string="{\"nom\":\""+this.p.nom+
-     "\",\"prix\":"+this.p.prix+",\"quantite\":"+this.p.quantite+",\"prix_achat\":"+this.p.prix_achat+
-     ",\"categorie\":{\"id\":"+this.p.categorie.id+" ,\"nom\":\""+this.p.categorie.nom+"\"}" +
-     ",\"magasin\":{\"id\":"+this.p.magasin.id+" ,\"nom\":\""+this.p.magasin.nom+"\"}}";
+    this.getCategoryById(this.p.categorie.id);
+    this.p.vendeur.id=this.v.id;
+    this.p.id=uuidv4();
+ 
      
-  this.service.addProduit(pp,this.photo).subscribe(()=>
+  this.service.addProduit(this.p,this.photo).subscribe(()=>
       {this.service.added=true;
        
        //console.log(JSON.stringify(this.newProduit));
@@ -106,8 +97,7 @@ isNomEmpty: boolean;
          quantite: 0,
          photo: "",
      categorie: {id:0,nom:""},
-     prix_achat:0,
-     magasin:{id:0,nom:""}
+     prix_achat:0,vendeur:{id:0}
        };
        this.reset();
       this.photo=new File([], '');

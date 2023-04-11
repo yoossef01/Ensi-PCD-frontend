@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AchatService } from 'src/app/achat.service';
-import { Achat } from 'src/app/model/achat';
+import { CommandeService } from 'src/app/commande.service';
+import { Commande } from 'src/app/model/commande';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,40 +9,40 @@ import Swal from 'sweetalert2';
   styleUrls: ['./panier.component.css']
 })
 export class PanierComponent implements OnInit{
-  achats:Achat[];
+  commandes:Commande[];
 somme:number=0;
 
-  constructor(private as:AchatService){}
+  constructor(private cs:CommandeService){}
   ngOnInit(): void {
-    this.getAchats();
+    this.getCommandes();
   }
-  getAchats(){      this.as.getAllAchats().subscribe(data=>{this.achats= data;});
+  getCommandes(){      this.cs.getAllCommandes().subscribe(data=>{this.commandes= data;});
 }
   getSomme(): number {
     let somme = 0;
-    for (let achat of this.achats) {
-      somme += achat.montant;
+    for (let commande of this.commandes) {
+      somme += commande.montant;
     }
     return somme;
   }
-  UpdateMontantTotal(a:Achat):void{
+  UpdateMontantTotal(c:Commande):void{
     
-      a.montant=a.product.prix*a.quantite;
-this.as.updateAchat(a).subscribe(data =>{a=data;console.log(a);} );
+      c.montant=c.product.prix*c.quantite;
+this.cs.updateCommande(c).subscribe(data =>{c=data;console.log(c);} );
   }
 
-  decrementQuantity(a: Achat) {
-    if (a.quantite > 0) {
-      a.quantite--;
-      this.UpdateMontantTotal(a);
+  decrementQuantity(c: Commande) {
+    if (c.quantite > 0) {
+      c.quantite--;
+      this.UpdateMontantTotal(c);
     }
   }
   
-  incrementQuantity(a: Achat) {
-    a.quantite++;
-    this.UpdateMontantTotal(a);
+  incrementQuantity(c: Commande) {
+    c.quantite++;
+    this.UpdateMontantTotal(c);
   }
-  DeleteAchat(id: string) {
+  DeleteCommande(id: string) {
    
      
     const swalWithBootstrapButtons = Swal.mixin({
@@ -63,10 +63,10 @@ this.as.updateAchat(a).subscribe(data =>{a=data;console.log(a);} );
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        this.as.deleteAchat(id).subscribe(
+        this.cs.deleteCommande(id).subscribe(
           data => {
             console.log(data);
-            this.getAchats();
+            this.getCommandes();
   
         swalWithBootstrapButtons.fire(
           'Deleted!',

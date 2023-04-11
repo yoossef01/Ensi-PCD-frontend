@@ -1,6 +1,7 @@
 import { Produit } from "./produit";
 
-export class Achat {
+
+export class Commande {
     id:string;
     montant:number;
     date:Date;

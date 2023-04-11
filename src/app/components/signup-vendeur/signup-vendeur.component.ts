@@ -10,8 +10,11 @@ import { VendeurService } from 'src/app/vendeur.service';
   styleUrls: ['./signup-vendeur.component.css']
 })
 export class SignupVendeurComponent implements OnInit{
+  
   constructor(private service: VendeurService, private router: Router) { }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 v:Vendeur=new Vendeur();
   data: any
 
@@ -30,12 +33,19 @@ v:Vendeur=new Vendeur();
     console.log(this.data)
 
     this.service.adduser(this.data).subscribe(data => {
-      console.log(data)
+      
+      console.log(data);
+      this.service.getVendeurByEmail(this.data.email).subscribe(data=>{
+        this.service.id=data.id;
+        this.router.navigate(['/choose/'+data.id]);
+      })
+      
+      
     })
 
     
     
-    this.router.navigate(['/loginVendeur']);
+    
   }
   click(){
     this.service.getVendeurById(3).subscribe(data=>{this.v=data;

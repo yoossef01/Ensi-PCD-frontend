@@ -107,37 +107,10 @@
 </div>
   
     
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Montant</th>
-    <th>Date</th>
-    <th>Produit</th>
-    <th>Action</th>
-  </tr>
-  <tr *ngFor="let acha of achats">
-    <td>{{ acha.id }}</td>
-    <td>{{ acha.montant }}</td>
-    <td>{{ acha.date }}</td>
-    <td>{{ acha.product.nom }}</td>
-    <td><button (click)="deleteAchat(acha.id)">Supprimer</button></td>
-  </tr>
-</table>
+
 
   
-    <div class="col-md-6">
-      <form (ngSubmit)="addAchat()">
-       
-          <label for="montant">Montant</label>
-          <input type="number" class="form-control" id="montant" [(ngModel)]="this.achat.montant" name="montant" required>
-       
-          <label for="date">Date</label>
-          <input type="date" class="form-control" id="date" [(ngModel)]="this.achat.date" name="date" required>
-          <label for="productId">Product ID</label>
-          <input type="text" class="form-control" id="productId" [(ngModel)]="this.achat.product.id" name="productId" required>
-        <button type="submit" class="btn btn-success">Ajouter achat</button>
-      </form>
-    </div>
+   
 
 
 

@@ -26,12 +26,7 @@
           <option *ngFor="let cat of categories" [value]="cat.id" >{{ cat.nom }}</option>
         </select>
       </mat-form-field>
-      <!-- <mat-form-field>
-        <mat-label for="magasin">Magasin</mat-label>
-        <mat-select matNativeControl id="magasin" name="magasin" (change)="selectMag($event)" [(ngModel)]="prod.magasin.id" [required]="true" >
-          <option *ngFor="let mag of magasins" [value]="mag.id" >{{ mag.nom }}</option>
-        </mat-select>
-      </mat-form-field> -->
+     
       
        <div>      
           <label>Photo</label>

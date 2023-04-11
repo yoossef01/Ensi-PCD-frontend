@@ -8,8 +8,9 @@ import Swal from 'sweetalert2';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { UpdateProductDialogComponent } from '../update-product-dialog/update-product-dialog.component';
 import { v4 as uuidv4 } from 'uuid';
-import { Achat } from 'src/app/model/achat';
-import { AchatService } from 'src/app/achat.service';
+import { Commande } from 'src/app/model/commande';
+import { CommandeService } from 'src/app/commande.service';
+
 
 @Component({
   selector: 'app-template1',
@@ -43,12 +44,11 @@ public isCollapsed2 = false;
     quantite: 0,
     photo: "",
     categorie: {id:0,nom:""},
-    prix_achat:0
-    ,
-    magasin:{id:0,nom:""}
+    prix_achat:0,vendeur:{id:0}
+    
   };
   photo:File;
-  achat: Achat = {
+  commande: Commande = {
     id:'' ,
     montant: 0,quantite:2,
     date: new Date(),
@@ -59,9 +59,7 @@ public isCollapsed2 = false;
       quantite: 0,
       photo: "",
       categorie: {id:1,nom:"informatique"},
-      prix_achat:0,
-      magasin:{id:0,nom:""}
-    }
+      prix_achat:0,vendeur:{id:0}}
   };
   set texte(ch:string)
   {
@@ -71,7 +69,9 @@ public isCollapsed2 = false;
   {
    return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
   }
-  constructor(private sc:CategorieService,private service:ProduitService,public dialog:MatDialog,private achatService: AchatService) { }
+  constructor(private sc:CategorieService,private service:ProduitService,public dialog:MatDialog
+    ,private commandeService:CommandeService
+    ) { }
  getAll()
  {
    this.service.getAllProducts().subscribe(data=>{this.produits=data; this.produitF=this.produits})
@@ -275,21 +275,18 @@ this.sc.addCategorie(this.newCategory).subscribe(() => {
      this.catadded=true;
         this.nomNewCat = "";},);
 }
-addAchat(id:string) {
+addCommande(id:string) {
  this.service.getProduct(id).subscribe(data => {
   this.produit = data;
 
-  // const a:string="{\"montant\":"+this.achat.montant+",\"date\":\""+this.achat.date+"\",\"product\":{"+"\"id\":"+this.achat.product.id+"}}"
-//  if(this.achat.id==''){
-//    this.achat.id=uuidv4();
-//  }
- this.achat.montant=this.produit.prix*this.achat.quantite;
- this.produit.quantite=this.produit.quantite-this.achat.quantite;
- this.achat.date=new Date();
- this.achat.product.id=id;
- this.achat.id=uuidv4();
+ 
+ this.commande.montant=this.produit.prix*this.commande.quantite;
+ this.produit.quantite=this.produit.quantite-this.commande.quantite;
+ this.commande.date=new Date();
+ this.commande.product.id=id;
+ this.commande.id=uuidv4();
  this.service.saveP(this.produit).subscribe(data=>{this.produit=data})
-   this.achatService.addAchat(this.achat)
+   this.commandeService.addCommande(this.commande)
      .subscribe(data => console.log(data));
     })
       

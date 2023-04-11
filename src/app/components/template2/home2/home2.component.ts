@@ -41,8 +41,7 @@ id:number;
     quantite: 0,
     photo: "",
     categorie: {id:1,nom:"informatique"},
-    prix_achat:0,
-    magasin:{id:0,nom:""}
+    prix_achat:0,vendeur:{id:0}
   };
   prod: Produit = {
     id: '38df45e4-e155-426e-ba81-2ea4128c15da',
@@ -51,8 +50,7 @@ id:number;
     quantite: 0,
     photo: "",
     categorie: {id:1,nom:"informatique"},
-    prix_achat:0,
-    magasin:{id:0,nom:""}
+    prix_achat:0,vendeur:{id:0}
   };
   categories!:Categorie[];
 photo:File;
@@ -206,9 +204,7 @@ updateProduit(): void {
    this.getCategoryById(this.id);
    
    
-  // const pp:string="{\"nom\":\""+this.p.nom+
-  //   "\",\"prix\":"+this.p.prix+",\"quantite\":"+this.p.quantite+",\"prix_achat\":"+this.p.prix_achat+
-  //   ",\"categorie\":{\"id\":"+this.p.categorie.id+" ,\"nom\":\""+this.p.categorie.nom+"\"}}";
+  
     
  this.service.updateProduct(this.photo,this.prod).subscribe(
     response => {
@@ -224,8 +220,7 @@ updateProduit(): void {
         quantite: 0,
         photo: "",
     categorie: {id:0,nom:""},
-    prix_achat:0,
-    magasin:{id:0,nom:""}
+    prix_achat:0,vendeur:{id:0}
       };
      this.photo=new File([], '');
 

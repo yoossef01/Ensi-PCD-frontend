@@ -11,35 +11,37 @@
                 <div class="p-5" >
                   <div class="d-flex justify-content-between align-items-center mb-5" >
                     <h1 class="fw-bold mb-0 text-black">Panier</h1>
-                    <h6 class="mb-0 text-muted">{{achats.length}} produits à acheter</h6>
+                    <h6 class="mb-0 text-muted">3
+                      {{commandes.length}}
+                       produits à acheter</h6>
                   </div>
-<div  *ngFor="let a of achats"  >
+<div  *ngFor="let c of commandes"  >
                   <hr class="my-4" >
 
                   <div class="row mb-4 d-flex justify-content-between align-items-center"  >
                     <div class="col-md-2 col-lg-2 col-xl-2">
                       <img
-                        src="http://localhost:8080/apiproduit/getimage/{{a.product.id}}"
+                        src="http://localhost:8080/apiproduit/getimage/{{c.product.id}}"
                         class="img-fluid rounded-3" alt="Cotton T-shirt">
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-3">
-                      <h6 class="text-muted">{{a.product.nom}}</h6>
-                      <h6 class="text-black mb-0">{{a.product.magasin.nom}}</h6>
+                      <h6 class="text-muted">{{c.product.nom}}</h6>
+                      <h6 class="text-black mb-0">{{c.product.vendeur}}</h6>
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                      <button class="btn btn-link px-2" (click)="decrementQuantity(a)" >
+                      <button class="btn btn-link px-2" (click)="decrementQuantity(c)" >
                         <i class="fas fa-minus"></i>
                       </button>
-                      <input id="form1" min="0" name="quantity" [(ngModel)]="a.quantite" type="number" class="form-control form-control-sm" />
-                      <button class="btn btn-link px-2" (click)="incrementQuantity(a)">
+                      <input id="form1" min="0" name="quantity" [(ngModel)]="c.quantite" type="number" class="form-control form-control-sm" />
+                      <button class="btn btn-link px-2" (click)="incrementQuantity(c)">
                         <i class="fas fa-plus"></i>
                       </button>
                     </div>
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1" >
-                      <h6 class="mb-0">{{a.product.prix}}DT</h6>
+                      <h6 class="mb-0">{{c.product.prix}}DT</h6>
                     </div>
                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                      <a type="button" class="text-muted" (click)="DeleteAchat(a.id)"><i class="fas fa-times"></i></a>
+                      <a type="button" class="text-muted" (click)="DeleteCommande(c.id)"><i class="fas fa-times"></i></a>
                     </div>
                   </div></div>
 
@@ -83,7 +85,7 @@
                   <div class="d-flex justify-content-between information"><span>Subtotal</span><span>{{getSomme()}}.00 DT</span></div>
                   <div class="d-flex justify-content-between information"><span>Livraison</span><span>7.00 DT</span></div>
                   <div class="d-flex justify-content-between information"><span>Total(Incl. taxes)</span><span>{{getSomme()+7.00}}.00 DT</span></div>
-                  <button class="btn btn-primary btn-block d-flex justify-content-between mt-5" type="button"><span>Registre</span></button></div>
+                  <button class="btn btn-primary btn-block d-flex justify-content-between mt-5" type="button"  ><span>Registre</span></button></div>
 
                  
                  

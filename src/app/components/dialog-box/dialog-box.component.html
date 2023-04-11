@@ -33,12 +33,7 @@
           <mat-option *ngFor="let cat of categories" [value]="cat.id" >{{ cat.nom }}</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field>
-        <mat-label for="magasin">Magasin</mat-label>
-        <mat-select id="magasin" name="magasin"(change)="selectMag($event)" [(ngModel)]="p.magasin.id" [required]="true" >
-          <mat-option *ngFor="let mag of magasins" [value]="mag.id" >{{ mag.nom }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+     
   <div>
         <mat-label for="photo">Photo</mat-label>
         <input #myInput  type="file" id="photo" name="photo" (change)="onPhotoSelected($event)" [(ngModel)]="photo" required>

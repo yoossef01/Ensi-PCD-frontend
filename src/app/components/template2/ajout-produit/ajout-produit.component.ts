@@ -30,8 +30,7 @@ myInputVariable!: ElementRef;
     quantite: 0,
     photo: "",
     categorie: {id:1,nom:"informatique"},
-    prix_achat:0,
-    magasin:{id:0,nom:""}
+    prix_achat:0,vendeur:{id:0}
   };id!:number;
   categories!:Categorie[];
   categorie: Categorie = new Categorie();
@@ -66,11 +65,11 @@ myInputVariable!: ElementRef;
     this.getCategoryById(this.id);
     
     
-   const pp:string="{\"nom\":\""+this.p.nom+
-     "\",\"prix\":"+this.p.prix+",\"quantite\":"+this.p.quantite+",\"prix_achat\":"+this.p.prix_achat+
-     ",\"categorie\":{\"id\":"+this.p.categorie.id+" ,\"nom\":\""+this.p.categorie.nom+"\"}}";
+  //  const pp:string="{\"nom\":\""+this.p.nom+
+  //    "\",\"prix\":"+this.p.prix+",\"quantite\":"+this.p.quantite+",\"prix_achat\":"+this.p.prix_achat+
+  //    ",\"categorie\":{\"id\":"+this.p.categorie.id+" ,\"nom\":\""+this.p.categorie.nom+"\"}}";
      
-  this.service.addProduit(pp,this.photo).subscribe(()=>
+  this.service.addProduit(this.p,this.photo).subscribe(()=>
       {this.service.added=true;
        
        //console.log(JSON.stringify(this.newProduit));
@@ -84,8 +83,7 @@ myInputVariable!: ElementRef;
          quantite: 0,
          photo: "",
      categorie: {id:0,nom:""},
-     prix_achat:0,
-     magasin:{id:0,nom:""}
+     prix_achat:0,vendeur:{id:0}
     
        };
        this.reset();

@@ -32,7 +32,7 @@ export class AjoutCategorieComponent {
   
     this.sc.addCategorie(this.newCategory).subscribe(() => {
          this.catadded=true;
-            this.nomNewCat = "";},);7
-    this.router.navigate(['/template2home'])
+            this.nomNewCat = "";},);
+    this.router.navigate(['/template2/1'])
   }
 }

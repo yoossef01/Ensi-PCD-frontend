@@ -30,7 +30,7 @@ myInputVariable!: ElementRef;
     quantite: 0,
     photo: "",
     categorie: {id:1,nom:"informatique"},
-    prix_achat:0,vendeur:{id:0}
+    prix_achat:0,vendeur:{id:2}
   };id!:number;
   categories!:Categorie[];
   categorie: Categorie = new Categorie();
@@ -95,7 +95,7 @@ myInputVariable!: ElementRef;
      },
      
    );
-   this.router.navigate(['/template2/152']);
+   this.router.navigate(['/template2/1']);
  }
 
  

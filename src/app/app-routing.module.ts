@@ -19,28 +19,32 @@ import { AjoutCategorieComponent } from './components/template2/ajout-categorie/
 import { PanierComponent } from './components/panier/panier.component';
 import { SignupVendeurComponent } from './components/signup-vendeur/signup-vendeur.component';
 import { LoginVendeurComponent } from './components/login-vendeur/login-vendeur.component';
+import { HomeclientComponent } from './components/template2/homeclient/homeclient.component';
+import { AchatComponent } from './components/template2/achat/achat.component';
+
 
 
 
 const routes: Routes = [
-  {path:'home',component: HomeComponent}
-  ,{path:'signup',component:SignupComponent},
+  {path:'home',component: HomeComponent},
+  {path:'signup',component:SignupComponent},
   {path:"products/:id",component: DetailsComponent},
-  {path:"deta",component:DetailsComponent},
   {path:'choose',component:ChoosetemplateComponent},
   {path:'template',component:TemplateComponent},{
-  path:'liste',component:ListeproduitsComponent
-  },{path:'template1',component:Template1Component},{
+  path:'liste',component:ListeproduitsComponent},
+  {path:'template1',component:Template1Component},{
    path:'insc',component:InscriptionComponent
   },{
-    path:'login', component:LoginComponent
-  },{path:'Panier',component:PanierComponent}
-  ,{path:'login', component:LoginComponent},
+    path:'login', component:LoginComponent},
+    {path:'Panier',component:PanierComponent}
+  ,
   {path:'template2/:id',component:Home2Component},
   {path:'signupVendeur',component:SignupVendeurComponent},
   {path:'loginVendeur',component:LoginVendeurComponent},
   {path:'template2ajoutproduit',component:AjoutProduitComponent},
-{path:'template2ajoutcategorie',component:AjoutCategorieComponent}
+  {path:'template2ajoutcategorie',component:AjoutCategorieComponent},
+  {path: 'homeclient/:id', component:HomeclientComponent},
+  {path:'achat', component:AchatComponent}
   
 ];
 

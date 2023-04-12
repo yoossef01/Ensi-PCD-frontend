@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { AchatService } from 'src/app/achat.service';
 import { CommandeService } from 'src/app/commande.service';
+import { Achat } from 'src/app/model/achat';
 import { Commande } from 'src/app/model/commande';
+import { Produit } from 'src/app/model/produit';
+import { Vendeur } from 'src/app/model/vendeur';
 import Swal from 'sweetalert2';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-panier',
@@ -10,9 +15,31 @@ import Swal from 'sweetalert2';
 })
 export class PanierComponent implements OnInit{
   commandes:Commande[];
-somme:number=0;
+  achats : Achat[];
+  vendeur! : Vendeur;
 
-  constructor(private cs:CommandeService){}
+  achat: Achat = {
+    id:'' ,
+    date: new Date(),
+    montant: 0,
+    nom : "fir",
+    quantite:0,
+    product: {
+      id: '',
+      nom: '',
+      prix: 0,
+      quantite: 0,
+      photo: "",
+      categorie: {id:1,nom:"informatique"},
+      prix_achat:0,vendeur:{id:0}
+    },
+    vendeur: {id:1}
+  };
+
+
+somme:number=0;
+produit!:Produit;
+  constructor(private cs:CommandeService, private achatservice: AchatService){}
   ngOnInit(): void {
     this.getCommandes();
   }
@@ -85,5 +112,20 @@ this.cs.updateCommande(c).subscribe(data =>{c=data;console.log(c);} );
       }
     })
   }
+
+
+  addAchat(): void {
+
+
+    this.achat.date=new Date();
+    this.achat.product.id=this.produit.id;
+    this.achat.vendeur.id=this.vendeur.id;
+    this.achat.id=uuidv4();
+
+      this.achatservice.saveAchat(this.achat)
+        .subscribe(data => console.log(data));
+
+    }
+
 
 }

@@ -39,6 +39,8 @@ import { AjoutCategorieComponent } from './components/template2/ajout-categorie/
 import { PanierComponent } from './components/panier/panier.component';
 import { SignupVendeurComponent } from './components/signup-vendeur/signup-vendeur.component';
 import { LoginVendeurComponent } from './components/login-vendeur/login-vendeur.component';
+import { HomeclientComponent } from './components/template2/homeclient/homeclient.component';
+import { AchatComponent } from './components/template2/achat/achat.component';
 
    // import{} from '@angular/material/slide-toggle';
 //import {  } from '@angular/material/badge';
@@ -74,6 +76,8 @@ const materiel=[
     
       SignupVendeurComponent,
       LoginVendeurComponent,
+      HomeclientComponent,
+      AchatComponent,
   ],
    schemas:[CUSTOM_ELEMENTS_SCHEMA]
 ,

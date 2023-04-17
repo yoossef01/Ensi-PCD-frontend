@@ -19,7 +19,7 @@ public getAllCategories():Observable<Categorie []>
   return this.client.get<Categorie []>(this.host+"/all")
 }
 public addCategorie(cat:Categorie): Observable<Categorie>{
-  
+  console.log(cat);
   return this.client.post<Categorie>(this.host+"/add",cat)
 
 }

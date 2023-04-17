@@ -29,8 +29,8 @@ myInputVariable!: ElementRef;
     prix: 0,
     quantite: 0,
     photo: "",
-    categorie: {id:1,nom:"informatique"},
-    prix_achat:0,vendeur:{id:2}
+    categorie: {id:1,nom:"informatique",vendeur: {id: 0}},
+    prix_achat:0,vendeur:{id:0}
   };id!:number;
   categories!:Categorie[];
   categorie: Categorie = new Categorie();
@@ -82,7 +82,7 @@ myInputVariable!: ElementRef;
          prix: 0,
          quantite: 0,
          photo: "",
-     categorie: {id:0,nom:""},
+     categorie: {id:0,nom:"",vendeur: {id: 0}},
      prix_achat:0,vendeur:{id:0}
     
        };

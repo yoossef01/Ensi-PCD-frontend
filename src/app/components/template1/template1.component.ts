@@ -10,6 +10,8 @@ import { UpdateProductDialogComponent } from '../update-product-dialog/update-pr
 import { v4 as uuidv4 } from 'uuid';
 import { Commande } from 'src/app/model/commande';
 import { CommandeService } from 'src/app/commande.service';
+import { Vendeur } from 'src/app/model/vendeur';
+import { VendeurService } from 'src/app/vendeur.service';
 
 
 @Component({
@@ -33,7 +35,7 @@ Vendeur='Vendeur';
   public isCollapsed = false;
 public isCollapsed2 = false;
    private catadded =false;
-   newCategory: Categorie;
+   newCategory: Categorie={id:0,nom:"",vendeur: {id: 0}}
    nomNewCat:string;
    categorie: Categorie = new Categorie();
   cat:Categorie = new Categorie();
@@ -43,7 +45,7 @@ public isCollapsed2 = false;
     prix: 0,
     quantite: 0,
     photo: "",
-    categorie: {id:0,nom:""},
+    categorie: {id:0,nom:"",vendeur: {id: 0}},
     prix_achat:0,vendeur:{id:0}
     
   };
@@ -58,9 +60,11 @@ public isCollapsed2 = false;
       prix: 0,
       quantite: 0,
       photo: "",
-      categorie: {id:1,nom:"informatique"},
-      prix_achat:0,vendeur:{id:0}}
+      categorie: {id:1,nom:"informatique",vendeur: {id: 0}},
+      prix_achat:0,vendeur:{id:0}},
+      client:{id:0}
   };
+  v:Vendeur;
   set texte(ch:string)
   {
  this.produitF=this.filtrer(ch);
@@ -70,7 +74,7 @@ public isCollapsed2 = false;
    return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
   }
   constructor(private sc:CategorieService,private service:ProduitService,public dialog:MatDialog
-    ,private commandeService:CommandeService
+    ,private commandeService:CommandeService,private vs:VendeurService
     ) { }
  getAll()
  {
@@ -80,7 +84,8 @@ public isCollapsed2 = false;
   ngOnInit(): void {
    this.getAll();
     this.Buttons=1;
-   
+    this.vs.getCurrentVendeur().subscribe(vendeur =>
+      {if(vendeur) this.v=vendeur;console.log("le vendeur"+this.v.nom+"est connecté")});
   this.sc.getCategory(1).subscribe(data=>{this.categorie=data;  this.categorie=this.categorie;});
     //  setInterval(() => {
     //   this.added();
@@ -224,7 +229,7 @@ this.sc.getCategory(id).subscribe(data=>{this.categorie=data; this.p.categorie.i
 }
 
 modifierCategorie(id:number ,nom:string): void {
-  const cat :Categorie={id:id ,nom:nom}
+  const cat :Categorie={id:id ,nom:nom,vendeur: {id:this.v.id}}
   this.sc.modifierCategorie(id, cat)
     .subscribe(cat => this.categorie = cat);
 }
@@ -261,14 +266,17 @@ let dialogRef = this.dialog.open(UpdateProductDialogComponent, {
 });
 }
 createNewCategory() {
-if (this.nomNewCat=='') {
+
+  if (this.nomNewCat=='') {
     alert("Name cannot be empty.");
 
     return;
 }
-this.newCategory = new Categorie();
-this.newCategory.nom = this.nomNewCat;
 
+this.newCategory.nom = this.nomNewCat;
+console.log(this.newCategory);
+
+this.newCategory.vendeur.id=this.v.id;
 console.log(this.newCategory);
 
 this.sc.addCategorie(this.newCategory).subscribe(() => {

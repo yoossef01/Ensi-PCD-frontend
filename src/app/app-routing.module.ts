@@ -21,7 +21,7 @@ import { SignupVendeurComponent } from './components/signup-vendeur/signup-vende
 import { LoginVendeurComponent } from './components/login-vendeur/login-vendeur.component';
 import { HomeclientComponent } from './components/template2/homeclient/homeclient.component';
 import { AchatComponent } from './components/template2/achat/achat.component';
-
+import { ComparateurComponent } from './components/comparateur/comparateur.component';
 
 
 
@@ -44,7 +44,8 @@ const routes: Routes = [
   {path:'template2ajoutproduit',component:AjoutProduitComponent},
   {path:'template2ajoutcategorie',component:AjoutCategorieComponent},
   {path: 'homeclient/:id', component:HomeclientComponent},
-  {path:'achat', component:AchatComponent}
+  {path:'achat', component:AchatComponent},
+  {path:'comparateur', component:ComparateurComponent}
   
 ];
 

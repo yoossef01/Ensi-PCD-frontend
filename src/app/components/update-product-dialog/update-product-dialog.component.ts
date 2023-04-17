@@ -83,7 +83,7 @@ this.service.updateProduct(this.photo,this.prod).subscribe(
        prix: 0,
        quantite: 0,
        photo: "",
-   categorie: {id:0,nom:""},
+   categorie: {id:0,nom:"",vendeur: {id: 0}},
    prix_achat:0,vendeur:{id:0}
      };this.reset();
     this.photo=new File([], '');

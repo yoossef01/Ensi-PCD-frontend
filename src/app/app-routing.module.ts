@@ -34,10 +34,9 @@ const routes: Routes = [
   path:'liste',component:ListeproduitsComponent},
   {path:'template1',component:Template1Component},{
    path:'insc',component:InscriptionComponent
-  },{
-    path:'login', component:LoginComponent},
-    {path:'Panier',component:PanierComponent}
-  ,
+  }
+  ,{path:'Panier',component:PanierComponent}
+  ,{path:'loginClient', component:LoginComponent},
   {path:'template2/:id',component:Home2Component},
   {path:'signupVendeur',component:SignupVendeurComponent},
   {path:'loginVendeur',component:LoginVendeurComponent},

@@ -40,7 +40,7 @@ id:number;
     prix: 0,
     quantite: 0,
     photo: "",
-    categorie: {id:1,nom:"informatique"},
+    categorie: {id:1,nom:"informatique",vendeur: {id: 0}},
     prix_achat:0,vendeur:{id:0}
   };
   prod: Produit = {
@@ -49,7 +49,7 @@ id:number;
     prix: 0,
     quantite: 0,
     photo: "",
-    categorie: {id:1,nom:"informatique"},
+    categorie: {id:1,nom:"informatique",vendeur: {id: 0}},
     prix_achat:0,vendeur:{id:0}
   };
   categories!:Categorie[];
@@ -219,7 +219,7 @@ updateProduit(): void {
         prix: 0,
         quantite: 0,
         photo: "",
-    categorie: {id:0,nom:""},
+    categorie: {id:0,nom:"",vendeur: {id: 0}},
     prix_achat:0,vendeur:{id:0}
       };
      this.photo=new File([], '');

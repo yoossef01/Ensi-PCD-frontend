@@ -17,6 +17,8 @@ import { CommandeService } from 'src/app/commande.service';
 import { VendeurService } from 'src/app/vendeur.service';
 import { Vendeur } from 'src/app/model/vendeur';
 import { Commande } from 'src/app/model/commande';
+import { ClientService } from 'src/app/client.service';
+import { Client } from 'src/app/model/client';
 
 
 @Component({
@@ -43,7 +45,7 @@ id:number;
     prix: 0,
     quantite: 0,
     photo: "",
-    categorie: {id:1,nom:"informatique"},
+    categorie: {id:1,nom:"informatique",vendeur: {id: 0}},
     prix_achat:0,vendeur:{id:0}
   };
   categories!:Categorie[];
@@ -58,11 +60,13 @@ commande: Commande = {
     prix: 0,
     quantite: 0,
     photo: "",
-    categorie: {id:1,nom:"informatique"},
+    categorie: {id:1,nom:"informatique",vendeur: {id: 0}},
     prix_achat:0,vendeur:{id:0}
-  }
+  },
+  client:{id:0}
 };
 v:Vendeur;
+c:Client;
   set texte(ch:string)
   {
  this.produitF=this.filtrer(ch);
@@ -73,7 +77,7 @@ v:Vendeur;
   }
    constructor(private service:ProduitService,private sc:CategorieService,public dialog:MatDialog,
     private commandeService: CommandeService
-    ,private vendeurservice :VendeurService) { }
+    ,private vendeurservice :VendeurService,private clientservice:ClientService) { }
  getAll()
  {
    this.service.getAllProducts().subscribe(data=>{this.produitF=data; })
@@ -84,9 +88,10 @@ v:Vendeur;
      this.getAll()
      this.sc.getCategory(1).subscribe(data=>{this.categorie=data;  this.categorie=this.categorie;});
      this.getCommandes();
+     
      this.vendeurservice.getCurrentVendeur().subscribe(vendeur =>
-       {if(vendeur) this.v=vendeur;console.log("le vendeur"+this.v.nom+"est connecté")});
-
+       {if(vendeur) this.v=vendeur;console.log("le vendeur "+this.v.nom+" est connecté")});
+       
     //  setInterval(() => {
     //   this.added();
     // }, 1000);
@@ -247,8 +252,8 @@ createNewCategory() {
   }
   this.newCategory = new Categorie();
   this.newCategory.nom = this.nomNewCat;
- // this.idVendeur=this.v.id;
- console.log(this.newCategory);
+this.newCategory.vendeur.id=this.v.id;
+  console.log(this.newCategory);
 
   this.sc.addCategorie(this.newCategory).subscribe(() => {
        this.catadded=true;

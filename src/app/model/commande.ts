@@ -7,4 +7,5 @@ export class Commande {
     date:Date;
     quantite:number;
     product:Produit;
+    client:{id:number};
 }

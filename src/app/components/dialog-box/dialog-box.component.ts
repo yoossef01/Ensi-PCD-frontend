@@ -27,7 +27,7 @@ isNomEmpty: boolean;
     prix: 0,
     quantite: 0,
     photo: "",
-    categorie: {id:0,nom:""},
+    categorie: {id:0,nom:"",vendeur: {id: 0}},
     prix_achat:0,vendeur:{id:0}
   };id:number;
   categories!:Categorie[];
@@ -96,7 +96,7 @@ isNomEmpty: boolean;
          prix: 0,
          quantite: 0,
          photo: "",
-     categorie: {id:0,nom:""},
+     categorie: {id:0,nom:"",vendeur: {id: 0}},
      prix_achat:0,vendeur:{id:0}
        };
        this.reset();

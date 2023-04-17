@@ -19,7 +19,8 @@ export class ChoosetemplateComponent implements OnInit {
 
   ngOnInit(): void {
     this.vendeurservice.checkLoginStatus();
-    this.vendeurservice.getCurrentVendeur().subscribe(vendeur => {if(vendeur) this.v=vendeur});
+    this.vendeurservice.getCurrentVendeur().subscribe(vendeur => {if(vendeur) {this.v=vendeur;console.log(""+this.v.id)}else console.log("nest pas connecté")}
+    );
   }
 
 
@@ -33,9 +34,9 @@ firstchoice(){
 }
 secondchoice(){
   this.numtemplate.NumTemplate=2;
-  this.vendeurservice.getVendeurById(this.v.id).subscribe(data=>{this.v=data;
+  
     this.v.idTemplate=2;
-    this.vendeurservice.UpdateVendeur(this.v).subscribe(data=>{this.v=data;console.log(this.v)})})
+    this.vendeurservice.UpdateVendeur(this.v).subscribe(data=>{this.v=data;console.log(this.v)})
   this.route.navigateByUrl('/template2/'+this.vendeurservice.id);
 }
 thirdchoice(){

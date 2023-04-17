@@ -14,7 +14,7 @@ export class VendeurService {
 
  private readonly baseUrl: string = 'http://localhost:8080/api/v1/auth';
   constructor(private http:HttpClient) { }
-  adduser(user: Vendeur){
+  adduser(user: Vendeur): Observable<any> {
     return this.http.post<Vendeur>('http://localhost:8080/api/v1/auth/registerVend', user)
   }
   
@@ -50,7 +50,7 @@ export class VendeurService {
     return this.http.get<Vendeur>("http://localhost:8080/api/v1/auth/vendeur/email/"+email);
   }
   UpdateVendeur (vendeur:Vendeur):Observable<Vendeur>{
-    return this.http.put<Vendeur>("http://localhost:8080/api/v1/auth/update",vendeur)
+    return this.http.put<Vendeur>("http://localhost:8080/api/v1/auth/updateVendeur",vendeur)
   }
 }
 

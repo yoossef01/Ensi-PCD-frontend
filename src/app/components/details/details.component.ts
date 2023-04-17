@@ -8,6 +8,8 @@ import { Categorie } from 'src/app/model/categorie';
 import { Produit } from 'src/app/model/produit';
 import { ProduitService } from 'src/app/produit.service';
 import { v4 as uuidv4 } from 'uuid';
+import { ClientService } from 'src/app/client.service';
+import { Client } from 'src/app/model/client';
 
 @Component({
   selector: 'app-details',
@@ -18,7 +20,7 @@ export class DetailsComponent implements OnInit {
 quantity:number;
   
   constructor(private ar:ActivatedRoute, private service:ProduitService,
-    private commandeService:CommandeService
+    private commandeService:CommandeService,private clientservice :ClientService
     ) { }
   produit!:Produit;
   commandes:Commande[];
@@ -32,10 +34,12 @@ quantity:number;
       prix: 0,
       quantite: 0,
       photo: "",
-      categorie: {id:1,nom:"informatique"},
+      categorie: {id:1,nom:"informatique",vendeur: {id: 0}},
       prix_achat:0,vendeur:{id:0}
-    }
+    },
+    client:{id:0}
   };
+  c :Client;
   ngOnInit(): void {
    
     let id=this.ar.snapshot.paramMap.get('id');
@@ -49,6 +53,8 @@ quantity:number;
           break; 
         }
       }});
+      this.clientservice.getCurrentClient().subscribe(client =>
+        {if(client) this.c=client;console.log("le client "+this.c.nom+" est connecté")});
   };
  
 
@@ -60,6 +66,7 @@ quantity:number;
     this.commande.date=new Date();
     this.commande.product.id=this.produit.id;
     this.commande.id=uuidv4();
+    this.commande.client.id=this.c.id;
     this.service.saveP(this.produit).subscribe(data=>{this.produit=data})
       this.commandeService.addCommande(this.commande)
         .subscribe(data => console.log(data));

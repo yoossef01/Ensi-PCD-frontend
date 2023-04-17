@@ -36,7 +36,7 @@ loginUser() {
       this.vendeurservice.getVendeurByEmail(vendeur).subscribe(data=>{
         const NumTemplate :number=data.idTemplate;console.log("0"+NumTemplate);
         const idVendeur:number=data.id;
-      this.router.navigate(['/template'+NumTemplate+"/"+idVendeur])
+      this.router.navigate(['/template'+NumTemplate])
     })
     },
     (error: HttpErrorResponse) => {

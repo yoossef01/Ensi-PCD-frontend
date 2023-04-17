@@ -32,6 +32,8 @@ import { SignupVendeurComponent } from './components/signup-vendeur/signup-vende
 import { LoginVendeurComponent } from './components/login-vendeur/login-vendeur.component';
 import { HomeclientComponent } from './components/template2/homeclient/homeclient.component';
 import { AchatComponent } from './components/template2/achat/achat.component';
+import { ComparateurComponent } from './components/comparateur/comparateur.component';
+import { ProductService } from './product.service';
 
    // import{} from '@angular/material/slide-toggle';
 //import {  } from '@angular/material/badge';
@@ -69,6 +71,8 @@ const materiel=[
       LoginVendeurComponent,
       HomeclientComponent,
       AchatComponent,
+      ComparateurComponent
+
   ],
    schemas:[CUSTOM_ELEMENTS_SCHEMA]
 ,
@@ -83,7 +87,7 @@ const materiel=[
     
   ],
   
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

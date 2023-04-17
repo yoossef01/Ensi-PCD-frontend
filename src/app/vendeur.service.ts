@@ -44,13 +44,13 @@ export class VendeurService {
     return of(null);
   }
   getVendeurById(id:number):Observable<Vendeur>{
-    return this.http.get<Vendeur>("http://localhost:8080/api/v1/auth/vendeur/"+id);
+    return this.http.get<Vendeur>("http://localhost:8080/api/vendeur/"+id);
   }
   getVendeurByEmail(email:string):Observable<Vendeur>{
-    return this.http.get<Vendeur>("http://localhost:8080/api/v1/auth/vendeur/email/"+email);
+    return this.http.get<Vendeur>("http://localhost:8080/api/vendeur/email/"+email);
   }
   UpdateVendeur (vendeur:Vendeur):Observable<Vendeur>{
-    return this.http.put<Vendeur>("http://localhost:8080/api/v1/auth/updateVendeur",vendeur)
+    return this.http.put<Vendeur>("http://localhost:8080/api/vendeur/update",vendeur)
   }
 }
 

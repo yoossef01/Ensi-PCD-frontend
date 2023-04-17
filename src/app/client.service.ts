@@ -41,12 +41,12 @@ export class ClientService {
     return of(null);
   }
   getClientById(id:number):Observable<Client>{
-    return this.http.get<Client>("http://localhost:8080/api/v1/auth/client/"+id);
+    return this.http.get<Client>("http://localhost:8080/api/client/"+id);
   }
   getClientByEmail(email:string):Observable<Client>{
-    return this.http.get<Client>("http://localhost:8080/api/v1/auth/client/email/"+email);
+    return this.http.get<Client>("http://localhost:8080/api/client/email/"+email);
   }
   UpdateClient (client:Client):Observable<Client>{
-    return this.http.put<Client>("http://localhost:8080/api/v1/auth/updateClient",client)
+    return this.http.put<Client>("http://localhost:8080/api/client/update",client)
   }
 }

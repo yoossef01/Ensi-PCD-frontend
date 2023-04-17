@@ -22,72 +22,56 @@ quantity:number;
   constructor(private ar:ActivatedRoute, private service:ProduitService,
     private commandeService:CommandeService,private clientservice :ClientService
     ) { }
-  produit!:Produit;
-  commandes:Commande[];
-  commande: Commande = {
-    id:'' ,
-    montant: 0,quantite:0,
-    date: new Date(),
-    product: {
-      id: '',
-      nom: '',
-      prix: 0,
-      quantite: 0,
-      photo: "",
-      categorie: {id:1,nom:"informatique",vendeur: {id: 0}},
-      prix_achat:0,vendeur:{id:0}
-    },
-    client:{id:0}
-  };
+  categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
+  produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
+  commandes:Commande[]=[];
+  commande: Commande = new Commande("1", "commande 1", 100, new Date(), 2, this.produit, { id: 0 });
   c :Client;
-  ngOnInit(): void {
-   
-    let id=this.ar.snapshot.paramMap.get('id');
-    console.log(id)
-    this.service.getProduct(id!).subscribe(data =>this.produit=data) 
-     this.commandeService.getAllCommandes().subscribe(data=>{this.commandes= data;
-      for (let commande of this.commandes) {
-        if (commande.product.id == id) {
-          this.commande = commande;
-          console.log(this.commande)
-          break; 
-        }
-      }});
-      this.clientservice.getCurrentClient().subscribe(client =>
-        {if(client) this.c=client;console.log("le client "+this.c.nom+" est connecté")});
-  };
- 
 
-  
+  ngOnInit(): void {
+   //ce code sert a extraire l'id de produit a partir de l'URL et l'affecter à un objet produit
+    let id=this.ar.snapshot.paramMap.get('id');
+    console.log(id);
+    this.service.getProduct(id!).subscribe(data =>this.produit=data) 
+    
+    this.getCurrentClient() };
+    
+ 
+     //connaitre le client connecté ,on l'a besoin pour créer les nouveaux commandes
+  getCurrentClient(){
+    this.clientservice.getCurrentClient().subscribe(client =>
+      {if(client) this.c=client;console.log("le client: "+this.c.id+" est connecté")});}
+       
+    
   addCommande() {
 
+    this.commande.nom=this.produit.nom;
     this.commande.montant=this.produit.prix*this.commande.quantite;
     this.produit.quantite=this.produit.quantite-this.commande.quantite;
     this.commande.date=new Date();
     this.commande.product.id=this.produit.id;
     this.commande.id=uuidv4();
     this.commande.client.id=this.c.id;
-    this.service.saveP(this.produit).subscribe(data=>{this.produit=data})
+    this.service.saveP(this.produit).subscribe(data=>{this.produit=data
       this.commandeService.addCommande(this.commande)
-        .subscribe(data => console.log(data));
-       
-         
-    }
+        .subscribe(data => console.log(data));})}
+        
+    
     decrementQuantity() {
       if (this.commande.quantite > 0) {
         this.commande.quantite--;
         let id=this.ar.snapshot.paramMap.get('id');
         console.log(id)
-        this.service.getProduct(id!).subscribe(data =>this.produit=data)
-      }
-    }
+        this.service.getProduct(id!).subscribe(data =>this.produit=data)} }
+     
+    
     
     incrementQuantity() {
       this.commande.quantite++;
       let id=this.ar.snapshot.paramMap.get('id');
       console.log(id)
-      this.service.getProduct(id!).subscribe(data =>this.produit=data)
-    }
+      this.service.getProduct(id!).subscribe(data =>this.produit=data)    }
+
   
 
 }

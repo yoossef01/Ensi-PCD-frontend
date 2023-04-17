@@ -30,30 +30,12 @@ export class HomeclientComponent implements OnInit {
   produitF!:Produit[];
   nomNewCat:string;
   newCategory: Categorie;
-  
-   categorie: Categorie = new Categorie();
-  cat:Categorie = new Categorie();
-id:number;
-  p: Produit = {
-    id: '',
-    nom: '',
-    prix: 0,
-    quantite: 0,
-    photo: "",
-    categorie: {id:1,nom:"informatique"},
-    prix_achat:0,vendeur:{id:0}
-  };
-  prod: Produit = {
-    id: '38df45e4-e155-426e-ba81-2ea4128c15da',
-    nom: 'aziz',
-    prix: 0,
-    quantite: 0,
-    photo: "",
-    categorie: {id:1,nom:"informatique"},
-    prix_achat:0,vendeur:{id:0}
-  };
+  categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
+  produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
+  produitModifie:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
+  idCategorie:number;
   categories!:Categorie[];
-photo:File;
+  photo:File;
 
   set texte(ch:string)
   {
@@ -81,7 +63,6 @@ photo:File;
     // } else {
     //   console.log('id is null');
     // }
-     this.sc.getCategory(1).subscribe(data=>{this.categorie=data;  this.categorie=this.categorie;});
     //  setInterval(() => {
     //   this.added();
     // }, 1000);
@@ -89,7 +70,7 @@ photo:File;
     //   this.Catadded();
     // }, 1000);
     ;
-    this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
+    this.sc.getAllCategories().subscribe(data=>{this.categories=data;})
 
    }
   added(){
@@ -191,8 +172,8 @@ deletecat(cat:Categorie)
   
 }
 getCategoryById(id:number){
-  this.sc.getCategory(id).subscribe(data=>{this.categorie=data; this.p.categorie.id=this.categorie.id;
-    this.p.categorie.nom=this.categorie.nom;});
+  this.sc.getCategory(id).subscribe(data=>{this.categorieProduit=data;
+     this.produit.categorie=this.categorieProduit});
  
 }
 
@@ -201,28 +182,22 @@ getCategoryById(id:number){
   this.photo = event.target.files[0];
 }
 updateProduit(): void {
-   this.getCategoryById(this.id);
+   this.getCategoryById(this.idCategorie);
    
    
   
     
- this.service.updateProduct(this.photo,this.prod).subscribe(
+ this.service.updateProduct(this.photo,this.produitModifie).subscribe(
     response => {
       console.log(response);
       //console.log(JSON.stringify(this.newProduit));
-      console.log(this.prod);
+      console.log(this.produitModifie);
       
       // Vider le formulaire et recharger la liste des produits
-      this.prod = {
-        id: '',
-        nom: '',
-        prix: 0,
-        quantite: 0,
-        photo: "",
-    categorie: {id:0,nom:""},
-    prix_achat:0,vendeur:{id:0}
-      };
-     this.photo=new File([], '');
+      
+      this.produitModifie=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
+      
+      this.photo=new File([], '');
 
 
       // Charger la liste des produits
@@ -234,37 +209,22 @@ updateProduit(): void {
 
  selectCat(event:any){
 
-   this.id=(parseInt(event.target.value));
-   this.getCategoryById(this.id);
+   this.idCategorie=(parseInt(event.target.value));
+   this.getCategoryById(this.idCategorie);
   
 
 }
 selectCategorie(event:any){
-this.id=parseInt(event.target.value);
-this.sc.getCategory(this.id).subscribe(data=>{this.categorie=data;  this.cat.id=this.categorie.id;  this.cat.nom=this.categorie.nom;
-  this.produitF=this.produits.filter(x=>x.categorie.nom.indexOf(this.cat.nom)!=-1)
+this.idCategorie=parseInt(event.target.value);
+this.sc.getCategory(this.idCategorie).subscribe(data=>{
+  this.categorieProduit=data;  
+  this.produitF=this.produits.filter(x=>x.categorie.nom.indexOf(this.categorieProduit.nom)!=-1)
 });
 
  
 
   }
 
-createNewCategory() {
-  if (this.nomNewCat=='') {
-      alert("Name cannot be empty.");
-
-      return;
-  }
-  this.newCategory = new Categorie();
-  this.newCategory.nom = this.nomNewCat;
- 
- console.log(this.newCategory);
-
-  this.sc.addCategorie(this.newCategory).subscribe(() => {
-       this.catadded=true;
-          this.nomNewCat = "";},);
-
-}
 
 
 

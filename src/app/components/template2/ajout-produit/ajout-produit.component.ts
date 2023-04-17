@@ -8,94 +8,89 @@ import { Categorie } from 'src/app/model/categorie';
 import { ProduitService } from '../../../produit.service';
 import { ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { Vendeur } from 'src/app/model/vendeur';
+import { VendeurService } from 'src/app/vendeur.service';
+import { v4 as uuidv4 } from 'uuid';
 @Component({
   selector: 'app-ajout-produit',
   templateUrl: './ajout-produit.component.html',
   styleUrls: ['./ajout-produit.component.css']
 })
 export class AjoutProduitComponent implements OnInit {
-
-  
-
-
-
-
-  @ViewChild('myInput')
+@ViewChild('myInput')
 myInputVariable!: ElementRef;
-  p: Produit = {
-    id: '',
-    nom: '',
-    prix: 0,
-    quantite: 0,
-    photo: "",
-    categorie: {id:1,nom:"informatique",vendeur: {id: 0}},
-    prix_achat:0,vendeur:{id:0}
-  };id!:number;
-  categories!:Categorie[];
-  categorie: Categorie = new Categorie();
-  photo!:File;
-  constructor(
-    
-   private service:ProduitService,private sc:CategorieService,private router: Router) { }
+img:string;
+categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
+produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
+categories!:Categorie[];
+photo!:File;
+vendeur:Vendeur;
+idCategorie:number;
+  
+constructor( private service:ProduitService,private sc:CategorieService,private router: Router,
+  private vendeurservice:VendeurService) { }
 
-  ngOnInit(): void {this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
-  }
-  getCategoryById(id:number){
-    this.sc.getCategory(id).subscribe(data=>{this.categorie=data; this.p.categorie.id=this.categorie.id;
-      this.p.categorie.nom=this.categorie.nom;});
+  ngOnInit(): void {
+    this.getAllCategories();
+    this.getCurrentVendeur();
    
-  }
-  onPhotoSelected(event: any) {
-    this.photo = event.target.files[0];
-  }
-  reset() {
+}
+  getCurrentVendeur(){
+    this.vendeurservice.getCurrentVendeur().subscribe(vendeur =>
+    {if(vendeur) this.vendeur=vendeur;console.log("le vendeur "+this.vendeur.nom+" est connecté")});}
+  
+  getAllCategories(){
+      this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
+    }
+  
+  //selectionner une image a partir de votre bureau ,s'excecuter a l'appui pour ajouter une image de nouveau produit
+  onPhotoSelected(event: any): void {
+    this.photo =event.target.files[0];
+    if (this.photo) {
+       const reader = new FileReader();
+       reader.readAsDataURL(this.photo);
+       reader.onload = () => {
+         this.img = reader.result as string;};
+     }}
+     
+  // deselectionner la photo  apres l'ajout du produit
+  resetPhoto() {
     console.log(this.myInputVariable.nativeElement.files);
     this.myInputVariable.nativeElement.value = "";
-    console.log(this.myInputVariable.nativeElement.files);
-}
-  selectCat(event:any){
+    console.log(this.myInputVariable.nativeElement.files);}
 
-    this.id=(parseInt(event.target.value));
-    this.getCategoryById(this.id);
+  // Vider le formulaire et recharger la liste des produits
+  restProduit(){
+    this.categorieProduit=new Categorie(0,"",{id:0});
+    this.produit = new Produit("", "", 0, 0, "", this.categorieProduit, 0, {id: 0});
+  }
+  //extraire la categorie selectionner a partir de la base de données
+  selectCat(event:any){
    
+    this.idCategorie=(parseInt(event.target.value));
+    this.getCategoryById(this.idCategorie);
+    console.log(''+this.idCategorie);
+  }
  
- }
+  getCategoryById(id:number){
+    this.sc.getCategory(id).subscribe(data=>{this.categorieProduit=data}); }
+  
+  
+  
   addProduit(): void {
-    this.getCategoryById(this.id);
-    
-    
-  //  const pp:string="{\"nom\":\""+this.p.nom+
-  //    "\",\"prix\":"+this.p.prix+",\"quantite\":"+this.p.quantite+",\"prix_achat\":"+this.p.prix_achat+
-  //    ",\"categorie\":{\"id\":"+this.p.categorie.id+" ,\"nom\":\""+this.p.categorie.nom+"\"}}";
-     
-  this.service.addProduit(this.p,this.photo).subscribe(()=>
-      {this.service.added=true;
-       
-       //console.log(JSON.stringify(this.newProduit));
-       
-       
-       // Vider le formulaire et recharger la liste des produits
-       this.p = {
-         id: '',
-         nom: '',
-         prix: 0,
-         quantite: 0,
-         photo: "",
-     categorie: {id:0,nom:"",vendeur: {id: 0}},
-     prix_achat:0,vendeur:{id:0}
-    
-       };
-       this.reset();
-      this.photo=new File([], '');
- 
- 
-       // Charger la liste des produits
-       // this.listeProduits = this.serviceProduit.getListeProduits();
-     },
-     
-   );
-   this.router.navigate(['/template2/1']);
+    console.log(this.photo)
+    this.produit.id=uuidv4();
+    this.getCategoryById(this.produit.categorie.id);
+    this.produit.categorie=this.categorieProduit;
+    this.produit.vendeur.id=this.vendeur.id;
+    this.service.addProduit(this.produit,this.photo).subscribe(()=>
+    {this.restProduit();
+    this.resetPhoto();
+    this.photo=new File([], '');
+    // Charger la liste des produits
+    // this.listeProduits = this.serviceProduit.getListeProduits();
+  } );
+   //this.router.navigate(['/template2/1']);
  }
 
  

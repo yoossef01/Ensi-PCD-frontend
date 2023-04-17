@@ -31,40 +31,19 @@ export class Template1Component implements OnInit {
 Vendeur='Vendeur';
  id:number;
  idProduit:string;
- produit!:Produit;
+ 
   public isCollapsed = false;
 public isCollapsed2 = false;
    private catadded =false;
    newCategory: Categorie={id:0,nom:"",vendeur: {id: 0}}
    nomNewCat:string;
-   categorie: Categorie = new Categorie();
-  cat:Categorie = new Categorie();
-  p: Produit = {
-    id: '',
-    nom: '',
-    prix: 0,
-    quantite: 0,
-    photo: "",
-    categorie: {id:0,nom:"",vendeur: {id: 0}},
-    prix_achat:0,vendeur:{id:0}
-    
-  };
-  photo:File;
-  commande: Commande = {
-    id:'' ,
-    montant: 0,quantite:2,
-    date: new Date(),
-    product: {
-      id: '',
-      nom: '',
-      prix: 0,
-      quantite: 0,
-      photo: "",
-      categorie: {id:1,nom:"informatique",vendeur: {id: 0}},
-      prix_achat:0,vendeur:{id:0}},
-      client:{id:0}
-  };
-  v:Vendeur;
+   categorie: Categorie;
+   categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
+   produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
+   photo:File;
+   commande: Commande = new Commande("1", "commande 1", 100, new Date(), 2, this.produit, { id: 0 });
+   v:Vendeur;
+ 
   set texte(ch:string)
   {
  this.produitF=this.filtrer(ch);
@@ -223,8 +202,8 @@ deletecat(cat:Categorie)
 
 }
 getCategoryById(id:number){
-this.sc.getCategory(id).subscribe(data=>{this.categorie=data; this.p.categorie.id=this.categorie.id;
-  this.p.categorie.nom=this.categorie.nom;});
+this.sc.getCategory(id).subscribe(data=>{this.categorie=data; this.produit.categorie.id=this.categorie.id;
+  this.produit.categorie.nom=this.categorie.nom;});
 
 }
 
@@ -246,8 +225,8 @@ updateProduit(): void {
 
 selectCategorie(event:any){
 this.id=parseInt(event.target.value);
-this.sc.getCategory(this.id).subscribe(data=>{this.categorie=data;  this.cat.id=this.categorie.id;  this.cat.nom=this.categorie.nom;
-this.produitF=this.produits.filter(x=>x.categorie.nom.indexOf(this.cat.nom)!=-1)
+this.sc.getCategory(this.id).subscribe(data=>{this.categorie=data;  this.categorieProduit=this.categorie;  
+this.produitF=this.produits.filter(x=>x.categorie.nom.indexOf(this.categorieProduit.nom)!=-1)
 });
 
 
@@ -272,10 +251,7 @@ createNewCategory() {
 
     return;
 }
-
 this.newCategory.nom = this.nomNewCat;
-console.log(this.newCategory);
-
 this.newCategory.vendeur.id=this.v.id;
 console.log(this.newCategory);
 

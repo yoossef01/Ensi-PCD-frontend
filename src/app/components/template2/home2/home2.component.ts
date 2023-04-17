@@ -11,6 +11,8 @@ import { Produit } from 'src/app/model/produit';
 import { ProduitService } from 'src/app/produit.service';
 import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
+import { VendeurService } from 'src/app/vendeur.service';
+import { Vendeur } from 'src/app/model/vendeur';
 
 
 
@@ -23,38 +25,22 @@ import { ActivatedRoute } from '@angular/router';
 export class Home2Component implements OnInit {
 
 
-  produits: Produit[] ;
+  produits: Produit[]=[] ;
   public isCollapsed = false;
   public isCollapsed2 = false;
   private catadded =false;
   produitF!:Produit[];
   nomNewCat:string;
   newCategory: Categorie;
+  categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
+  produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
+  produitModifie:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
+  idCategorie:number;
+  categories:Categorie[]=[];
+  photo:File;
+  vendeur:Vendeur=new Vendeur(0,0,"","","","","","","");
   
-   categorie: Categorie = new Categorie();
-  cat:Categorie = new Categorie();
-id:number;
-  p: Produit = {
-    id: '',
-    nom: '',
-    prix: 0,
-    quantite: 0,
-    photo: "",
-    categorie: {id:1,nom:"informatique",vendeur: {id: 0}},
-    prix_achat:0,vendeur:{id:0}
-  };
-  prod: Produit = {
-    id: '38df45e4-e155-426e-ba81-2ea4128c15da',
-    nom: 'aziz',
-    prix: 0,
-    quantite: 0,
-    photo: "",
-    categorie: {id:1,nom:"informatique",vendeur: {id: 0}},
-    prix_achat:0,vendeur:{id:0}
-  };
-  categories!:Categorie[];
-photo:File;
-
+  
   set texte(ch:string)
   {
  this.produitF=this.filtrer(ch);
@@ -63,49 +49,30 @@ photo:File;
   {
    return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
   }
-   constructor(private ar:ActivatedRoute,private service:ProduitService,private sc:CategorieService,public dialog:MatDialog) { }
- getAll()
- {
-   this.service.getAllProducts().subscribe(data=>{this.produits=data; this.produitF=this.produits})
-   this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
- }
-   ngOnInit(): void {
-    
-    let idStr = this.ar.snapshot.paramMap.get('id');
-    if (idStr) {
-      let id = parseInt(idStr);
-      console.log(id);
-      this.service.getProductsByVendeur(id).subscribe(data=>this.produitF=data);
+   constructor(private service:ProduitService,private sc:CategorieService,
+    public dialog:MatDialog,private vendeurservice:VendeurService ) { }
+  getCurrentVendeur(){
+    this.vendeurservice.getCurrentVendeur().subscribe(vendeur =>
+    {if(vendeur) this.vendeur=vendeur;console.log("le vendeur "+this.vendeur.nom+" est connecté")
+    //affichage de liste de produit de currentVendeur
+    this.service.getProductsByVendeur(this.vendeur.id).subscribe(data=>{this.produitF=data;} )});}
+  
+  ngOnInit(): void {
+    this.getAll();
+    this.getCurrentVendeur();
+  }
 
-      
-    } else {
-      console.log('id is null');
-    }
-     this.sc.getCategory(1).subscribe(data=>{this.categorie=data;  this.categorie=this.categorie;});
-    //  setInterval(() => {
-    //   this.added();
-    // }, 1000);
-    // setInterval(() => {
-    //   this.Catadded();
-    // }, 1000);
-    ;
+  
+  getAll()
+  {
     this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
+  }
+  
+  
 
-   }
-  added(){
-    if(this.service.added==true){
-      this.getAll();
-    }
-    this.service.added=false;
-  }
-  Catadded(){
-    if(this.catadded==true){
-      this.getAll();
-    }
-    this.catadded=false;
-  }
- delete(p:Produit)
- {
+ 
+  delete(p:Produit)
+   {
    const swalWithBootstrapButtons = Swal.mixin({
      customClass: {
        confirmButton: 'btn btn-success',
@@ -191,37 +158,25 @@ deletecat(cat:Categorie)
   
 }
 getCategoryById(id:number){
-  this.sc.getCategory(id).subscribe(data=>{this.categorie=data; this.p.categorie.id=this.categorie.id;
-    this.p.categorie.nom=this.categorie.nom;});
- 
+  this.sc.getCategory(id).subscribe(data=>{this.categorieProduit=data; 
+   });
 }
 
  
  onPhotoSelected(event: any) {
   this.photo = event.target.files[0];
 }
-updateProduit(): void {
-   this.getCategoryById(this.id);
-   
-   
-  
-    
- this.service.updateProduct(this.photo,this.prod).subscribe(
+ updateProduit(): void {
+   this.getCategoryById(this.idCategorie);
+   this.produit.categorie=this.categorieProduit;
+    this.service.updateProduct(this.photo,this.produitModifie).subscribe(
     response => {
       console.log(response);
       //console.log(JSON.stringify(this.newProduit));
-      console.log(this.prod);
+      console.log(this.produitModifie);
       
       // Vider le formulaire et recharger la liste des produits
-      this.prod = {
-        id: '',
-        nom: '',
-        prix: 0,
-        quantite: 0,
-        photo: "",
-    categorie: {id:0,nom:"",vendeur: {id: 0}},
-    prix_achat:0,vendeur:{id:0}
-      };
+      this.produitModifie=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
      this.photo=new File([], '');
 
 
@@ -232,22 +187,19 @@ updateProduit(): void {
   );
 }
 
- selectCat(event:any){
+selectCat(event:any){
 
-   this.id=(parseInt(event.target.value));
-   this.getCategoryById(this.id);
+   this.idCategorie=(parseInt(event.target.value));
+   this.getCategoryById(this.idCategorie);
   
 
 }
+//affichage de priduit selon la categorie selectionnée
 selectCategorie(event:any){
-this.id=parseInt(event.target.value);
-this.sc.getCategory(this.id).subscribe(data=>{this.categorie=data;  this.cat.id=this.categorie.id;  this.cat.nom=this.categorie.nom;
-  this.produitF=this.produits.filter(x=>x.categorie.nom.indexOf(this.cat.nom)!=-1)
-});
-
- 
-
-  }
+  this.idCategorie=parseInt(event.target.value);
+  this.sc.getCategory(this.idCategorie).subscribe(data=>{this.categorieProduit=data; 
+  this.produitF=this.produits.filter(x=>x.categorie.nom.indexOf(this.categorieProduit.nom)!=-1)});
+   }
 
 createNewCategory() {
   if (this.nomNewCat=='') {
@@ -255,18 +207,17 @@ createNewCategory() {
 
       return;
   }
-  this.newCategory = new Categorie();
   this.newCategory.nom = this.nomNewCat;
+  this.newCategory.vendeur.id=this.vendeur.id;
+  console.log(this.newCategory);
  
- console.log(this.newCategory);
+ 
 
   this.sc.addCategorie(this.newCategory).subscribe(() => {
        this.catadded=true;
           this.nomNewCat = "";},);
 
 }
-
-
 
 showDescription(): void {
   const description = document.getElementById("description");

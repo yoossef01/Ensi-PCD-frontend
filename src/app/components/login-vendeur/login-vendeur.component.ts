@@ -26,24 +26,18 @@ loginUser() {
   
 
    
-  this.vendeurservice.login(vendeur, password)
-    .subscribe((res : any) => {
-      
+  this.vendeurservice.login(vendeur, password).subscribe((res : any) => {
+      console.log("vendeur connecté");
       console.log('res',res)
       localStorage.setItem('token',res.token)
       this.vendeurservice.isLoggedIn.next(true);
 
       this.vendeurservice.getVendeurByEmail(vendeur).subscribe(data=>{
-        const NumTemplate :number=data.idTemplate;console.log("0"+NumTemplate);
-        const idVendeur:number=data.id;
-      this.router.navigate(['/template'+NumTemplate])
-    })
-    },
-    (error: HttpErrorResponse) => {
+      const NumTemplate :number=data.idTemplate;console.log("0"+NumTemplate);
+      this.router.navigate(['/template'+NumTemplate]) })},
+      (error: HttpErrorResponse) => {
       alert("invalid user");
-      console.log(error);
-    }
-    )
-    }
+      console.log(error);})
+     }
 
 }

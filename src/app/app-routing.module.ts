@@ -6,7 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 
 
 
-import { SignupComponent } from './components/signup/signup.component';
+
 import { TemplateComponent } from './components/template/template.component';
 import { ListeproduitsComponent } from './components/listeproduits/listeproduits.component';
 import { DetailsComponent } from './components/details/details.component';
@@ -27,7 +27,6 @@ import { AchatComponent } from './components/template2/achat/achat.component';
 
 const routes: Routes = [
   {path:'home',component: HomeComponent},
-  {path:'signup',component:SignupComponent},
   {path:"products/:id",component: DetailsComponent},
   {path:'choose',component:ChoosetemplateComponent},
   {path:'template',component:TemplateComponent},{
@@ -37,7 +36,7 @@ const routes: Routes = [
   }
   ,{path:'Panier',component:PanierComponent}
   ,{path:'loginClient', component:LoginComponent},
-  {path:'template2/:id',component:Home2Component},
+  {path:'template2',component:Home2Component},
   {path:'signupVendeur',component:SignupVendeurComponent},
   {path:'loginVendeur',component:LoginVendeurComponent},
   {path:'template2ajoutproduit',component:AjoutProduitComponent},

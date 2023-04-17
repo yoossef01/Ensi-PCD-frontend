@@ -17,6 +17,9 @@ export class CommandeService {
     const url = `${this.host}/${id}`;
     return this.client.get<Commande>(url);
   }
+  getCommandesByClient(id:number):Observable<Commande[]>{
+    return this.client.get<Commande[]>(this.host+"/commandesByClient/"+id);
+  }
   addCommande(achat:Commande): Observable<Commande> {
     return this.client.post<Commande>(this.host+"/add", achat);
   }

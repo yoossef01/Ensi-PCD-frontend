@@ -20,7 +20,7 @@ export class UpdateProductDialogComponent implements OnInit {
    img:string;
     categories!:Categorie[];
    
-    categorie: Categorie = new Categorie();
+    categorie: Categorie  =new Categorie(0,"",{id:0}); 
     
     photo:File;
   constructor(public dialogRef: MatDialogRef<UpdateProductDialogComponent>,
@@ -77,16 +77,7 @@ this.service.updateProduct(this.photo,this.prod).subscribe(
      console.log(this.prod);
      
      // Vider le formulaire et recharger la liste des produits
-     this.prod = {
-       id: '',
-       nom: '',
-       prix: 0,
-       quantite: 0,
-       photo: "",
-   categorie: {id:0,nom:"",vendeur: {id: 0}},
-   prix_achat:0,vendeur:{id:0}
-     };this.reset();
-    this.photo=new File([], '');
+     this.prod = new Produit("","",0,0,"",this.categorie,0,{id:0}) ;
 
 
      // Charger la liste des produits

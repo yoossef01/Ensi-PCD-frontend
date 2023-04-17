@@ -5,13 +5,13 @@
 <section class="py-5"  style="padding-top: 3rem;padding-bottom: 3rem ;">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-5"><img class="card-img-top mb-5 mb-md-0" src="http://localhost:8080/apiproduit/getimage/{{produit.id}}"  /></div>
+            <div class="col-md-5"><img class="card-img-top mb-5 mb-md-0" src="http://localhost:8080/apiproduit/getimage/{{this.produit.id}}"  /></div>
             <div class="col-md-6">
                 <div class="small mb-1">SKU: BST-498</div>
-                <h1 class="display-5 fw-bolder">{{produit.nom}}</h1>
+                <h1 class="display-5 fw-bolder">{{this.produit.nom}}</h1>
                 <div class="fs-5 mb-5" style="font-size: 1.25rem">
                     <span class="text-decoration-line-through"  style="  text-decoration: line-through">$45.00</span>
-                    <span>{{produit.prix}}</span>
+                    <span>{{this.produit.prix}}</span>
                 </div>
                 <p class="lead" style="font-size: 1.25rem;font-weight: 300;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
                 

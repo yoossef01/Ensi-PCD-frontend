@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
+import { ClientService } from 'src/app/client.service';
+import { Client } from 'src/app/model/client';
 import { Vendeur } from 'src/app/model/vendeur';
 import { TemplateserviceService } from 'src/app/templateservice.service';
 import { VendeurService } from 'src/app/vendeur.service';
@@ -10,37 +12,38 @@ import { VendeurService } from 'src/app/vendeur.service';
   styleUrls: ['./choosetemplate.component.css']
 })
 export class ChoosetemplateComponent implements OnInit {
-  public NumTemplate:number
+  
   currentVendeurId: number;
   currentSeller: Vendeur;
+  v:Vendeur;
 
-  v:Vendeur=new Vendeur();
+
   constructor(private route:Router,public numtemplate:TemplateserviceService,public vendeurservice:VendeurService) { }
 
   ngOnInit(): void {
-    this.vendeurservice.checkLoginStatus();
-    this.vendeurservice.getCurrentVendeur().subscribe(vendeur => {if(vendeur) {this.v=vendeur;console.log(""+this.v.id)}else console.log("nest pas connecté")}
+   
+    this.getCurrentVendeur();
+  }
+
+  getCurrentVendeur(){
+    this.vendeurservice.getCurrentVendeur().subscribe(vendeur => {if(vendeur) 
+      {this.v=vendeur;console.log("le vendeur: "+this.v.id+" est connecté")}else console.log("nest pas connecté")}
     );
   }
-
-
-  getNumtemplate(){
-    this.NumTemplate=this.numtemplate.NumTemplate;
-  }
+  
 firstchoice(){
   
-  this.numtemplate.NumTemplate=1;
+  
   this.route.navigateByUrl('/template1/'+this.vendeurservice.id);
 }
 secondchoice(){
-  this.numtemplate.NumTemplate=2;
   
     this.v.idTemplate=2;
-    this.vendeurservice.UpdateVendeur(this.v).subscribe(data=>{this.v=data;console.log(this.v)})
+   this.vendeurservice.UpdateVendeur(this.v).subscribe(data=>{this.v=data;console.log(this.v)})
   this.route.navigateByUrl('/template2/'+this.vendeurservice.id);
 }
 thirdchoice(){
-  this.numtemplate.NumTemplate=3;
-  this.route.navigateByUrl('/template3/'+this.vendeurservice.id);
+  
+ this.route.navigateByUrl('/template3/'+this.vendeurservice.id);
 }
 }

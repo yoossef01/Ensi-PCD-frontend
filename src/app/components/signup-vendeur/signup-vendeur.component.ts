@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Vendeur } from 'src/app/model/vendeur';
 import { VendeurService } from 'src/app/vendeur.service';
-
 @Component({
   selector: 'app-signup-vendeur',
   templateUrl: './signup-vendeur.component.html',
@@ -15,7 +14,6 @@ export class SignupVendeurComponent implements OnInit{
   ngOnInit(): void {
 
   }
-v:Vendeur=new Vendeur();
   data: any
 
   formVendeur = new FormGroup({

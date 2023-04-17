@@ -10,6 +10,7 @@ import { ProduitService } from 'src/app/produit.service';
 import { v4 as uuidv4 } from 'uuid';
 import { ClientService } from 'src/app/client.service';
 import { Client } from 'src/app/model/client';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-details',
@@ -25,7 +26,7 @@ quantity:number;
   categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
   produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
   commandes:Commande[]=[];
-  commande: Commande = new Commande("1", "commande 1", 100, new Date(), 2, this.produit, { id: 0 });
+  commande: Commande = new Commande("", "", 0, new Date(), 0, this.produit, { id: 0 });
   c :Client;
 
   ngOnInit(): void {
@@ -44,7 +45,8 @@ quantity:number;
        
     
   addCommande() {
-
+    
+    if(this.produit.quantite>this.commande.quantite){
     this.commande.nom=this.produit.nom;
     this.commande.montant=this.produit.prix*this.commande.quantite;
     this.produit.quantite=this.produit.quantite-this.commande.quantite;
@@ -56,6 +58,14 @@ quantity:number;
       this.commandeService.addCommande(this.commande)
         .subscribe(data => console.log(data));})}
         
+        else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'La quantité demandée est supérieure au stock disponible!',
+            footer: 'Quantité currente est '+this.produit.quantite
+          })
+        }}
     
     decrementQuantity() {
       if (this.commande.quantite > 0) {

@@ -37,6 +37,7 @@ const routes: Routes = [
   ,{path:'Panier',component:PanierComponent}
   ,{path:'loginClient', component:LoginComponent},
   {path:'template2',component:Home2Component},
+  {path:'template2Client',component:HomeclientComponent},
   {path:'signupVendeur',component:SignupVendeurComponent},
   {path:'loginVendeur',component:LoginVendeurComponent},
   {path:'template2ajoutproduit',component:AjoutProduitComponent},

@@ -20,7 +20,7 @@ import {MatButtonToggleModule}from '@angular/material/button-toggle';
  
    import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
-import { Template1Component } from './components/template1/template1.component';
+import { Template1Component } from './components/template12/template1.component';
 import { UpdateProductDialogComponent } from './components/update-product-dialog/update-product-dialog.component';
 import { InscriptionComponent } from './components/inscription/inscription.component';
 import { LoginComponent } from './components/login/login.component';
@@ -34,6 +34,9 @@ import { HomeclientComponent } from './components/template2/homeclient/homeclien
 import { AchatComponent } from './components/template2/achat/achat.component';
 import { ComparateurComponent } from './components/comparateur/comparateur.component';
 import { ProductService } from './product.service';
+import { Home1Component } from './components/template1/home1/home1.component';
+import { ListProductsComponent } from './components/template1/list-products/list-products.component';
+import { ListProductsClientComponent } from './components/template1/list-products-client/list-products-client.component';
 
    // import{} from '@angular/material/slide-toggle';
 //import {  } from '@angular/material/badge';
@@ -71,7 +74,10 @@ const materiel=[
       LoginVendeurComponent,
       HomeclientComponent,
       AchatComponent,
-      ComparateurComponent
+      ComparateurComponent,
+      Home1Component,
+      ListProductsComponent,
+      ListProductsClientComponent
 
   ],
    schemas:[CUSTOM_ELEMENTS_SCHEMA]

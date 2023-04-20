@@ -4,7 +4,7 @@ import { Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { CategorieService } from '../../../categorie.service';
 import { Produit } from 'src/app/model/produit';
 import { Categorie } from 'src/app/model/categorie';
-
+import Swal from 'sweetalert2';
 import { ProduitService } from '../../../produit.service';
 import { ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
@@ -84,7 +84,15 @@ constructor( private service:ProduitService,private sc:CategorieService,private 
     this.produit.categorie=this.categorieProduit;
     this.produit.vendeur.id=this.vendeur.id;
     this.service.addProduit(this.produit,this.photo).subscribe(()=>
-    {this.restProduit();
+    {//fenetre de notification : le produit a été ajouté avec succès.
+    Swal.fire({
+     //position: 'top-end',
+     icon: 'success',
+     title: 'le produit a été ajouté avec succès',
+     showConfirmButton: false,
+     timer: 1500
+})
+      this.restProduit();
     this.resetPhoto();
     this.photo=new File([], '');
     // Charger la liste des produits

@@ -1,0 +1,152 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#">My shop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page"  type="button" >Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                <li ngbDropdown class="dropdown">
+                    <a  ngbDropdownToggle class="nav-link dropdown-toggle"type="button" id="dropdownMenuButton1" aria-expanded="false">Shop</a>
+                    <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+                        <li><a routerLink="/listproducts1" ngbDropdownItem type="button" >All Products</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a ngbDropdownItem href="#">Popular Items </a></li>
+                        <li><a ngbDropdownItem href="#">New Arrivals </a></li>
+                      </ul>
+                </li>
+            </ul>
+            
+
+            
+                    <!-- <form class="d-flex">
+                        <a class="btn btn-outline-dark" href="/Panier">
+                              <i class="bi-cart-fill me-1"></i>
+                              Cart
+                              <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        </a>
+                      </form> -->
+                    </div>
+                    </div>
+                </nav>
+                <section class="hero-image">
+                    <div class="hero-text">
+                      <h2>Les Meilleurs Produits</h2>
+                      <p>Achetez les produits les plus en vogue sur notre site</p>
+                      <a routerLink="/listproducts1" class="btn" id="btn" >Acheter Maintenant</a>
+                    </div>
+                  </section>
+                  <div class="container" id="product-cards">
+                    
+                    <h1 class="text-center">PRODUITS POPULAIRES</h1>
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-md-3 py-3 py-md-0">
+                            <div class="card">
+                                <img src="https://via.placeholder.com/150x150" alt="">
+                                <div class="card-body">
+                                    <h3>Nom du produit</h3>
+                                    <p>Lorem ipsum dolor sit amet.</p>
+                                    <div class="star">
+                                        <i class="fas fa-star checked"></i>
+                                        <i class="fas fa-star checked"></i>
+                                        <i class="fas fa-star checked"></i>
+                                        <i class="fas fa-star checked"></i>
+                                        <i class="fas fa-star checked"></i>
+                                    </div>
+                                    <h5>$prix  <span><i class="fa-solid fa-cart-shopping"></i></span></h5>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <a  id="viewmorebtn">Voir plus</a>
+                </div>
+                <!-- product cards -->
+                
+                <!-- product -->
+                <div class="container" style="margin-top: 100px;">
+                <hr>
+                </div>
+                <div class="container">
+                <h3 style="font-weight: bold;">PRODUCT</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque vero eius ipsam incidunt illum totam nostrum quidem sit cumque fugit. Accusamus rem praesentium labore tempore ullam porro quaerat fugiat cum ipsum, sint perferendis voluptate ad, quod reiciendis officia! In voluptate quae expedita sunt eum placeat alias soluta. Rem commodi, impedit error doloribus ratione at provident beatae, aut doloremque sunt possimus voluptas recusandae nam aliquid eos quia minus harum repellat quae eveniet laborum dolore esse voluptate sed. Voluptate ullam dolor sapiente neque labore hic nam odio qui consectetur porro minima nesciunt suscipit vitae obcaecati reiciendis itaque ipsum unde, debitis nemo soluta!</p>
+                
+                <hr>
+                </div>
+                <!-- product -->
+                
+                
+                <!-- offer -->
+                <div class="container" id="offer">
+                    <div class="row">
+                        <div class="col-md-4 py-3 py-md-0">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <h5>Free Shipping</h5>
+                            <p>On order over $100</p>
+                        </div>
+                        <div class="col-md-4 py-3 py-md-0">
+                            <i class="fa-solid fa-truck"></i>
+                            <h5>Fast Delivery</h5>
+                            <p>World wide</p>
+                        </div>
+                        <div class="col-md-4 py-3 py-md-0">
+                            <i class="fa-solid fa-thumbs-up"></i>
+                            <h5>Big Choice</h5>
+                            <p>Of product</p>
+                        </div>
+                    </div>
+                </div>
+                 <!-- offer -->
+                <!-- footer -->
+                <footer id="footer" style="margin-top: 50px;">
+                    <div class="footer-top">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6 footer-content">
+                                    <h3>Fashion</h3>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, hic?</p>
+                                    <p>
+                                        Karcahi <br>
+                                        Sindh <br>
+                                        Pakistan <br>
+                                    </p>
+                                    <strong><i class="fas fa-phone"></i> Phone: <strong>+000000000000000</strong></strong><br>
+                                    <strong><i class="fa-solid fa-envelope"></i> Email: <strong>example@gmail.com</strong></strong>
+                                </div>
+                                <div class="col-lg-3 col-md-6 footer-links">
+                                    <h4>Usefull Links</h4>
+                                    <ul>
+                                      <li><a href="index.html">Home</a></li>
+                                      <li><a href="about.html">About</a></li>
+                                      <li><a href="contact.html">Contact</a></li>
+                                      <li><a href="#">Services</a></li>
+                                      <li><a href="#">Privacy policay</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-3 col-md-6 footer-links">
+                                    <h4>Our Services</h4>
+                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi, rem!</p>
+                                    <ul>
+                                        <li><a href="#">Smart phone</a></li>
+                                        <li><a href="#">Smart watch</a></li>
+                                        <li><a href="#">Airpods</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-3 col-md-6 footer-links">
+                                    <h4>Our Social Network</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, ad?</p>
+                                    <div class="socail-links mt-3">
+                                        <a href="#" class="twiiter"><i class="fa-brands fa-twitter"></i></a>
+                                        <a href="#" class="twiiter"><i class="fa-brands fa-facebook-f"></i></a>
+                                        <a href="#" class="twiiter"><i class="fa-brands fa-google-plus"></i></a>
+                                        <a href="#" class="twiiter"><i class="fa-brands fa-instagram"></i></a>
+                                        <a href="#" class="twiiter"><i class="fa-brands fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div></footer>
+             
+                   

@@ -1,34 +1,21 @@
-
-import { HttpErrorResponse } from '@angular/common/http';
-import { NonNullAssert } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material';
-
-import { FormGroup, NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material';
 import { CategorieService } from 'src/app/categorie.service';
 import { Categorie } from 'src/app/model/categorie';
 import { Produit } from 'src/app/model/produit';
-import { ProduitService } from 'src/app/produit.service';
-import Swal from 'sweetalert2';
-import { ActivatedRoute } from '@angular/router';
-import { VendeurService } from 'src/app/vendeur.service';
 import { Vendeur } from 'src/app/model/vendeur';
-import { SweetAlertOptions } from 'sweetalert2';
-
-interface MySweetAlertOptions extends SweetAlertOptions {
-  didOpen?: () => void;
-  willClose?: () => void;
-}
+import { ProduitService } from 'src/app/produit.service';
+import { VendeurService } from 'src/app/vendeur.service';
+import Swal from 'sweetalert2';
+import { DialogBoxComponent } from '../../dialog-box/dialog-box.component';
+import { UpdateProductDialogComponent } from '../../update-product-dialog/update-product-dialog.component';
 
 @Component({
-  selector: 'app-home2',
-  templateUrl: './home2.component.html',
-  styleUrls: ['./home2.component.css']
+  selector: 'app-list-products',
+  templateUrl: './list-products.component.html',
+  styleUrls: ['./list-products.component.css']
 })
-
-export class Home2Component implements OnInit {
-
-
+export class ListProductsComponent implements OnInit {
   produits: Produit[]=[] ;
   public isCollapsed = false;
   public isCollapsed2 = false;
@@ -41,9 +28,14 @@ export class Home2Component implements OnInit {
   produitModifie:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
   idCategorie:number;
   categories:Categorie[]=[];
+  categorie: Categorie;
   photo:File;
   vendeur:Vendeur=new Vendeur(0,0,"","","","","","","");
-  
+  selectedValue = 'Vendeur';
+  isEditMode = false;
+  Client = 'Client';
+ 
+Vendeur='Vendeur';
   
   set texte(ch:string)
   {
@@ -51,18 +43,19 @@ export class Home2Component implements OnInit {
   }
   filtrer(mot:string)
   {
-   return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
+   return this.produitF.filter(x=>x.nom.indexOf(mot)!=-1)
   }
-   constructor(private service:ProduitService,private sc:CategorieService,
+   
+  constructor(private service:ProduitService,private sc:CategorieService,
     public dialog:MatDialog,private vendeurservice:VendeurService ) { }
-  getCurrentVendeur(){
+     getCurrentVendeur(){
     this.vendeurservice.getCurrentVendeur().subscribe(vendeur =>
-    {if(vendeur) this.vendeur=vendeur;console.log("le vendeur "+this.vendeur.nom+" est connecté")
+    {if(vendeur) this.vendeur=vendeur;console.log("le vendeur "+this.vendeur.id+" est connecté")
     //affichage de liste de produit de currentVendeur
     this.service.getProductsByVendeur(this.vendeur.id).subscribe(data=>{this.produitF=data;} )});}
   
   ngOnInit(): void {
-    this.BuildTemplate();
+    
     this.getAll();
     this.getCurrentVendeur();
   }
@@ -166,40 +159,6 @@ getCategoryById(id:number){
   this.sc.getCategory(id).subscribe(data=>{this.categorieProduit=data; 
    });
 }
-
- 
- onPhotoSelected(event: any) {
-  this.photo = event.target.files[0];
-}
- updateProduit(): void {
-   this.getCategoryById(this.idCategorie);
-   this.produit.categorie=this.categorieProduit;
-    this.service.updateProduct(this.photo,this.produitModifie).subscribe(
-    response => {
-      console.log(response);
-      //console.log(JSON.stringify(this.newProduit));
-      console.log(this.produitModifie);
-      
-      // Vider le formulaire et recharger la liste des produits
-      this.produitModifie=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
-     this.photo=new File([], '');
-
-
-      // Charger la liste des produits
-      // this.listeProduits = this.serviceProduit.getListeProduits();
-    },
-   
-  );
-}
-
-selectCat(event:any){
-
-   this.idCategorie=(parseInt(event.target.value));
-   this.getCategoryById(this.idCategorie);
-  
-
-}
-//affichage de priduit selon la categorie selectionnée
 selectCategorie(event:any){
   this.idCategorie=parseInt(event.target.value);
   this.sc.getCategory(this.idCategorie).subscribe(data=>{this.categorieProduit=data; 
@@ -216,54 +175,34 @@ createNewCategory() {
   this.newCategory.vendeur.id=this.vendeur.id;
   console.log(this.newCategory);
  
- 
-
   this.sc.addCategorie(this.newCategory).subscribe(() => {
        this.catadded=true;
           this.nomNewCat = "";},);
 
 }
-
-showDescription(): void {
-  const description = document.getElementById("description");
-  if (description !== null) {
-    if (description.style.display === "none") {
-      description.style.display = "block";
-    } else {
-      description.style.display = "none";
-    }
-  }
+modifierCategorie(id:number ,nom:string): void {
+  const cat :Categorie={id:id ,nom:nom,vendeur: {id:this.vendeur.id}}
+  this.sc.modifierCategorie(id, cat)
+    .subscribe(cat => this.categorie = cat);
 }
-BuildTemplate() {
-  let timerInterval: NodeJS.Timeout;
-  let subWindow;
-  const options: MySweetAlertOptions = {
-    title: 'Template are building!',
-    html: 'It will be ready in <b></b> milliseconds.',
-    timer: 2000,
-    timerProgressBar: true,
-    didOpen: () => {
-      Swal.showLoading();
-      const b = Swal.getHtmlContainer()?.querySelector('b');
-      if (b !== null) {
-        timerInterval = setInterval(() => {
-          b!.textContent = Swal.getTimerLeft()?.toString() ?? null;
-        }, 100);
-      }},
-    willClose: () => {
-      clearInterval(timerInterval);
-    }
-  };
-  Swal.fire(options).then((result) => {
-    /* Read more about handling dismissals below */
-    if (result.dismiss === Swal.DismissReason.timer) {
-      console.log('I was closed by the timer');
-    }
+
+enableEditMode(id: number): void {
+  this.isEditMode = true;
+}
+
+cancelEditMode(): void {
+  this.isEditMode = false;
+}
+openDialog(){
+  let dialogRef = this.dialog.open(DialogBoxComponent, {
+    width: '700px'
   });
-}
-
-
-
-
-
+  }
+  openDialogUpdate(id:string){
+  let dialogRef = this.dialog.open(UpdateProductDialogComponent, {
+    width: '700px',
+    data: {id}
+    
+  });
+  }
 }

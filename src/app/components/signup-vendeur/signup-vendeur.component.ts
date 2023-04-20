@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Vendeur } from 'src/app/model/vendeur';
 import { VendeurService } from 'src/app/vendeur.service';
-
 @Component({
   selector: 'app-signup-vendeur',
   templateUrl: './signup-vendeur.component.html',
@@ -15,7 +14,6 @@ export class SignupVendeurComponent implements OnInit{
   ngOnInit(): void {
 
   }
-v:Vendeur=new Vendeur();
   data: any
 
   formVendeur = new FormGroup({
@@ -32,26 +30,25 @@ v:Vendeur=new Vendeur();
     this.data = this.formVendeur.value
     console.log(this.data)
 
-    this.service.adduser(this.data).subscribe(data => {
+    this.service.adduser(this.data).subscribe((res : any) => {
       
-      console.log(data);
-      this.service.getVendeurByEmail(this.data.email).subscribe(data=>{
-        this.service.id=data.id;
-        this.router.navigate(['/choose/'+data.id]);
+      console.log('res',res)
+      localStorage.setItem('token',res.token)
+      this.service.isLoggedIn.next(true);
+      
+      
+      
+        this.router.navigate(['/choose']);
       })
       
       
-    })
+    
 
     
     
     
   }
-  click(){
-    this.service.getVendeurById(3).subscribe(data=>{this.v=data;
-    this.v.idTemplate=10;
-    this.service.UpdateVendeur(this.v).subscribe(data=>{this.v=data;console.log(this.v)})})
-  }
+ 
 
 
 }

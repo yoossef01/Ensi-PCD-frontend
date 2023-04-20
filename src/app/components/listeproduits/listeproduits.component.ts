@@ -17,6 +17,9 @@ import { CommandeService } from 'src/app/commande.service';
 import { VendeurService } from 'src/app/vendeur.service';
 import { Vendeur } from 'src/app/model/vendeur';
 import { Commande } from 'src/app/model/commande';
+import { ClientService } from 'src/app/client.service';
+import { Client } from 'src/app/model/client';
+
 
 
 @Component({
@@ -26,76 +29,53 @@ import { Commande } from 'src/app/model/commande';
 })
 export class ListeproduitsComponent implements OnInit {
   produits: Produit[] ;
-  commandes: Commande[];
+  public ids:string[]=[]
   public isCollapsed = false;
   public isCollapsed2 = false;
   private catadded =false;
   produitF!:Produit[];
   nomNewCat:string;
-  newCategory: Categorie;
-  selectedValue = 'Vendeur';
-   categorie: Categorie = new Categorie();
-  cat:Categorie = new Categorie();
-id:number;
-  p: Produit = {
-    id: '',
-    nom: '',
-    prix: 0,
-    quantite: 0,
-    photo: "",
-    categorie: {id:1,nom:"informatique"},
-    prix_achat:0,vendeur:{id:0}
-  };
-  categories!:Categorie[];
-photo:File;
-commande: Commande = {
-  id:'' ,
-  montant: 0,quantite:0,
-  date: new Date(),
-  product: {
-    id: '',
-    nom: '',
-    prix: 0,
-    quantite: 0,
-    photo: "",
-    categorie: {id:1,nom:"informatique"},
-    prix_achat:0,vendeur:{id:0}
-  }
-};
-v:Vendeur;
-  set texte(ch:string)
-  {
- this.produitF=this.filtrer(ch);
-  }
-  filtrer(mot:string)
-  {
-   return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
-  }
+  
+  categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
+  produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
+  cat:Categorie ;
+  idCategorie:number;
+  categories:Categorie[]=[];
+  photo:File;
+  vendeur:Vendeur;
+  client:Client;
+ 
    constructor(private service:ProduitService,private sc:CategorieService,public dialog:MatDialog,
     private commandeService: CommandeService
     ,private vendeurservice :VendeurService) { }
- getAll()
- {
-   this.service.getAllProducts().subscribe(data=>{this.produitF=data; })
-   this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
- }
-   ngOnInit(): void {
-    console.log(this.commande);
-     this.getAll()
-     this.sc.getCategory(1).subscribe(data=>{this.categorie=data;  this.categorie=this.categorie;});
-     this.getCommandes();
-     this.vendeurservice.getCurrentVendeur().subscribe(vendeur =>
-       {if(vendeur) this.v=vendeur;console.log("le vendeur"+this.v.nom+"est connecté")});
 
+  ngOnInit(): void {
+    
+     this.getAll()
+       
     //  setInterval(() => {
     //   this.added();
     // }, 1000);
     // setInterval(() => {
     //   this.Catadded();
     // }, 1000);
-    ;
-    
-   }
+    ;}
+
+    getAll()
+    {
+      this.service.getAllProducts().subscribe(data=>{this.produitF=data; })
+      this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
+    }
+    //les fonctions de barre de rechreche
+  set texte(ch:string)
+    {
+   this.produitF=this.filtrer(ch);
+    }
+  filtrer(mot:string)
+    {
+     return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
+    }
+   //solution provisoire pour l'affichage de liste de produits chaque seconde  
   added(){
     if(this.service.added==true){
       this.getAll();
@@ -108,181 +88,27 @@ v:Vendeur;
     }
     this.catadded=false;
   }
-  onChange(event:any) {
-    this.selectedValue = event.target.checked ? 'Client' : 'Vendeur';
-  }
- delete(p:Produit)
- {
-   const swalWithBootstrapButtons = Swal.mixin({
-     customClass: {
-       confirmButton: 'btn btn-success',
-       cancelButton: 'btn btn-danger'
-     },
-     buttonsStyling: false
-   })
-   
-   swalWithBootstrapButtons.fire({
-     title: 'Are you sure?',
-     text: "You won't be able to revert this!",
-     icon: 'warning',
-     showCancelButton: true,
-     confirmButtonText: 'Yes, delete it!',
-     cancelButtonText: 'No, cancel!',
-     reverseButtons: true
-   }).then((result) => {
-     if (result.isConfirmed) {
-       this.service.delete(p.id).subscribe(()=>
-       {this.produitF.splice(this.produitF.indexOf(p),1);
- 
-       swalWithBootstrapButtons.fire(
-         'Deleted!',
-         'Your file has been deleted.',
-         'success'
-       );})
-     } else if (
-       /* Read more about handling dismissals below */
-       result.dismiss === Swal.DismissReason.cancel
-     ) {
-       swalWithBootstrapButtons.fire(
-         'Cancelled',
-         'Your imaginary file is safe :)',
-         'error'
-       )
-     }
-   })
-   
-
-  
-}
-
-
-
-deletecat(cat:Categorie)
- {
-   const swalWithBootstrapButtons = Swal.mixin({
-     customClass: {
-       confirmButton: 'btn btn-success',
-       cancelButton: 'btn btn-danger'
-     },
-     buttonsStyling: false
-   })
-   
-   swalWithBootstrapButtons.fire({
-     title: 'Are you sure?',
-     text: "You won't be able to revert this!",
-     icon: 'warning',
-     showCancelButton: true,
-     confirmButtonText: 'Yes, delete it!',
-     cancelButtonText: 'No, cancel!',
-     reverseButtons: true
-   }).then((result) => {
-     if (result.isConfirmed) {
-       this.sc.deletecat(cat.id).subscribe(()=>
-       {this.categories.splice(this.categories.indexOf(cat),1);
- 
-       swalWithBootstrapButtons.fire(
-         'Deleted!',
-         'Your file has been deleted.',
-         'success'
-       );})
-     } else if (
-       /* Read more about handling dismissals below */
-       result.dismiss === Swal.DismissReason.cancel
-     ) {
-       swalWithBootstrapButtons.fire(
-         'Cancelled',
-         'Your imaginary file is safe :)',
-         'error'
-       )
-     }
-   })
-   
-
-  
-}
-getCategoryById(id:number){
-  this.sc.getCategory(id).subscribe(data=>{this.categorie=data; this.p.categorie.id=this.categorie.id;
-    this.p.categorie.nom=this.categorie.nom;});
- 
-}
-
- 
- onPhotoSelected(event: any) {
-  this.photo = event.target.files[0];
-}
-updateProduit(): void {
-   this.getCategoryById(this.id);
-   
-}
-  
-
- 
-selectCategorie(event:any){
-this.id=parseInt(event.target.value);
-this.service.getProductsByCat(this.id).subscribe(data=>{this.produitF=data
- this.sc.getCategory(this.id).subscribe(data=>{this.categorie=data;  this.cat.id=this.categorie.id;  this.cat.nom=this.categorie.nom;
-  this.produitF=this.produits.filter(x=>x.categorie.nom.indexOf(this.cat.nom)!=-1)
-});})
-}
-
  
 
+// ouvert de fenetre de l'ajout du produit
   openDialog(){
   let dialogRef = this.dialog.open(DialogBoxComponent, {
-    width: '700px'
-  });
+    width: '700px'});
+  
 }
+ //ouvert de fenetre de l'update du produit
 openDialogUpdate(id:string){
   let dialogRef = this.dialog.open(UpdateProductDialogComponent, {
     width: '700px',
-    data: {id}
-    
-  });
-}
-createNewCategory() {
-  if (this.nomNewCat=='') {
-      alert("Name cannot be empty.");
-
-      return;
-  }
-  this.newCategory = new Categorie();
-  this.newCategory.nom = this.nomNewCat;
- // this.idVendeur=this.v.id;
- console.log(this.newCategory);
-
-  this.sc.addCategorie(this.newCategory).subscribe(() => {
-       this.catadded=true;
-          this.nomNewCat = "";},);
-}
-
-
-
-
-
-getCommandes() {
-  this.commandeService.getAllCommandes().subscribe(
-    data => {
-      this.commandes = data;
-    }
-  );
-}
-
-deleteCommande(id: string) {
-  this.commandeService.deleteCommande(id).subscribe(
-    data => {
-      console.log(data);
-      this.getCommandes();
-    }
-  );
-}
-addCommande() {
+    data: {id} });
+}    
+updateProductsCompared(id:string){
   
-if(this.commande.id==''){
-  this.commande.id=uuidv4();
+  this.ids.push(id);
+  this.service.Idproducts=this.ids;
+  console.log(this.ids)
 }
-  this.commandeService.addCommande(this.commande)
-    .subscribe(data => console.log(data));
-   
-     
-}
+ 
+
+
 }

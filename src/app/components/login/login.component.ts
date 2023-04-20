@@ -11,41 +11,21 @@ import { ClientService } from 'src/app/client.service';
 export class LoginComponent {
   model: any = {};
   
-  
+  constructor(private router: Router, private clientservice: ClientService){}
  
-
-  constructor(
-    private router: Router, private clientservice: ClientService
-   
-  ) {}
- 
-
- 
-
-
-
   loginUser() {
-
     var client = this.model.email;
     var password = this.model.password;
     
-  
-     
-    this.clientservice.login(client, password)
-      .subscribe((res : any) => {
-        
+    this.clientservice.login(client, password).subscribe((res : any) => {
+        console.log("client connecté");
         console.log('res',res)
         localStorage.setItem('token',res.token)
-        
-        this.router.navigate(['/home'])
-      },
-      (error: HttpErrorResponse) => {
+        this.router.navigate(['/home']) },
+        (error: HttpErrorResponse) => {
         alert("invalid user");
-        console.log(error);
-      }
-      )
-      }
-
+        console.log(error); } )}
+  
 }
 
 

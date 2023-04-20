@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#">My shop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page"  type="button">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                <li ngbDropdown class="dropdown">
+                    <a  ngbDropdownToggle class="nav-link dropdown-toggle"type="button" id="dropdownMenuButton1" aria-expanded="false">Shop</a>
+                    <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+                        <li><a ngbDropdownItem type="button" >All Products</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a ngbDropdownItem href="#">Popular Items </a></li>
+                        <li><a ngbDropdownItem href="#">New Arrivals </a></li>
+                      </ul>
+                </li>
+            </ul>
+ 
+            <form class="d-flex">
+              <a class="btn btn-outline-dark" href="/Panier">
+                    <i class="bi-cart-fill me-1"></i>
+                    Cart
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+              </a>
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="px-0 bg-light" >
+    <div class="d-md-flex" > 
+    <div class="d-flex flex-column vh-00 flex-shrink-0 p-3 text-white bg-dark  " style="width: 250px; height: 100%;" > 
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" > 
+      <svg class="bi me-2" width="40" height="32"> </svg> <span class="fs-4">Boutique</span>
+     </a> 
+     <hr>
+     <ul class="nav nav-pills flex-column mb-auto" id="nav ul">
+     <li id="nav li"> <a type="button" class="nav-link text-white dropdown-toggle" data-toggle="collapse" (click)="collapse.toggle()" 
+        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample" id="nav a"> <i class="fa fa-first-order"></i>
+       <span class="ms-2">Categories</span> </a>
+       <div class="icone" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+       <ul class="item-show-1"  >
+        
+        <li   type="button"  class="nav-link text-white" *ngFor="let cat of categories" [value]="cat.id" id="nav li">
+            {{ cat.nom }}</li>
+        </ul>
+    </div> 
+    </li></ul>  </div>
+    <div class="container">
+        <div class="row  ">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">Key Word</span>
+            </div>
+            <input type="text"  [(ngModel)]="texte" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-sm-4 my-2"  *ngFor="let p of produitF">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="http://localhost:8080/apiproduit/getimage/{{p.id}}" width="50" height= "170" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">{{p.nom}}</h5>
+                      <h6 style="color:red">
+        
+                        {{p.prix}} DT
+                      </h6>
+                      <h6 style="color: green" *ngIf="p.quantite>0; else repture">
+                        En Stock
+                      </h6>
+                      <p> <a class="btn btn-primary" id="btn" routerLink="/products/{{p.id}}">Acheter Maintenant</a>
+                    </p>
+                    
+                    </div>
+                    
+                    
+                  </div>
+                  
+        <ng-template #repture><h6 style="color: brown"> Rupture de Stock</h6>
+        </ng-template>
+            </div>
+
+   
+

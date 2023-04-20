@@ -1,0 +1,37 @@
+<div class="product-selection">
+    
+    <div class="product-selection-wrapper">
+      <div class="product-list">
+        <h3>Product List</h3>
+        <ul>
+          <li *ngFor="let product of this.produits">
+            <mat-checkbox>{{ product.nom }}
+            </mat-checkbox>
+          </li>
+        </ul>
+      </div>
+      <div class="compare-button">
+        <button mat-raised-button color="primary" (click)="compare()">Compare</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="product-results" *ngIf="comparisonResults">
+    <h2>Product Results</h2>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th *ngFor="let product of comparisonResults">{{ product.name }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let attribute of productAttributes">
+          <td>{{ attribute }}</td>
+          <td *ngFor="let product of comparisonResults">{{ product.attributes[attribute] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  

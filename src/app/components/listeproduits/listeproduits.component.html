@@ -19,7 +19,8 @@
                <div class="icone" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
                <ul class="item-show-1"  >
                 
-                <li  (click)="selectCategorie($event)" type="button"  class="nav-link text-white" *ngFor="let cat of categories" [value]="cat.id" ><i type="button" class="fa fa-trash" style="color: red;" (click)="deletecat(cat)" ></i>  {{ cat.nom }}</li>
+                <li  type="button"  class="nav-link text-white" *ngFor="let cat of categories" [value]="cat.id" >
+                  <i type="button" class="fa fa-trash" style="color: red;"  ></i>  {{ cat.nom }}</li>
                <li type="button"  class="nav-link text-white dropdown-toggle"  data-toggle="collapse" (click)="isCollapsed2 = !isCollapsed2"
                 [attr.aria-expanded]="!isCollapsed2" aria-controls="collapseExample2">
                  <i  class="Ajout fa fa-plus-square "></i>
@@ -29,7 +30,7 @@
                                     <label for="nom">Nom</label> 
                   <input type="text" id="nom" name="nom" [(ngModel)]="this.nomNewCat"
                    required>
-                   <button (click)="createNewCategory()" (click)="isCollapsed2 = !isCollapsed2">Ajouter</button>
+                   <button (click)="isCollapsed2 = !isCollapsed2">Ajouter</button>
 </div>
              </ul>
          </div> 
@@ -63,7 +64,7 @@
                   <h6 style="color: green" *ngIf="p.quantite>0; else repture">
                     En Stock
                   </h6>
-                  <p><button class="btn btn-danger m-2" (click)=delete(p)>
+                  <p><button class="btn btn-danger m-2">
                     <span class="fa fa-trash"></span>
                   </button>
                   <!--  routerLink="/products/{{p.id}}"  -->
@@ -73,6 +74,10 @@
                   <button class="btn btn-primary m-2" (click)="openDialogUpdate(p.id)">
                     <span class="fa-solid fa-pen"></span>
                   </button>
+                  <a class ="btn btn-primary m-2" (click)="updateProductsCompared(p.id)" >
+                    <span class="fa-solid fa-columns"></span>
+                  </a>
+
                 </p>
                 
                 </div>
@@ -96,15 +101,7 @@
     </div>
    </button>
 
-   <div id="container">
-    <label class="switch">
-      <input type="checkbox" class="switch-input" (change)="onChange($event)">
-      <!--<i class="icon-play"></i>-->
-      <span class="switch-label" [attr.data-on]="selectedValue" [attr.data-off]="selectedValue"></span>
-      <span class="switch-handle"></span>
-    </label>
-    <p>Mode: {{ selectedValue }}</p>
-</div>
+   
   
     
 

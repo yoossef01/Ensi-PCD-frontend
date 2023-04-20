@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AchatService } from 'src/app/achat.service';
+import { ClientService } from 'src/app/client.service';
 import { CommandeService } from 'src/app/commande.service';
 import { Achat } from 'src/app/model/achat';
+import { Categorie } from 'src/app/model/categorie';
+import { Client } from 'src/app/model/client';
 import { Commande } from 'src/app/model/commande';
 import { Produit } from 'src/app/model/produit';
 import { Vendeur } from 'src/app/model/vendeur';
@@ -14,40 +17,38 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./panier.component.css']
 })
 export class PanierComponent implements OnInit{
-  commandes:Commande[];
-  achats : Achat[];
+  commandes:Commande[] = [];;
+  achats : Achat[]=[];
   vendeur! : Vendeur;
+  categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
+  produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
+  achat: Achat = new Achat('', new Date(), 0, '', 0, this.produit,{id:0});
+  client!:Client;
+  somme:number=0;
 
-  achat: Achat = {
-    id:'' ,
-    date: new Date(),
-    montant: 0,
-    nom : "fir",
-    quantite:0,
-    product: {
-      id: '',
-      nom: '',
-      prix: 0,
-      quantite: 0,
-      photo: "",
-      categorie: {id:1,nom:"informatique"},
-      prix_achat:0,vendeur:{id:0}
-    },
-    vendeur: {id:1}
-  };
-
-
-somme:number=0;
-produit!:Produit;
-  constructor(private cs:CommandeService, private achatservice: AchatService){}
+  constructor(private cs:CommandeService, private achatservice: AchatService,private clientservice:ClientService){}
   ngOnInit(): void {
-    this.getCommandes();
+    this.getCurrentClient()
+    this.getAllCommandes(this.client.id);};
+   
+  
+  getCurrentClient(){
+    this.clientservice.getCurrentClient().subscribe(client =>
+    {if(client) this.client=client;console.log("le client "+this.client.id+" est connecté");
+  this.getAllCommandes(this.client.id); })
+
   }
   getCommandes(){      this.cs.getAllCommandes().subscribe(data=>{this.commandes= data;
     for (let a of data){
       console.log(a.product.vendeur)
     }  });
 }
+  
+  getAllCommandes(idClient:number){  
+     return   this.cs.getCommandesByClient(idClient).subscribe(data=>{this.commandes= data;});
+   }
+  
+  //calculer le montant des commandes
   getSomme(): number {
     let somme = 0;
     for (let commande of this.commandes) {
@@ -55,10 +56,10 @@ produit!:Produit;
     }
     return somme;
   }
+  
   UpdateMontantTotal(c:Commande):void{
-    
-      c.montant=c.product.prix*c.quantite;
-this.cs.updateCommande(c).subscribe(data =>{c=data;console.log(c);} );
+    c.montant=c.product.prix*c.quantite;
+    this.cs.updateCommande(c).subscribe(data =>{c=data;console.log(c);} );
   }
 
   decrementQuantity(c: Commande) {
@@ -72,18 +73,15 @@ this.cs.updateCommande(c).subscribe(data =>{c=data;console.log(c);} );
     c.quantite++;
     this.UpdateMontantTotal(c);
   }
+  
   DeleteCommande(id: string) {
-   
-     
-    const swalWithBootstrapButtons = Swal.mixin({
+   const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger'
       },
-      buttonsStyling: false
-    })
-    
-    swalWithBootstrapButtons.fire({
+      buttonsStyling: false})
+  swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
       icon: 'warning',
@@ -96,7 +94,7 @@ this.cs.updateCommande(c).subscribe(data =>{c=data;console.log(c);} );
         this.cs.deleteCommande(id).subscribe(
           data => {
             console.log(data);
-            this.getCommandes();
+            this.getAllCommandes(this.client.id);
   
         swalWithBootstrapButtons.fire(
           'Deleted!',
@@ -118,17 +116,18 @@ this.cs.updateCommande(c).subscribe(data =>{c=data;console.log(c);} );
 
 
   addAchat(): void {
-
-
-    this.achat.date=new Date();
-    this.achat.product.id=this.produit.id;
-    this.achat.vendeur.id=this.vendeur.id;
-    this.achat.id=uuidv4();
-
-      this.achatservice.saveAchat(this.achat)
-        .subscribe(data => console.log(data));
-
-    }
+  for(let com of this.commandes){
+  this.achat.id=uuidv4(); 
+  this.achat.nom=com.nom;
+  this.achat.montant=com.montant;
+  this.achat.date=new Date();
+  this.achat.quantite=com.quantite;
+  this.achat.product.id=com.product.id;
+  console.log(com.product.vendeur.id);
+  this.achat.vendeur.id=com.product.vendeur.id;
+  console.log(this.achat);
+   this.achatservice.saveAchat(this.achat).subscribe(data => console.log(data));
+}}
 
 
 }

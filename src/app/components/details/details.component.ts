@@ -8,6 +8,9 @@ import { Categorie } from 'src/app/model/categorie';
 import { Produit } from 'src/app/model/produit';
 import { ProduitService } from 'src/app/produit.service';
 import { v4 as uuidv4 } from 'uuid';
+import { ClientService } from 'src/app/client.service';
+import { Client } from 'src/app/model/client';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-details',
@@ -18,69 +21,67 @@ export class DetailsComponent implements OnInit {
 quantity:number;
   
   constructor(private ar:ActivatedRoute, private service:ProduitService,
-    private commandeService:CommandeService
+    private commandeService:CommandeService,private clientservice :ClientService
     ) { }
-  produit!:Produit;
-  commandes:Commande[];
-  commande: Commande = {
-    id:'' ,
-    montant: 0,quantite:0,
-    date: new Date(),
-    product: {
-      id: '',
-      nom: '',
-      prix: 0,
-      quantite: 0,
-      photo: "",
-      categorie: {id:1,nom:"informatique"},
-      prix_achat:0,vendeur:{id:0}
-    }
-  };
+  categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
+  produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
+  commandes:Commande[]=[];
+  commande: Commande = new Commande("", "", 0, new Date(), 0, this.produit, { id: 0 });
+  c :Client;
+
   ngOnInit(): void {
-   
+   //ce code sert a extraire l'id de produit a partir de l'URL et l'affecter à un objet produit
     let id=this.ar.snapshot.paramMap.get('id');
-    console.log(id)
+    console.log(id);
     this.service.getProduct(id!).subscribe(data =>this.produit=data) 
-     this.commandeService.getAllCommandes().subscribe(data=>{this.commandes= data;
-      for (let commande of this.commandes) {
-        if (commande.product.id == id) {
-          this.commande = commande;
-          console.log(this.commande)
-          break; 
-        }
-      }});
-  };
+    
+    this.getCurrentClient() };
+    
  
-
-  
+     //connaitre le client connecté ,on l'a besoin pour créer les nouveaux commandes
+  getCurrentClient(){
+    this.clientservice.getCurrentClient().subscribe(client =>
+      {if(client) this.c=client;console.log("le client: "+this.c.id+" est connecté")});}
+       
+    
   addCommande() {
-
+    
+    if(this.produit.quantite>this.commande.quantite){
+    this.commande.nom=this.produit.nom;
     this.commande.montant=this.produit.prix*this.commande.quantite;
     this.produit.quantite=this.produit.quantite-this.commande.quantite;
     this.commande.date=new Date();
     this.commande.product.id=this.produit.id;
     this.commande.id=uuidv4();
-    this.service.saveP(this.produit).subscribe(data=>{this.produit=data})
+    this.commande.client.id=this.c.id;
+    this.service.saveP(this.produit).subscribe(data=>{this.produit=data
       this.commandeService.addCommande(this.commande)
-        .subscribe(data => console.log(data));
-       
-         
-    }
+        .subscribe(data => console.log(data));})}
+        
+        else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'La quantité demandée est supérieure au stock disponible!',
+            footer: 'Quantité currente est '+this.produit.quantite
+          })
+        }}
+    
     decrementQuantity() {
       if (this.commande.quantite > 0) {
         this.commande.quantite--;
         let id=this.ar.snapshot.paramMap.get('id');
         console.log(id)
-        this.service.getProduct(id!).subscribe(data =>this.produit=data)
-      }
-    }
+        this.service.getProduct(id!).subscribe(data =>this.produit=data)} }
+     
+    
     
     incrementQuantity() {
       this.commande.quantite++;
       let id=this.ar.snapshot.paramMap.get('id');
       console.log(id)
-      this.service.getProduct(id!).subscribe(data =>this.produit=data)
-    }
+      this.service.getProduct(id!).subscribe(data =>this.produit=data)    }
+
   
 
 }

@@ -14,7 +14,7 @@
           <div class="row">
             <div class="col-md-12 form-group mb-3">
               <label for="name" class="form-label">Nom</label>
-              <input id="nom"   type="text" name="nom" class="form-control" placeholder="Name" [(ngModel)]="p.nom" required>
+              <input id="nom"   type="text" name="nom" class="form-control" placeholder="Name" [(ngModel)]="produit.nom" required>
             </div>
           </div>
 
@@ -23,7 +23,7 @@
           <div class="row">
             <div class="col-md-12 form-group mb-3">
               <label for="dob" class="form-label">Prix</label>
-              <input id="prix" type="text" name="prix"  formControlName="dob" class="form-control" [(ngModel)]="p.prix" required>
+              <input id="prix" type="number" name="prix"  formControlName="dob" class="form-control" [(ngModel)]="produit.prix" required>
             </div>
           </div>
 
@@ -31,7 +31,7 @@
           <div class="row">
             <div class="col-md-12 form-group mb-3">
               <label for="email" class="form-label">Quantité</label>
-              <input id="quantite" type="text"  formControlName="email" name="quantite" class="form-control" placeholder="Quantité" [(ngModel)]="p.quantite" required>
+              <input id="quantite" type="text"  formControlName="email" name="quantite" class="form-control" placeholder="Quantité" [(ngModel)]="produit.quantite" required>
             </div>
           </div>
 
@@ -40,7 +40,7 @@
           <div class="row">
             <div class="col-md-12 form-group mb-3">
                 <label for="Address" class="form-label">Catégorie</label>
-                <select class="form-select" aria-label="Default select example" id="categorie" name="categorie"(change)="selectCat($event)" [(ngModel)]="p.categorie.id" required>
+                <select class="form-select" aria-label="Default select example" id="categorie" name="categorie"(change)="selectCat($event)" [(ngModel)]="produit.categorie.id" required>
                     <option selected>Séléctionner une categorie</option>
                     <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.nom }}</option>
                   </select>

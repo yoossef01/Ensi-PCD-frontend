@@ -9,11 +9,11 @@ import { ClientService } from 'src/app/client.service';
   styleUrls: ['./inscription.component.css']
 })
 export class InscriptionComponent implements OnInit{
+
   constructor(private service: ClientService, private router: Router) { }
+  
   ngOnInit(): void {}
-
   data: any
-
   form = new FormGroup({
     nom: new FormControl('', [Validators.required]),
     prenom: new FormControl('', [Validators.required]),
@@ -24,17 +24,12 @@ export class InscriptionComponent implements OnInit{
   })
 
 
-  submit(){
+  submitClient(){
     this.data = this.form.value
     console.log(this.data)
-
     this.service.adduser(this.data).subscribe(data => {
-      console.log(data)
-    })
-
-    
-    
-    this.router.navigate(['/login']);
-  }
+    console.log(data) })
+    this.router.navigate(['/loginClient']);}
+  
 
 }

@@ -8,7 +8,7 @@
       <div mat-dialog-content>
         <mat-form-field>
         <mat-label for="nom">Nom</mat-label>
-        <input type="text" id="nom" name="nom" placeholder="Nom" matInput  [(ngModel)]="p.nom" [required]="true">
+        <input type="text" id="nom" name="nom" placeholder="Nom" matInput  [(ngModel)]="produit.nom" [required]="true">
         <mat-error *ngIf="isNomEmpty">Le nom est obligatoire</mat-error>
       </mat-form-field>
       
@@ -16,20 +16,20 @@
       <mat-form-field>
 
         <mat-label for="prix">Prix</mat-label>
-        <input type="number" id="prix" name="prix" placeholder="Prix" matInput [(ngModel)]="p.prix" [required]="true">
+        <input type="number" id="prix" name="prix" placeholder="Prix" matInput [(ngModel)]="produit.prix" [required]="true">
       </mat-form-field>
   
       <mat-form-field>
 
         <mat-label for="quantite">Quantité</mat-label>
-        <input type="number" id="quantite" name="quantite" placeholder="Quantité" matInput [(ngModel)]="p.quantite" [required]="true">
+        <input type="number" id="quantite" name="quantite" placeholder="Quantité" matInput [(ngModel)]="produit.quantite" [required]="true">
       </mat-form-field>
   
       
   
       <mat-form-field>
         <mat-label for="categorie">Catégorie</mat-label>
-        <mat-select id="categorie" name="categorie"(change)="selectCat($event)" [(ngModel)]="p.categorie.id" [required]="true" >
+        <mat-select id="categorie" name="categorie"(change)="selectCat($event)" [(ngModel)]="produit.categorie.id" [required]="true" >
           <mat-option *ngFor="let cat of categories" [value]="cat.id" >{{ cat.nom }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -51,12 +51,12 @@
     <div class="card" style="width: 18rem;">
         <img class="card-img-top"  *ngIf="img" [src]="img" alt="Photo du produit" width="50" height= "170" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">{{p.nom}}</h5>
+          <h5 class="card-title">{{produit.nom}}</h5>
           <h6 style="color:red">
 
-            {{p.prix}} DT
+            {{produit.prix}} DT
           </h6>
-          <h6 style="color: green" *ngIf="p.quantite>0; else repture">
+          <h6 style="color: green" *ngIf="produit.quantite>0; else repture">
             En Stock
           </h6>
           <p><button class="btn btn-danger m-2" >

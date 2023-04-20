@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SignupComponent } from './components/signup/signup.component';
 
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,18 +17,10 @@ import {MatButtonToggleModule}from '@angular/material/button-toggle';
    import   {MatButtonModule,MatInputModule,MatRadioModule,MatDialogModule,MatCommonModule,MatSliderModule, MatAutocompleteModule,MatIconModule,
   MatCheckboxModule,MatSelectModule,MatFormFieldModule,MatSlideToggleModule,MatBadgeModule,} from '@angular/material'; 
  import  {CommonModule}  from '@angular/common'; 
-  // import {} from '@angular/material/radio'; 
-  // import {}  from '@angular/material/dialog'; 
-  // import {} from '@angular/material/core'; 
-  // import {}   from '@angular/material/slider'; 
-  //    import{}from'@angular/material/autocomplete';
-  //   import{} from '@angular/material/icon';
-  //   import{} from '@angular/material/checkbox';
-  //   import{ } from '@angular/material/select';
-  //   import{} from '@angular/material/form-field';
+ 
    import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
-import { Template1Component } from './components/template1/template1.component';
+import { Template1Component } from './components/template12/template1.component';
 import { UpdateProductDialogComponent } from './components/update-product-dialog/update-product-dialog.component';
 import { InscriptionComponent } from './components/inscription/inscription.component';
 import { LoginComponent } from './components/login/login.component';
@@ -53,6 +44,11 @@ import { TopThreeProductsComponent } from './components/dashboard/top-three-prod
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { ChartModule } from 'angular-highcharts';
 
+import { ComparateurComponent } from './components/comparateur/comparateur.component';
+
+import { Home1Component } from './components/template1/home1/home1.component';
+import { ListProductsComponent } from './components/template1/list-products/list-products.component';
+import { ListProductsClientComponent } from './components/template1/list-products-client/list-products-client.component';
 
    // import{} from '@angular/material/slide-toggle';
 //import {  } from '@angular/material/badge';
@@ -65,7 +61,7 @@ const materiel=[
 @NgModule({
   declarations: [
     AppComponent,
-    SignupComponent,
+   
     HomeComponent,
     ChoosetemplateComponent,
     TemplateComponent,
@@ -94,6 +90,11 @@ const materiel=[
       LastFewTransactionsComponent,
       TopThreeProductsComponent,
       DashboardComponent,
+      ComparateurComponent,
+      Home1Component,
+      ListProductsComponent,
+      ListProductsClientComponent
+
   ],
    schemas:[CUSTOM_ELEMENTS_SCHEMA]
 ,

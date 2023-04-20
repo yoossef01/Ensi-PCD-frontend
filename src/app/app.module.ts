@@ -41,6 +41,18 @@ import { SignupVendeurComponent } from './components/signup-vendeur/signup-vende
 import { LoginVendeurComponent } from './components/login-vendeur/login-vendeur.component';
 import { HomeclientComponent } from './components/template2/homeclient/homeclient.component';
 import { AchatComponent } from './components/template2/achat/achat.component';
+import { NgChartsModule } from 'ng2-charts';
+import { HeaderComponent } from './components/dashboard/header/header.component';
+import { SideNavComponent } from './components/dashboard/side-nav/side-nav.component';
+import { MainComponent } from './components/dashboard/main/main.component';
+import { TopWidgetsComponent } from './components/dashboard/top-widgets/top-widgets.component';
+import { SalesByMonthComponent } from './components/dashboard/sales-by-month/sales-by-month.component';
+import { SalesByCategoryComponent } from './components/dashboard/sales-by-category/sales-by-category.component';
+import { LastFewTransactionsComponent } from './components/dashboard/last-few-transactions/last-few-transactions.component';
+import { TopThreeProductsComponent } from './components/dashboard/top-three-products/top-three-products.component';
+import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
+import { ChartModule } from 'angular-highcharts';
+
 
    // import{} from '@angular/material/slide-toggle';
 //import {  } from '@angular/material/badge';
@@ -68,16 +80,20 @@ const materiel=[
       Home2Component,
       AjoutProduitComponent,
       AjoutCategorieComponent,
-     
       PanierComponent,
-     
-     
-     
-    
       SignupVendeurComponent,
       LoginVendeurComponent,
       HomeclientComponent,
       AchatComponent,
+      HeaderComponent,
+      SideNavComponent,
+      MainComponent,
+      TopWidgetsComponent,
+      SalesByMonthComponent,
+      SalesByCategoryComponent,
+      LastFewTransactionsComponent,
+      TopThreeProductsComponent,
+      DashboardComponent,
   ],
    schemas:[CUSTOM_ELEMENTS_SCHEMA]
 ,
@@ -87,7 +103,10 @@ const materiel=[
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule,materiel,CommonModule,ReactiveFormsModule
+    NgbModule,materiel,CommonModule,ReactiveFormsModule,
+    NgChartsModule,
+    ChartModule
+    
   
     
   ],

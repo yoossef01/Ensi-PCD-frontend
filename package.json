@@ -28,11 +28,15 @@
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@popperjs/core": "^2.10.2",
     "angular-bootstrap-toggle": "^0.4.2",
+    "angular-highcharts": "^13.0.1",
     "angularjs-sweetalert2": "^1.0.0",
     "bootstrap": "^5.2.3",
+    "chart.js": "^4.2.1",
     "font-awesome": "^4.7.0",
+    "highcharts": "^10.3.3",
     "jquery": "^3.6.3",
     "jwt-decode": "^3.1.2",
+    "ng2-charts": "^4.1.1",
     "rxjs": "~7.5.0",
     "three": "^0.150.1",
     "tslib": "^2.3.0",
@@ -43,6 +47,7 @@
     "@angular-devkit/build-angular": "^15.2.4",
     "@angular/cli": "~15.2.4",
     "@angular/compiler-cli": "^15.2.4",
+    "@types/highcharts": "^7.0.0",
     "@types/jasmine": "~4.0.0",
     "@types/three": "^0.149.0",
     "@types/uuid": "^9.0.1",
@@ -52,6 +57,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "node-sass": "^8.0.0",
     "typescript": "~4.9.5"
   }
 }

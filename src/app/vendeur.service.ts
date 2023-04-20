@@ -22,7 +22,6 @@ export class VendeurService {
   login(email: string, password: string) : Observable<any> {
     return this.http.post('http://localhost:8080/api/v1/auth/authenticateVend', { email, password });
       
-
   }
   getToken(): string|null {
     return localStorage.getItem('token');

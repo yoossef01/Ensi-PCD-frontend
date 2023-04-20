@@ -43,7 +43,10 @@ produit!:Produit;
   ngOnInit(): void {
     this.getCommandes();
   }
-  getCommandes(){      this.cs.getAllCommandes().subscribe(data=>{this.commandes= data;});
+  getCommandes(){      this.cs.getAllCommandes().subscribe(data=>{this.commandes= data;
+    for (let a of data){
+      console.log(a.product.vendeur)
+    }  });
 }
   getSomme(): number {
     let somme = 0;

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Produit } from 'src/app/model/produit';
 import { ProduitService } from 'src/app/produit.service';
 
 @Component({
@@ -6,15 +7,18 @@ import { ProduitService } from 'src/app/produit.service';
   templateUrl: './comparateur.component.html',
   styleUrls: ['./comparateur.component.css']
 })
-export class ComparateurComponent {
-  products: any[] = [];
+export class ComparateurComponent implements OnInit{
+  
   comparisonResults: any[];
   productAttributes: string[] = ['Price', 'Size', 'Color'];
-
-  constructor(private produitService: ProduitService) {
-    this.produitService.getAllProducts().subscribe(produits => {
-      this.products = produits;
-    });
+  produits:Produit[]=[]
+  constructor(private produitService: ProduitService) {}
+  ngOnInit(): void {
+    console.log(this.produitService.Idproducts)
+    for(let id of this.produitService.Idproducts){
+      this.produitService.getProduct(id).subscribe(data=>{this.produits.push(data)})
+    }
+   
   }
 
   compare(): void {

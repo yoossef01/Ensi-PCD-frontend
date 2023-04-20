@@ -4,8 +4,9 @@
       <div class="product-list">
         <h3>Product List</h3>
         <ul>
-          <li *ngFor="let product of products">
-            <mat-checkbox [(ngModel)]="product.selected">{{ product.name }}</mat-checkbox>
+          <li *ngFor="let product of this.produits">
+            <mat-checkbox>{{ product.nom }}
+            </mat-checkbox>
           </li>
         </ul>
       </div>

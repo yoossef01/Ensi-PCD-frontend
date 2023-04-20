@@ -11,7 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ProduitService {
   public added:boolean=false;
-  private products = new BehaviorSubject<string[]>([]);
+  public Idproducts:string[]=[];
  
 
   host="http://localhost:8080/apiproduit"
@@ -64,11 +64,5 @@ getProductsByCat(id:number):Observable<Produit[]>{
 getProductsByVendeur(id:number):Observable<Produit[]>{
   return this.client.get<Produit[]>(this.host+"/productsByVendeur/"+id);
 }
-getComparedProducts(){
-  return this.products.asObservable();
-}
 
-updateComparedProducts(newProducts: string[]) {
-  this.products.next(newProducts);
-}
 }

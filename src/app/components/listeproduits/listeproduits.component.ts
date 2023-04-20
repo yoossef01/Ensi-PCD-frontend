@@ -29,7 +29,7 @@ import { Client } from 'src/app/model/client';
 })
 export class ListeproduitsComponent implements OnInit {
   produits: Produit[] ;
-  
+  public ids:string[]=[]
   public isCollapsed = false;
   public isCollapsed2 = false;
   private catadded =false;
@@ -102,9 +102,11 @@ openDialogUpdate(id:string){
     width: '700px',
     data: {id} });
 }    
-updateProductsCompared(){
-  const newProducts = ['Product 1', 'Product 2', 'Product 3'];
-  this.service.updateComparedProducts(newProducts);
+updateProductsCompared(id:string){
+  
+  this.ids.push(id);
+  this.service.Idproducts=this.ids;
+  console.log(this.ids)
 }
  
 

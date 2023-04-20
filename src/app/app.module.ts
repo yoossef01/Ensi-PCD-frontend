@@ -33,7 +33,6 @@ import { LoginVendeurComponent } from './components/login-vendeur/login-vendeur.
 import { HomeclientComponent } from './components/template2/homeclient/homeclient.component';
 import { AchatComponent } from './components/template2/achat/achat.component';
 import { ComparateurComponent } from './components/comparateur/comparateur.component';
-import { ProductService } from './product.service';
 
    // import{} from '@angular/material/slide-toggle';
 //import {  } from '@angular/material/badge';
@@ -87,7 +86,7 @@ const materiel=[
     
   ],
   
-  providers: [ProductService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

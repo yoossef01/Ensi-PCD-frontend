@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProductService } from 'src/app/product.service';
+import { ProduitService } from 'src/app/produit.service';
 
 @Component({
   selector: 'app-comparateur',
@@ -7,21 +7,18 @@ import { ProductService } from 'src/app/product.service';
   styleUrls: ['./comparateur.component.css']
 })
 export class ComparateurComponent {
-  products: any[];
+  products: any[] = [];
   comparisonResults: any[];
   productAttributes: string[] = ['Price', 'Size', 'Color'];
 
-  constructor(private productService: ProductService) {
-    this.productService.getProducts().subscribe((data) => {
-      this.products = data;
+  constructor(private produitService: ProduitService) {
+    this.produitService.getAllProducts().subscribe(produits => {
+      this.products = produits;
     });
   }
 
   compare(): void {
-    const selectedProducts = this.products.filter((product) => product.selected);
-    const productIds = selectedProducts.map((product) => product.id);
-    this.productService.compareProducts(productIds).subscribe((data) => {
-      this.comparisonResults = data;
-    });
+
+
   }
 }

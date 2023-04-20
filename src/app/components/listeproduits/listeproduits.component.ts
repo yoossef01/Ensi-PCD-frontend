@@ -21,6 +21,7 @@ import { ClientService } from 'src/app/client.service';
 import { Client } from 'src/app/model/client';
 
 
+
 @Component({
   selector: 'app-listeproduits',
   templateUrl: './listeproduits.component.html',
@@ -101,6 +102,10 @@ openDialogUpdate(id:string){
     width: '700px',
     data: {id} });
 }    
+updateProductsCompared(){
+  const newProducts = ['Product 1', 'Product 2', 'Product 3'];
+  this.service.updateComparedProducts(newProducts);
+}
  
 
 

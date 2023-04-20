@@ -33,7 +33,7 @@ import { LoginVendeurComponent } from './components/login-vendeur/login-vendeur.
 import { HomeclientComponent } from './components/template2/homeclient/homeclient.component';
 import { AchatComponent } from './components/template2/achat/achat.component';
 import { ComparateurComponent } from './components/comparateur/comparateur.component';
-import { ProductService } from './product.service';
+
 import { Home1Component } from './components/template1/home1/home1.component';
 import { ListProductsComponent } from './components/template1/list-products/list-products.component';
 import { ListProductsClientComponent } from './components/template1/list-products-client/list-products-client.component';
@@ -93,7 +93,7 @@ const materiel=[
     
   ],
   
-  providers: [ProductService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

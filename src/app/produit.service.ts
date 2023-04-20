@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Produit } from './model/produit';
+import { BehaviorSubject } from 'rxjs';
+
 
 
 @Injectable({
@@ -9,6 +11,7 @@ import { Produit } from './model/produit';
 })
 export class ProduitService {
   public added:boolean=false;
+  private products = new BehaviorSubject<string[]>([]);
  
 
   host="http://localhost:8080/apiproduit"
@@ -60,5 +63,12 @@ getProductsByCat(id:number):Observable<Produit[]>{
 }
 getProductsByVendeur(id:number):Observable<Produit[]>{
   return this.client.get<Produit[]>(this.host+"/productsByVendeur/"+id);
+}
+getComparedProducts(){
+  return this.products.asObservable();
+}
+
+updateComparedProducts(newProducts: string[]) {
+  this.products.next(newProducts);
 }
 }

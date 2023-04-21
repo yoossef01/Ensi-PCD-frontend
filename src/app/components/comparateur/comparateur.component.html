@@ -19,17 +19,30 @@
   <div class="product-results" *ngIf="comparisonResults==true">
     <h2>Product Results</h2>
     <table>
-      
+      <thead>
         <tr>
-          <th></th>
-          <th *ngFor="let product of this.produits">{{ product.nom }}</th>
+          <th>Product</th>
+          <th *ngFor="let produit of produits">{{produit.nom}}</th>
         </tr>
-      
-        <tr *ngFor="let attribute of productAttributes">
-          <td>{{ attribute }}</td>
-          <td >{{productDescriptions}}.{{ attribute }}</td>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Couleur</td>
+          <td *ngFor="let description of productDescriptions">{{description.color}}</td>
         </tr>
-     
+        <tr>
+          <td>Matériel</td>
+          <td *ngFor="let description of productDescriptions">{{description.material}}</td>
+        </tr>
+        <tr>
+          <td>Description courte</td>
+          <td *ngFor="let description of productDescriptions">{{description.shortDescription}}</td>
+        </tr>
+        <tr>
+          <td>Description longue</td>
+          <td *ngFor="let description of productDescriptions">{{description.longDescription}}</td>
+        </tr>
+      </tbody>
     </table>
   </div>
   

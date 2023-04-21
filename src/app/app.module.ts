@@ -106,7 +106,7 @@ const materiel=[
     HttpClientModule,
     NgbModule,materiel,CommonModule,ReactiveFormsModule,
     NgChartsModule,
-    //ChartModule
+    ChartModule
     
   
     

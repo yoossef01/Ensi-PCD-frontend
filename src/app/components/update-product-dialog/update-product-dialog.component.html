@@ -33,7 +33,7 @@
         <input  #myInput type="file" id="photo" name="photo" (change)="onPhotoSelected($event)" [(ngModel)]="photo" required>
       </div>
     <div mat-dialog-actions>
-      <button mat-raised-button color="primary" (click)="onCancel()" href="/liste" type="submit">Modifier</button>
+      <button mat-raised-button color="primary"  routerLink="/liste"  type="submit"(click)="onCancel()" >Modifier</button>
       <button mat-raised-button mat-dialog-close>Annuler</button>
     </div>
    </div>

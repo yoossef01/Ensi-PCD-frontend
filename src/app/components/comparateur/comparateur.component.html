@@ -18,28 +18,24 @@
   
   <div class="product-results" *ngIf="comparisonResults==true">
     <h2>Product Results</h2>
-    <table>
+    <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Product</th>
-          <th *ngFor="let produit of produits">{{produit.nom}}</th>
+          <th scope="col">Product</th>
+          <th scope="col" *ngFor="let produit of produits">{{produit.nom}}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Couleur</td>
+          <th scope="row">Couleur</th>
           <td *ngFor="let description of productDescriptions">{{description.color}}</td>
         </tr>
         <tr>
-          <td>Matériel</td>
-          <td *ngFor="let description of productDescriptions">{{description.material}}</td>
-        </tr>
-        <tr>
-          <td>Description courte</td>
+          <th scope="row">Description courte</th>
           <td *ngFor="let description of productDescriptions">{{description.shortDescription}}</td>
         </tr>
         <tr>
-          <td>Description longue</td>
+          <th scope="row">Description longue</th>
           <td *ngFor="let description of productDescriptions">{{description.longDescription}}</td>
         </tr>
       </tbody>

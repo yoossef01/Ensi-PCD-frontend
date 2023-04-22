@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { DialogBoxComponent } from '../../dialog-box/dialog-box.component';
 import { UpdateProductDialogComponent } from '../../update-product-dialog/update-product-dialog.component';
 
+
 @Component({
   selector: 'app-list-products',
   templateUrl: './list-products.component.html',
@@ -197,6 +198,7 @@ openDialog(){
   let dialogRef = this.dialog.open(DialogBoxComponent, {
     width: '700px'
   });
+  
   }
   openDialogUpdate(id:string){
   let dialogRef = this.dialog.open(UpdateProductDialogComponent, {

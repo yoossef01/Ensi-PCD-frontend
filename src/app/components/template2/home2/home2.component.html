@@ -5,13 +5,14 @@
           <li><a href="#">Accueil</a></li>
           <li><a href="/template2ajoutproduit">ajout produit</a></li>
           <li><a href="/template2ajoutcategorie">ajout catégorie</a></li>
-        
+          <li><a (click)="logout()">Logout</a></li>
         </ul>
       </nav>
       <div class="search-bar col-md-8">
         <input type="text"  placeholder="Recherche..." [(ngModel)]="texte"  >
         <button type="submit">Recherche</button>
       </div>
+      
     </header>
   
   

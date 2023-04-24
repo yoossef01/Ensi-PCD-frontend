@@ -37,5 +37,5 @@ export class AjoutCategorieComponent {
     
         this.nomNewCat = "";},);
 
-    this.router.navigate(['/template2/1'])}
+        this.router.navigate(['/template/'+this.vendeur.idTemplate+'/'+this.vendeur.id])};
   }

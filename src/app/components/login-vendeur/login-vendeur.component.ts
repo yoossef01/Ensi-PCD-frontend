@@ -34,7 +34,8 @@ loginUser() {
 
       this.vendeurservice.getVendeurByEmail(vendeur).subscribe(data=>{
       const NumTemplate :number=data.idTemplate;console.log("0"+NumTemplate);
-      this.router.navigate(['/template'+NumTemplate]) })},
+      const idvendeur : number=data.id
+      this.router.navigate(['/template/'+NumTemplate+'/'+idvendeur]) })},
       (error: HttpErrorResponse) => {
       alert("invalid user");
       console.log(error);})

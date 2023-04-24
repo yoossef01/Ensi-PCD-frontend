@@ -19,6 +19,7 @@ import { Vendeur } from 'src/app/model/vendeur';
 import { Commande } from 'src/app/model/commande';
 import { ClientService } from 'src/app/client.service';
 import { Client } from 'src/app/model/client';
+import { Router } from '@angular/router';
 
 
 
@@ -44,13 +45,14 @@ export class ListeproduitsComponent implements OnInit {
   photo:File;
   vendeur:Vendeur;
   client:Client;
+  idTemplate : number;
  
-   constructor(private service:ProduitService,private sc:CategorieService,public dialog:MatDialog,
+   constructor(private service:ProduitService,private sc:CategorieService,public dialog:MatDialog,private router: Router,
     private commandeService: CommandeService
     ,private vendeurservice :VendeurService) { }
 
   ngOnInit(): void {
-    
+
      this.getAll()
        
     //  setInterval(() => {
@@ -108,7 +110,14 @@ updateProductsCompared(id:string){
   this.service.Idproducts=this.ids;
   console.log(this.ids)
 }
- 
 
+getVendeurById(n : number) {
+  this.vendeurservice.getVendeurById(n).subscribe(data=>{this.vendeur = data;
+  this.vendeurservice.setIdVendeur(n);
+  this.router.navigate(['/templateclient/'+this.vendeur.idTemplate+'/'+n])})
+}
 
+navigation(i : number) {
+  this.getVendeurById(i);
+}
 }

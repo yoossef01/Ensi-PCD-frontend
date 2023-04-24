@@ -1,6 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TemplateContent } from 'src/app/model/template-content';
+import { Vendeur } from 'src/app/model/vendeur';
 import { TemplateContentService } from 'src/app/template-content.service';
+import { VendeurService } from 'src/app/vendeur.service';
+import { SweetAlertOptions } from 'sweetalert2';
+import Swal from 'sweetalert2';
+
+interface MySweetAlertOptions extends SweetAlertOptions {
+  didOpen?: () => void;
+  willClose?: () => void;
+}
+
 @Component({
   selector: 'app-home-vendeur',
   templateUrl: './home-vendeur.component.html',
@@ -11,11 +22,17 @@ export class HomeVendeurComponent implements OnInit{
   isEditMode1 = false;
   isEditMode2 = false;
   isEditMode3 = false;
+  vendeur:Vendeur;
   photo:File;
   img:string;
-  constructor(private templateService:TemplateContentService){}
+  constructor(private templateService:TemplateContentService, private router: Router,private vendeurservice:VendeurService){}
+   
+  getCurrentVendeur(){
+    this.vendeurservice.getCurrentVendeur().subscribe(vendeur => {if(vendeur) 
+    this.vendeur=vendeur;console.log("le vendeur :"+this.vendeur.id+"est connecté")});}
   ngOnInit(){
-
+    this.BuildTemplate();
+    this.getCurrentVendeur();
     this.getTemplateByVendeur();
     
   }
@@ -77,5 +94,35 @@ export class HomeVendeurComponent implements OnInit{
     this.templateService.updateTemplateContent(this.templateContent,this.photo).subscribe(()=>
     this.isEditMode3 = false
   );
+  }
+  navigation() {
+    this.router.navigate(['/listeproduit/'+this.vendeur.id]);
+  }
+  BuildTemplate() {
+    let timerInterval: NodeJS.Timeout;
+    let subWindow;
+    const options: MySweetAlertOptions = {
+      title: 'Template are building!',
+      html: 'It will be ready in <b></b> milliseconds.',
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading();
+        const b = Swal.getHtmlContainer()?.querySelector('b');
+        if (b !== null) {
+          timerInterval = setInterval(() => {
+            b!.textContent = Swal.getTimerLeft()?.toString() ?? null;
+          }, 100);
+        }},
+      willClose: () => {
+        clearInterval(timerInterval);
+      }
+    };
+    Swal.fire(options).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer');
+      }
+    });
   }
 }

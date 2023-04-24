@@ -27,23 +27,25 @@ export class ChoosetemplateComponent implements OnInit {
 
   getCurrentVendeur(){
     this.vendeurservice.getCurrentVendeur().subscribe(vendeur => {if(vendeur) 
-      {this.v=vendeur;console.log("le vendeur: "+this.v.id+" est connecté")}else console.log("nest pas connecté")}
+      {this.v=vendeur;console.log("le vendeur: "+this.v.id+" est connecté")}
+      else console.log("nest pas connecté")}
     );
   }
   
 firstchoice(){
-  
-  
-  this.route.navigateByUrl('/template1/'+this.vendeurservice.id);
+  this.v.idTemplate=1;
+  this.vendeurservice.UpdateVendeur(this.v).subscribe(data=>{this.v=data;console.log(this.v)})
+  this.route.navigateByUrl('/template/1/'+this.v.id);
 }
 secondchoice(){
   
     this.v.idTemplate=2;
    this.vendeurservice.UpdateVendeur(this.v).subscribe(data=>{this.v=data;console.log(this.v)})
-  this.route.navigateByUrl('/template2/'+this.vendeurservice.id);
+  this.route.navigateByUrl('/template/2/'+this.v.id);
 }
 thirdchoice(){
-  
- this.route.navigateByUrl('/template3/'+this.vendeurservice.id);
+  this.v.idTemplate=3;
+  this.vendeurservice.UpdateVendeur(this.v).subscribe(data=>{this.v=data;console.log(this.v)})
+ this.route.navigateByUrl('/template3/'+this.v.id);
 }
 }

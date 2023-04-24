@@ -12,6 +12,8 @@ import { Produit } from 'src/app/model/produit';
 import { ProduitService } from 'src/app/produit.service';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
+import { VendeurService } from 'src/app/vendeur.service';
+import { Vendeur } from 'src/app/model/vendeur';
 
 @Component({
   selector: 'app-homeclient',
@@ -36,6 +38,7 @@ export class HomeclientComponent implements OnInit {
   idCategorie:number;
   categories!:Categorie[];
   photo:File;
+  vendeur:Vendeur=new Vendeur(0,0,"","","","","","","");
 
   set texte(ch:string)
   {
@@ -45,11 +48,22 @@ export class HomeclientComponent implements OnInit {
   {
    return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
   }
-   constructor(private ar:ActivatedRoute,private service:ProduitService,private sc:CategorieService,public dialog:MatDialog,private router: Router) { }
+   constructor(private ar:ActivatedRoute,private service:ProduitService,private sc:CategorieService,public dialog:MatDialog,private router: Router,private vendeurservice:VendeurService) { }
+
+   getcategoriie(i : number)
+   {
+     this.sc.getAllCategoriesByVendeur(i).subscribe(data=>{this.categories=data; this.categories=this.categories
+     console.log(data)})
+   }
+   getproduitByVendeur(i : number)
+   {
+    this.service.getProductsByVendeur(i).subscribe(data=>{this.produitF=data;})
+   }
+
  getAll()
  {
-   this.service.getAllProducts().subscribe(data=>{this.produits=data; this.produitF=this.produits})
-   this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
+  this.getproduitByVendeur(this.vendeurservice.getIdVendeur())
+  this.getcategoriie(this.vendeurservice.getIdVendeur())
  }
    ngOnInit(): void {
     
@@ -58,8 +72,7 @@ export class HomeclientComponent implements OnInit {
     //   let id = parseInt(idStr);
     //   console.log(id);
     //   this.service.getProductsByVendeur(id).subscribe(data=>this.produitF=data);
-
-        this.service.getAllProducts().subscribe(data=>this.produitF=data)
+    this.getAll();
     // } else {
     //   console.log('id is null');
     // }
@@ -70,7 +83,7 @@ export class HomeclientComponent implements OnInit {
     //   this.Catadded();
     // }, 1000);
     ;
-    this.sc.getAllCategories().subscribe(data=>{this.categories=data;})
+ 
 
    }
   added(){

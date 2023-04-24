@@ -58,7 +58,7 @@
                    </ng-container>
                    
 
-                      <a routerLink="/listproducts1" class="btn" id="btn" >Acheter Maintenant</a> <br><br>
+                      <a  class="btn" id="btn" (click)="navigation()" >Acheter Maintenant</a> <br><br>
                        <div >      
                         <label>Photo : </label>
                       <input  #myInput type="file" id="photo" name="photo" (change)="onPhotoSelected($event)" [(ngModel)]="photo" required>

@@ -10,10 +10,9 @@
                 <div class="small mb-1">SKU: BST-498</div>
                 <h1 class="display-5 fw-bolder">{{this.produit.nom}}</h1>
                 <div class="fs-5 mb-5" style="font-size: 1.25rem">
-                    <span class="text-decoration-line-through"  style="  text-decoration: line-through">$45.00</span>
-                    <span>{{this.produit.prix}}</span>
+                    <span >{{this.produit.prix}} DT</span>
                 </div>
-                <p class="lead" style="font-size: 1.25rem;font-weight: 300;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
+                <p class="lead" style="font-size: 1.25rem;font-weight: 300;">{{this.description.longDescription}}</p>
                 
                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex" >
                         <button class="btn btn-link px-2" (click)="decrementQuantity()" >
@@ -30,7 +29,7 @@
                       
                     <button class="btn btn-outline-dark flex-shrink-0" id="btn" type="button" (click)="addCommande()" >
                         <i class="bi-cart-fill me-1"></i>
-                        Add to cart
+                        Ajouter au panier
                     </button>
                 </div>
             </div>

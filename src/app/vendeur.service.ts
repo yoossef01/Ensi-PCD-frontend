@@ -61,4 +61,9 @@ getIdVendeur() {
   UpdateVendeur (vendeur:Vendeur):Observable<Vendeur>{
     return this.http.put<Vendeur>("http://localhost:8080/api/vendeur/update",vendeur)
   }
+
+  logout():Observable<any> {
+    return this.http.post('http://localhost:8080/api/v1/auth/logout', {})
+  }
+
 }

@@ -11,6 +11,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { ClientService } from 'src/app/client.service';
 import { Client } from 'src/app/model/client';
 import Swal from 'sweetalert2';
+import { TemplateContentService } from 'src/app/template-content.service';
+import { DescriptionService } from 'src/app/description.service';
+import { Description } from 'src/app/model/description';
 
 @Component({
   selector: 'app-details',
@@ -21,10 +24,12 @@ export class DetailsComponent implements OnInit {
 quantity:number;
   
   constructor(private ar:ActivatedRoute, private service:ProduitService,
-    private commandeService:CommandeService,private clientservice :ClientService
+    private commandeService:CommandeService,private clientservice :ClientService,
+    private descriptionService:DescriptionService
     ) { }
   categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
   produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
+  description:Description=new Description("","","","","",{id:""});
   commandes:Commande[]=[];
   commande: Commande = new Commande("", "", 0, new Date(), 0, this.produit, { id: 0 });
   c :Client;
@@ -33,7 +38,9 @@ quantity:number;
    //ce code sert a extraire l'id de produit a partir de l'URL et l'affecter à un objet produit
     let id=this.ar.snapshot.paramMap.get('id');
     console.log(id);
-    this.service.getProduct(id!).subscribe(data =>this.produit=data) 
+    this.service.getProduct(id!).subscribe(data =>{this.produit=data;
+    this.descriptionService.getDescriptionByProduct(this.produit.id).subscribe(data=>this.description=data);
+    }) 
     
     this.getCurrentClient() };
     

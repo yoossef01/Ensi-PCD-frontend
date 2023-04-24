@@ -9,6 +9,9 @@ import { VendeurService } from 'src/app/vendeur.service';
 import Swal from 'sweetalert2';
 import { DialogBoxComponent } from '../../dialog-box/dialog-box.component';
 import { UpdateProductDialogComponent } from '../../update-product-dialog/update-product-dialog.component';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-list-products',
@@ -35,7 +38,7 @@ export class ListProductsComponent implements OnInit {
   isEditMode = false;
   Client = 'Client';
  
-Vendeur='Vendeur';
+  Vendeur='Vendeur';
   
   set texte(ch:string)
   {
@@ -46,27 +49,27 @@ Vendeur='Vendeur';
    return this.produitF.filter(x=>x.nom.indexOf(mot)!=-1)
   }
    
-  constructor(private service:ProduitService,private sc:CategorieService,
-    public dialog:MatDialog,private vendeurservice:VendeurService ) { }
-     getCurrentVendeur(){
+  constructor(private service:ProduitService,private sc:CategorieService,private router: Router,public dialog:MatDialog,private vendeurservice:VendeurService ) { }
+  getCurrentVendeur(){
     this.vendeurservice.getCurrentVendeur().subscribe(vendeur =>
     {if(vendeur) this.vendeur=vendeur;console.log("le vendeur "+this.vendeur.id+" est connecté")
     //affichage de liste de produit de currentVendeur
-    this.service.getProductsByVendeur(this.vendeur.id).subscribe(data=>{this.produitF=data;} )});}
+    this.service.getProductsByVendeur(this.vendeur.id).subscribe(data=>{this.produitF=data; this.getcategoriie(this.vendeur.id)} )});}
   
   ngOnInit(): void {
-    
-    this.getAll();
     this.getCurrentVendeur();
   }
 
   
-  getAll()
+  getcategoriie(i : number)
   {
-    this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
+    this.sc.getAllCategoriesByVendeur(i).subscribe(data=>{this.categories=data; this.categories=this.categories
+    console.log(data)})
   }
   
-  
+  navigation() {
+    this.router.navigate(['/template/1/'+this.vendeur.id]);
+  }
 
  
   delete(p:Produit)
@@ -197,6 +200,7 @@ openDialog(){
   let dialogRef = this.dialog.open(DialogBoxComponent, {
     width: '700px'
   });
+  
   }
   openDialogUpdate(id:string){
   let dialogRef = this.dialog.open(UpdateProductDialogComponent, {
@@ -205,4 +209,6 @@ openDialog(){
     
   });
   }
+
+
 }

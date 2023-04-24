@@ -10,7 +10,7 @@ import { Categorie } from 'src/app/model/categorie';
 import { Produit } from 'src/app/model/produit';
 import { ProduitService } from 'src/app/produit.service';
 import Swal from 'sweetalert2';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VendeurService } from 'src/app/vendeur.service';
 import { Vendeur } from 'src/app/model/vendeur';
 import { SweetAlertOptions } from 'sweetalert2';
@@ -27,6 +27,7 @@ interface MySweetAlertOptions extends SweetAlertOptions {
 })
 
 export class Home2Component implements OnInit {
+
 
 
   produits: Produit[]=[] ;
@@ -53,7 +54,7 @@ export class Home2Component implements OnInit {
   {
    return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
   }
-   constructor(private service:ProduitService,private sc:CategorieService,
+   constructor(private service:ProduitService,private sc:CategorieService, private router:Router,
     public dialog:MatDialog,private vendeurservice:VendeurService ) { }
   getCurrentVendeur(){
     this.vendeurservice.getCurrentVendeur().subscribe(vendeur =>
@@ -265,8 +266,11 @@ BuildTemplate() {
   });
 }
 
-
-
-
+logout() {
+  this.vendeurservice.logout().subscribe(() =>{
+  localStorage.removeItem('currentUser');
+  this.router.navigate(['/loginVendeur'])}
+  )
+}
 
 }

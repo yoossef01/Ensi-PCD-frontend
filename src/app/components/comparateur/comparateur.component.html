@@ -16,19 +16,27 @@
     </div>
   </div>
   
-  <div class="product-results" *ngIf="comparisonResults">
+  <div class="product-results" *ngIf="comparisonResults==true">
     <h2>Product Results</h2>
-    <table>
+    <table class="table table-bordered">
       <thead>
         <tr>
-          <th></th>
-          <th *ngFor="let product of comparisonResults">{{ product.name }}</th>
+          <th scope="col">Product</th>
+          <th scope="col" *ngFor="let produit of produits">{{produit.nom}}</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let attribute of productAttributes">
-          <td>{{ attribute }}</td>
-          <td *ngFor="let product of comparisonResults">{{ product.attributes[attribute] }}</td>
+        <tr>
+          <th scope="row">Couleur</th>
+          <td *ngFor="let description of productDescriptions">{{description.color}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Description courte</th>
+          <td *ngFor="let description of productDescriptions">{{description.shortDescription}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Description longue</th>
+          <td *ngFor="let description of productDescriptions">{{description.longDescription}}</td>
         </tr>
       </tbody>
     </table>

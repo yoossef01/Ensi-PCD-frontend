@@ -72,8 +72,7 @@ export class HomeclientComponent implements OnInit {
     //   let id = parseInt(idStr);
     //   console.log(id);
     //   this.service.getProductsByVendeur(id).subscribe(data=>this.produitF=data);
-
-        this.service.getAllProducts().subscribe(data=>this.produitF=data)
+    this.getAll();
     // } else {
     //   console.log('id is null');
     // }
@@ -84,7 +83,7 @@ export class HomeclientComponent implements OnInit {
     //   this.Catadded();
     // }, 1000);
     ;
-    this.sc.getAllCategories().subscribe(data=>{this.categories=data;})
+ 
 
    }
   added(){

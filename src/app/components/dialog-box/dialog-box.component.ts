@@ -8,6 +8,9 @@ import { ViewChild } from '@angular/core';
 import { VendeurService } from 'src/app/vendeur.service';
 import { Vendeur } from 'src/app/model/vendeur';
 import { v4 as uuidv4 } from 'uuid';
+import { Description } from 'src/app/model/description';
+import { DescriptionService } from 'src/app/description.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -26,10 +29,13 @@ idCategorie:number;
 photo:File;
 categories:Categorie[]=[];
 vendeur:Vendeur; 
-
+suivant:boolean=false;
+precedent:boolean=false;
+description:Description=new Description("","","","","",{id:""});
 
 constructor(public dialogRef: MatDialogRef<DialogBoxComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-private service:ProduitService,private sc:CategorieService,private vendeurservice :VendeurService) { }
+private service:ProduitService,private sc:CategorieService,private vendeurservice :VendeurService,
+private ds:DescriptionService,private router: Router,) { }
 
 
  ngOnInit(): void {
@@ -85,16 +91,35 @@ private service:ProduitService,private sc:CategorieService,private vendeurservic
     this.produit.categorie=this.categorieProduit;
     this.produit.vendeur.id=this.vendeur.id;
     this.service.addProduit(this.produit,this.photo).subscribe(()=>
-    {this.restProduit();
+   { this.description.product.id=this.produit.id;
+    this.addDescription();
+    this.restProduit();
     this.resetPhoto();
     this.photo=new File([], '');
+    
+    
     // Charger la liste des produits
     // this.listeProduits = this.serviceProduit.getListeProduits();
   } );
    this.isNomEmpty = this.produit.nom.trim() === '';}
+   
+   
+   //ajout Description
+    addDescription():void{
+    this.description.id=uuidv4();
+    console.log(""+this.description.product.id)
+     this.ds.addDescription(this.description).subscribe(()=>console.log(this.description))    }
 
-  //fermer la fenetre de l'ajout du produit
+
+   precedentButton(){
+    this.suivant=false;
+    
+   }
+   suivantButton(){this.suivant=true;}
+     //fermer la fenetre de l'ajout du produit
   onCancel(): void {
     this.dialogRef.close();
+
   }
+
 }

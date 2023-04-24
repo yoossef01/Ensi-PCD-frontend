@@ -90,16 +90,8 @@
           <h6 style="color: green" *ngIf="produit.quantite>0; else repture">
             En Stock
           </h6>
-          <p><button class="btn btn-danger m-2" >
-            <span class="fa fa-trash"></span>
-          </button>
-         
-            <a  class ="btn btn-primary m-2">
-            <span class="fa fa-info"></span>
-          </a>
-          <button class="btn btn-primary m-2">
-            <span class="fa-solid fa-pen"></span>
-          </button>
+          <p> <a class="btn btn-primary" id="btn">Acheter Maintenant</a>
+          
         </p>
         <ng-template #repture><h6 style="color: brown"> Rupture de Stock</h6>
         </ng-template>

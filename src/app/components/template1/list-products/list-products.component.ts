@@ -23,7 +23,7 @@ export class ListProductsComponent implements OnInit {
   private catadded =false;
   produitF!:Produit[];
   nomNewCat:string;
-  newCategory: Categorie;
+  newCategory: Categorie=new Categorie(0,"",{id:0})
   categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
   produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
   produitModifie:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
@@ -172,6 +172,7 @@ createNewCategory() {
 
       return;
   }
+  
   this.newCategory.nom = this.nomNewCat;
   this.newCategory.vendeur.id=this.vendeur.id;
   console.log(this.newCategory);

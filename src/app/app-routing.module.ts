@@ -27,6 +27,7 @@ import { ComparateurComponent } from './components/comparateur/comparateur.compo
 import { Home1Component } from './components/template1/home1/home1.component';
 import { ListProductsComponent } from './components/template1/list-products/list-products.component';
 import { ListProductsClientComponent } from './components/template1/list-products-client/list-products-client.component';
+import { HomeVendeurComponent } from './components/template1/home-vendeur/home-vendeur.component';
 
 
 
@@ -51,8 +52,13 @@ const routes: Routes = [
   {path:'achat', component:AchatComponent},
 
 {path:'dashboard', component: DashboardComponent},
+//component de temaplte1
+//*****************************
   {path:'template1',component:Home1Component},
-  {path:'listproducts1',component:ListProductsComponent},{path:'listproductclient',component:ListProductsClientComponent},
+  {path:'listproducts1',component:ListProductsComponent},
+  {path:'listproduct1client',component:ListProductsClientComponent},
+  {path:'homeVend',component:HomeVendeurComponent},
+  //************************** */
   {path:'achat', component:AchatComponent},
   {path:'comparateur', component:ComparateurComponent}
   

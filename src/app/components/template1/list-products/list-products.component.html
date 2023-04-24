@@ -55,7 +55,7 @@
                     <i class="fa fa-trash" style="color: red;" (click)="deletecat(categorie)"></i>
 <span>&nbsp;&nbsp;</span>
 <ng-container classe="ng" *ngIf="!isEditMode; else editMode">
-<i class="fa fa-edit" style="color: rgb(42, 42, 255);" (click)="enableEditMode(cat.id)"></i> {{ cat.nom }}
+<i class="fa fa-edit" style="color: rgb(42, 42, 255);" (click)="enableEditMode(cat.id)"></i> {{cat.nom }}
 </ng-container>
 <ng-template #editMode>
 <div class="edit-mode-container">

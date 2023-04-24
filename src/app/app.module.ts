@@ -49,6 +49,7 @@ import { ComparateurComponent } from './components/comparateur/comparateur.compo
 import { Home1Component } from './components/template1/home1/home1.component';
 import { ListProductsComponent } from './components/template1/list-products/list-products.component';
 import { ListProductsClientComponent } from './components/template1/list-products-client/list-products-client.component';
+import { HomeVendeurComponent } from './components/template1/home-vendeur/home-vendeur.component';
 
    // import{} from '@angular/material/slide-toggle';
 //import {  } from '@angular/material/badge';
@@ -93,7 +94,9 @@ const materiel=[
       ComparateurComponent,
       Home1Component,
       ListProductsComponent,
-      ListProductsClientComponent
+      ListProductsClientComponent,
+      
+      HomeVendeurComponent
 
   ],
    schemas:[CUSTOM_ELEMENTS_SCHEMA]

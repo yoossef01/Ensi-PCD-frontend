@@ -31,13 +31,14 @@ constructor( private service:ProduitService,private sc:CategorieService,private 
   private vendeurservice:VendeurService) { }
 
   ngOnInit(): void {
-    this.getAllCategories();
+
     this.getCurrentVendeur();
    
 }
   getCurrentVendeur(){
     this.vendeurservice.getCurrentVendeur().subscribe(vendeur =>
-    {if(vendeur) this.vendeur=vendeur;console.log("le vendeur "+this.vendeur.nom+" est connecté")});}
+    {if(vendeur) this.vendeur=vendeur;console.log("le vendeur "+this.vendeur.nom+" est connecté");    this.getAllCategories();});
+  }
   
   getAllCategories(){
       this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})

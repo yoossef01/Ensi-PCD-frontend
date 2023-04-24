@@ -64,7 +64,7 @@
                   <h6 style="color: green" *ngIf="p.quantite>0; else repture">
                     En Stock
                   </h6>
-                  <p><button class="btn btn-danger m-2">
+                  <p><button class="btn btn-danger m-2" (click)="navigation(p.vendeur.id)">
                     <span class="fa fa-trash"></span>
                   </button>
                   <!--  routerLink="/products/{{p.id}}"  -->

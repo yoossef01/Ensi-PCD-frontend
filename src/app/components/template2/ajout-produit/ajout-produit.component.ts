@@ -31,16 +31,17 @@ constructor( private service:ProduitService,private sc:CategorieService,private 
   private vendeurservice:VendeurService) { }
 
   ngOnInit(): void {
-    this.getAllCategories();
+
     this.getCurrentVendeur();
    
 }
   getCurrentVendeur(){
     this.vendeurservice.getCurrentVendeur().subscribe(vendeur =>
-    {if(vendeur) this.vendeur=vendeur;console.log("le vendeur "+this.vendeur.nom+" est connecté")});}
+    {if(vendeur) this.vendeur=vendeur;console.log("le vendeur "+this.vendeur.nom+" est connecté");this.getAllCategoriesByVendeur(this.vendeur.id);});
+}
   
-  getAllCategories(){
-      this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
+  getAllCategoriesByVendeur(i : number){
+      this.sc.getAllCategoriesByVendeur(i).subscribe(data=>{this.categories=data; this.categories=this.categories})
     }
   
   //selectionner une image a partir de votre bureau ,s'excecuter a l'appui pour ajouter une image de nouveau produit
@@ -98,7 +99,7 @@ constructor( private service:ProduitService,private sc:CategorieService,private 
     // Charger la liste des produits
     // this.listeProduits = this.serviceProduit.getListeProduits();
   } );
-   //this.router.navigate(['/template2/1']);
+   this.router.navigate(['/template/'+this.vendeur.idTemplate+'/'+this.vendeur.id]);
  }
 
  

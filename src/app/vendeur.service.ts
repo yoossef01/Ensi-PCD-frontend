@@ -7,17 +7,26 @@ import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
-})
+})  
 export class VendeurService {
  id:number;
  isLoggedIn = new BehaviorSubject<boolean>(false);
+
+ private idvendeur : number;
+
+ setIdVendeur(idvendeur : number) {
+  this.idvendeur = idvendeur;
+ }
+getIdVendeur() {
+  return this.idvendeur;
+}
 
  private readonly baseUrl: string = 'http://localhost:8080/api/v1/auth';
   constructor(private http:HttpClient) { }
   adduser(user: Vendeur): Observable<any> {
     return this.http.post<Vendeur>('http://localhost:8080/api/v1/auth/registerVend', user)
   }
-  
+    
 
   login(email: string, password: string) : Observable<any> {
     return this.http.post('http://localhost:8080/api/v1/auth/authenticateVend', { email, password });
@@ -35,6 +44,7 @@ export class VendeurService {
   }
   getCurrentVendeur(): Observable<Vendeur|null> {
     const token = this.getToken();
+    console.log(token);
     if (token) {
       const decodedToken = jwt_decode(token) as { sub: string, exp: string };
       const email = decodedToken.sub;
@@ -52,5 +62,3 @@ export class VendeurService {
     return this.http.put<Vendeur>("http://localhost:8080/api/vendeur/update",vendeur)
   }
 }
-
-

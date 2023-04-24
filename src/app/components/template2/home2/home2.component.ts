@@ -59,18 +59,21 @@ export class Home2Component implements OnInit {
     this.vendeurservice.getCurrentVendeur().subscribe(vendeur =>
     {if(vendeur) this.vendeur=vendeur;console.log("le vendeur "+this.vendeur.nom+" est connecté")
     //affichage de liste de produit de currentVendeur
-    this.service.getProductsByVendeur(this.vendeur.id).subscribe(data=>{this.produitF=data;} )});}
+    this.service.getProductsByVendeur(this.vendeur.id).subscribe(data=>{this.produitF=data; this.getcategoriie(this.vendeur.id)}    )});}
   
   ngOnInit(): void {
     this.BuildTemplate();
-    this.getAll();
+
     this.getCurrentVendeur();
+
+ 
   }
 
-  
-  getAll()
+
+  getcategoriie(i : number)
   {
-    this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
+    this.sc.getAllCategoriesByVendeur(i).subscribe(data=>{this.categories=data; this.categories=this.categories
+    console.log(data)})
   }
   
   

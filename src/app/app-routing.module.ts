@@ -41,13 +41,13 @@ const routes: Routes = [
   }
   ,{path:'Panier',component:PanierComponent}
   ,{path:'loginClient', component:LoginComponent},
-  {path:'template2',component:Home2Component},
+  {path:'template/:id/:id',component:Home2Component},
   {path:'template2Client',component:HomeclientComponent},
   {path:'signupVendeur',component:SignupVendeurComponent},
   {path:'loginVendeur',component:LoginVendeurComponent},
   {path:'template2ajoutproduit',component:AjoutProduitComponent},
   {path:'template2ajoutcategorie',component:AjoutCategorieComponent},
-  {path: 'homeclient/:id', component:HomeclientComponent},
+  {path: 'templateclient/:id/:id', component:HomeclientComponent},
   {path:'achat', component:AchatComponent},
 
 {path:'dashboard', component: DashboardComponent},

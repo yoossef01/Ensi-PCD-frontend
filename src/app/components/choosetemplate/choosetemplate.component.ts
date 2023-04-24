@@ -27,7 +27,8 @@ export class ChoosetemplateComponent implements OnInit {
 
   getCurrentVendeur(){
     this.vendeurservice.getCurrentVendeur().subscribe(vendeur => {if(vendeur) 
-      {this.v=vendeur;console.log("le vendeur: "+this.v.id+" est connecté")}else console.log("nest pas connecté")}
+      {this.v=vendeur;console.log("le vendeur: "+this.v.id+" est connecté")}
+      else console.log("nest pas connecté")}
     );
   }
   

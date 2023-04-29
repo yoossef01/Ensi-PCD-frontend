@@ -39,16 +39,20 @@ private ds:DescriptionService,private router: Router,) { }
 
 
  ngOnInit(): void {
-    this.getAllCategories();
+  
     this.getCurrentVendeur();
     this.img="./assets/150x150.png";}
-  
-  getAllCategories(){
-     this.sc.getAllCategories().subscribe(data=>{this.categories=data; });}
+   
+  getcategoriie(i : number)
+  {
+    this.sc.getAllCategoriesByVendeur(i).subscribe(data=>{this.categories=data; this.categories=this.categories
+    })
+  }
   
   getCurrentVendeur(){
     this.vendeurservice.getCurrentVendeur().subscribe(vendeur => {if(vendeur) 
-    this.vendeur=vendeur;console.log("le vendeur :"+this.vendeur.id+"est connecté")});}
+    this.vendeur=vendeur;console.log("le vendeur :"+this.vendeur.id+"est connecté");
+    this.getcategoriie(this.vendeur.id)});}
   
 
   //selectionner une image a partir de votre bureau ,s'excecuter a l'appui pour ajouter une image de nouveau produit

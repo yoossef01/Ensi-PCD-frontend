@@ -28,8 +28,7 @@ export class PanierComponent implements OnInit{
 
   constructor(private cs:CommandeService, private achatservice: AchatService,private clientservice:ClientService){}
   ngOnInit(): void {
-    this.getCurrentClient()
-    this.getAllCommandes(this.client.id);};
+    this.getCurrentClient()};
    
   
   getCurrentClient(){

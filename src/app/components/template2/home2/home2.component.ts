@@ -268,9 +268,13 @@ BuildTemplate() {
 
 logout() {
   this.vendeurservice.logout().subscribe(() =>{
-  localStorage.removeItem('currentUser');
+  localStorage.removeItem('token');
   this.router.navigate(['/loginVendeur'])}
   )
+}
+
+navigation() {
+  this.router.navigate(['/dashboard/'+this.vendeur.id])
 }
 
 }

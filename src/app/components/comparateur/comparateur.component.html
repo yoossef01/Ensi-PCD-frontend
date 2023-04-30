@@ -1,45 +1,53 @@
-<div class="product-selection">
-    
-    <div class="product-selection-wrapper">
-      <div class="product-list">
-        <h3>Product List</h3>
-        <ul>
-          <li *ngFor="let product of this.produits">
-            <mat-checkbox>{{ product.nom }}
-            </mat-checkbox>
-          </li>
-        </ul>
-      </div>
-      <div class="compare-button">
-        <button mat-raised-button color="primary" (click)="compare()">Compare</button>
+
+<ngb-carousel *ngIf="produits && produits.length > 0" [interval]="5000" style="background-color: silver; height: 400px;">
+  <ng-template ngbSlide *ngFor="let products of listeDeListes" >
+    <div class="d-flex justify-content-center">
+      <div *ngFor="let p of products" class="col-md-3 mr-2">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="http://localhost:8080/apiproduit/getimage/{{p.id}}" width="50" height= "170" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{p.nom}}</h5>
+            <h6 style="color:red">
+
+              {{p.prix}} DT
+            </h6>
+            <h6 >
+              En Stock
+            </h6>
+            <p>
+            <button class="btn btn-primary" (click)="selectProduct(p)">Select</button></p>
+          </div>
+        </div>
       </div>
     </div>
+  </ng-template>
+</ngb-carousel>
+<div class="compare-button">
+    <button mat-raised-button color="primary" (click)="compare()">Compare</button>
   </div>
-  
-  <div class="product-results" *ngIf="comparisonResults==true">
+
+  <div class="product-results" *ngIf="comparisonResults">
     <h2>Product Results</h2>
     <table class="table table-bordered">
       <thead>
         <tr>
           <th scope="col">Product</th>
-          <th scope="col" *ngFor="let produit of produits">{{produit.nom}}</th>
+          <th scope="col" *ngFor="let produit of selectedProducts">{{ produit.nom }}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <th scope="row">Couleur</th>
-          <td *ngFor="let description of productDescriptions">{{description.color}}</td>
+          <td *ngFor="let Description of DescriptionOfSelectedProducts">{{ Description.color }}</td>
         </tr>
         <tr>
           <th scope="row">Description courte</th>
-          <td *ngFor="let description of productDescriptions">{{description.shortDescription}}</td>
+          <td *ngFor="let Description of DescriptionOfSelectedProducts">{{ Description.shortDescription }}</td>
         </tr>
         <tr>
           <th scope="row">Description longue</th>
-          <td *ngFor="let description of productDescriptions">{{description.longDescription}}</td>
+          <td *ngFor="let Description of DescriptionOfSelectedProducts">{{ Description.longDescription }}</td>
         </tr>
       </tbody>
     </table>
   </div>
-  
-  

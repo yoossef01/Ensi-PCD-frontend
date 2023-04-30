@@ -1,38 +1,71 @@
-<div class="container mycontainer" >
-    <div class="card justify-content-md-center">
-        <div class="card-header text-center">
-            <h3>S'inscrire</h3>
-        </div>
-        <div class="card-body">
+
+<body>
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-0 " >
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
         <form [formGroup]="formVendeur" (ngSubmit)="submit()">
-            <div class="mb-3">
-                <input type="text" class="form-control" formControlName="nom" placeholder="Nom" required>
+          <div class="form-group row">
+          <div class="col-sm-6 mb-3 mb-sm-3">
+            <input type="text" class="form-control " formControlName="nom" placeholder="Nom" required minlength="3" maxlength="20">
+            <div class="alert alert-danger" *ngIf="formVendeur.controls['nom'].touched && formVendeur.controls['nom'].errors">
+              <div *ngIf="formVendeur.controls['nom'].errors?.['required']">Nom requis</div>
+              <div *ngIf="formVendeur.controls['nom'].errors?.['minlength']">Le nom doit comporter au moins 3 caractères</div>
+              <div *ngIf="formVendeur.controls['nom'].errors?.['maxlength']">Le nom ne doit pas dépasser 20 caractères</div>
             </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" formControlName="prenom" placeholder="Prenom" required>
+          </div>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" formControlName="prenom" placeholder="Prenom" required minlength="3" maxlength="20">
+            <div class="alert alert-danger" *ngIf="formVendeur.controls['prenom'].touched && formVendeur.controls['prenom'].errors">
+              <div *ngIf="formVendeur.controls['prenom'].errors?.['required']">Prenom requis</div>
+              <div *ngIf="formVendeur.controls['prenom'].errors?.['minlength']">Le prenom doit comporter au moins 3 caractères</div>
+              <div *ngIf="formVendeur.controls['prenom'].errors?.['maxlength']">Le prenom ne doit pas dépasser 20 caractères</div>
             </div>
-            <div class="mb-3">                                                  
-                <input type="email" class="form-control" formControlName="adresse" placeholder="Adresse" required>
+          </div></div>
+          <div class="mb-3">
+            <input type="email" class="form-control" formControlName="adresse" placeholder="Adresse" required>
+            <div class="alert alert-danger" *ngIf="formVendeur.controls['adresse'].touched && formVendeur.controls['adresse'].errors">
+              <div *ngIf="formVendeur.controls['adresse'].errors?.['required']">Adresse email requise</div>
             </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" formControlName="tel" placeholder="Numero Telephone" required>
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" formControlName="tel" placeholder="Numero Telephone" required pattern="^[0-9]*$" minlength="8" maxlength="8">
+            <div class="alert alert-danger" *ngIf="formVendeur.controls['tel'].touched && formVendeur.controls['tel'].errors">
+              <div *ngIf="formVendeur.controls['tel'].errors?.['required']">Numéro de téléphone requis</div>
+              <div *ngIf="formVendeur.controls['tel'].errors?.['pattern']">Le numéro de téléphone doit contenir uniquement des chiffres</div>
+              <div *ngIf="formVendeur.controls['tel'].errors?.['minlength']">Le numéro de téléphone doit comporter 8 chiffres</div>
+              <div *ngIf="formVendeur.controls['tel'].errors?.['maxlength']">Le numéro de téléphone doit comporter 8 chiffres</div>
             </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" formControlName="email" placeholder="E-mail" required>
+          </div>
+          <div class="mb-3">
+            <input type="email" class="form-control" formControlName="email" placeholder="E-mail" required>
+            <div class="alert alert-danger" *ngIf="formVendeur.controls['email'].touched && formVendeur.controls['email'].errors">
+              <div *ngIf="formVendeur.controls['email'].errors?.['required']">E-mail requis</div>
+              <div *ngIf="formVendeur.controls['email'].errors?.['pattern']">E-mail invalide</div>
             </div>
-            <div class="mb-3">
-                <input type="password" class="form-control" formControlName="password" placeholder="Mot de passe" required>
+          </div>
+          <div class="mb-3">
+            <input type="password" class="form-control" formControlName="password" placeholder="Mot de passe" 
+            [pattern]="'^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$@$!%*?&+/\-])[A-Za-z\\d$@$!%*?&+/\-]{7,}$'" required>
+            <div class="alert alert-danger" *ngIf="formVendeur.controls['password'].touched && formVendeur.controls['password'].errors">
+                <div *ngIf="formVendeur.controls['password'].errors?.['required']">Mot de passe requis</div>
+                <div *ngIf="formVendeur.controls['password'].errors?.['pattern']">Le mot de passe doit contenir au moins 7 caractères, des chiffres, des caractères et des symboles</div>
             </div>
-        
-            
-            <div class="mb-3 d-flex justify-content-between">
-                <input [disabled]="!formVendeur.valid" class="btn btn-primary w-100" type="submit" value="S'inscrire">
-            </div>
+          </div>
+          <div class="mb-3 d-flex justify-content-between">
+            <input [disabled]="!formVendeur.valid" class="btn btn-primary w-100" type="submit" value="S'inscrire">
+          </div>
         </form>
-        </div>
+      </div>
     </div>
-</div>
-
-
-
-
+  </div>
+            </div></div></div>
+</body>

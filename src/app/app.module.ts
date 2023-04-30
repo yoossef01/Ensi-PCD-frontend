@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HomeComponent } from './components/home/home.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {  ReactiveFormsModule } from '@angular/forms';
 import { ChoosetemplateComponent } from './components/choosetemplate/choosetemplate.component';
 import { TemplateComponent } from './components/template/template.component';
 import { ListeproduitsComponent } from './components/listeproduits/listeproduits.component';
@@ -43,6 +43,7 @@ import { LastFewTransactionsComponent } from './components/dashboard/last-few-tr
 import { TopThreeProductsComponent } from './components/dashboard/top-three-products/top-three-products.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { ChartModule } from 'angular-highcharts';
+import { FormsModule } from '@angular/forms';
 
 import { ComparateurComponent } from './components/comparateur/comparateur.component';
 
@@ -50,9 +51,6 @@ import { Home1Component } from './components/template1/home1/home1.component';
 import { ListProductsComponent } from './components/template1/list-products/list-products.component';
 import { ListProductsClientComponent } from './components/template1/list-products-client/list-products-client.component';
 import { HomeVendeurComponent } from './components/template1/home-vendeur/home-vendeur.component';
-
-   // import{} from '@angular/material/slide-toggle';
-//import {  } from '@angular/material/badge';
 
 const materiel=[
   MatAutocompleteModule, MatIconModule, MatButtonModule,
@@ -109,7 +107,8 @@ const materiel=[
     HttpClientModule,
     NgbModule,materiel,CommonModule,ReactiveFormsModule,
     NgChartsModule,
-    ChartModule
+    ChartModule,    
+
     
   
     

@@ -25,7 +25,7 @@ export class PanierComponent implements OnInit{
   achat: Achat = new Achat('', new Date(), 0, '', 0, this.produit,{id:0});
   client!:Client;
   somme:number=0;
-
+  order:boolean=false;
   constructor(private cs:CommandeService, private achatservice: AchatService,private clientservice:ClientService){}
   ngOnInit(): void {
     this.getCurrentClient()};
@@ -126,6 +126,7 @@ export class PanierComponent implements OnInit{
   this.achat.vendeur.id=com.product.vendeur.id;
   console.log(this.achat);
    this.achatservice.saveAchat(this.achat).subscribe(data => console.log(data));
+   this.order=true;
 }}
 
 

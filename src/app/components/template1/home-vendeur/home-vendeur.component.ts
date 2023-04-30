@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TemplateContent } from 'src/app/model/template-content';
@@ -25,19 +26,32 @@ export class HomeVendeurComponent implements OnInit{
   vendeur:Vendeur;
   photo:File;
   img:string;
-  constructor(private templateService:TemplateContentService, private router: Router,private vendeurservice:VendeurService){}
+  
+  constructor(private templateService:TemplateContentService, private http: HttpClient,private router: Router,private vendeurservice:VendeurService){}
    
   getCurrentVendeur(){
     this.vendeurservice.getCurrentVendeur().subscribe(vendeur => {if(vendeur) 
-    this.vendeur=vendeur;console.log("le vendeur :"+this.vendeur.id+"est connecté")});}
+    this.vendeur=vendeur;console.log("le vendeur :"+this.vendeur.id+"est connecté")
+    this.getTemplateByVendeur();});}
   ngOnInit(){
     this.BuildTemplate();
     this.getCurrentVendeur();
-    this.getTemplateByVendeur();
     
   }
   getTemplateByVendeur(){
-    this.templateService.getTemplateByVendeur(252).subscribe(data=>{this.templateContent=data;console.log(this.templateContent)});
+
+    this.templateService.getTemplateByVendeur(this.vendeur.id).subscribe(data=>{
+      if(data){
+      this.templateContent=data;console.log("if")}
+      else
+      {this.templateContent.description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque vero eius ipsam incidunt illum totam nostrum quidem sit cumque fugit. Accusamus rem praesentium labore tempore ullam porro quaerat fugiat cum ipsum, sint perferendis "
+      this.templateContent.text1="Les Meilleurs Produits";
+      this.templateContent.text2="Achetez les produits les plus en vogue sur notre site"
+      this.templateContent.vendeur.id=this.vendeur.id;  
+     
+
+          this.templateService.createTemplateContent(this.templateContent,this.photo).subscribe(()=>console.log(this.templateContent))
+        }});
     
   }
   onPhotoSelected(event: any): void {
@@ -48,6 +62,7 @@ export class HomeVendeurComponent implements OnInit{
        reader.readAsDataURL(this.photo);
        reader.onload = () => {
          this.img = reader.result as string;
+         this.templateService.createTemplateContent(this.templateContent,this.photo).subscribe(()=>console.log(this.templateContent));
        };
      }
    }

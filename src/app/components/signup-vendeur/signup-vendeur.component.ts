@@ -21,7 +21,7 @@ export class SignupVendeurComponent implements OnInit{
     prenom: new FormControl('', [Validators.required]),
     adresse : new FormControl('', [Validators.required]),
     tel: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')]),
     password: new FormControl('', [Validators.required])
   })
 

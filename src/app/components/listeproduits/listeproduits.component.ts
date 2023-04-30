@@ -54,7 +54,7 @@ export class ListeproduitsComponent implements OnInit {
   ngOnInit(): void {
 
      this.getAll()
-       
+       this.getCurrentVendeur();
     //  setInterval(() => {
     //   this.added();
     // }, 1000);
@@ -62,7 +62,9 @@ export class ListeproduitsComponent implements OnInit {
     //   this.Catadded();
     // }, 1000);
     ;}
-
+    getCurrentVendeur(){
+      this.vendeurservice.getCurrentVendeur().subscribe(vendeur =>
+      {if(vendeur) this.vendeur=vendeur;console.log("le vendeur "+this.vendeur.id+" est connecté")})}
     getAll()
     {
       this.service.getAllProducts().subscribe(data=>{this.produitF=data; })

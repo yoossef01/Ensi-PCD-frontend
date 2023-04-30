@@ -2,3 +2,45 @@
     margin-top: 100px;
     max-width: 500px;
 }
+
+body {
+    background-color: red;
+  } 
+.card {
+    border-radius: 10px;
+  }
+  
+  .bg-register-image {
+    background-image: url('C:/Users/youss/OneDrive/Bureau/pcdversion1/src/assets/shop1.png');
+    background-position: center;
+    background-size: cover;
+    min-height: 500px;
+  }
+  
+  .form-control {
+    border-radius: 30px;
+  }
+  
+  .btn-user {
+    border-radius: 30px;
+    font-weight: bold;
+  }
+  
+  
+  
+  .small {
+    font-size: 0.8rem;
+    color: #aaa;
+  }
+  
+  @media (min-width: 992px) {
+    .bg-register-image {
+      min-height: 100%;
+      max-width: 50%;
+      float: left;
+    }
+  
+    .col-lg-7 {
+      padding-left: 50px;
+    }
+  }

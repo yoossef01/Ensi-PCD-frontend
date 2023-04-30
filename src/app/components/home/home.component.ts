@@ -1,4 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Vendeur } from 'src/app/model/vendeur';
+import { VendeurService } from 'src/app/vendeur.service';
 
 
 @Component({
@@ -8,13 +10,14 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '
 })
 export class HomeComponent implements OnInit {
 
+vendeurs:Vendeur[]=[];
 
-
-constructor() { }
+constructor(private vendeurService:VendeurService) { }
   
   
 
   ngOnInit(): void {
+    this.vendeurService.getAllVendeurs().subscribe(data=>{this.vendeurs=data;console.log(this.vendeurs)})
   }
 
 

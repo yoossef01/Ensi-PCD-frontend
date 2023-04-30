@@ -37,10 +37,11 @@
             <button ngbDropdownToggle class="btn btn-secondary" type="button" id="dropdownMenuButton1" aria-expanded="false"  style="position: relative; left:-130px;top:-50px; width:25%;">
               Boutiques
               </button>
-                <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
-                  <li><a ngbDropdownItem href="#">Zen</a></li>
-                  <li><a ngbDropdownItem href="#">Zara </a></li>
-                  <li><a ngbDropdownItem href="#">Meublatx </a></li>
+                <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1" >
+                  <li *ngFor="let boutique of vendeurs">
+                    <a ngbDropdownItem >{{boutique.nom}}</a>
+                  </li>
+                  
                 </ul>
           </div>
           </div>

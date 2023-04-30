@@ -60,8 +60,11 @@ const routes: Routes = [
   {path:'template/1/:id',component:HomeVendeurComponent},
   //************************** */
   {path:'achat', component:AchatComponent},
-  {path:'comparateur', component:ComparateurComponent}
-  
+  {path:'comparateur', component:ComparateurComponent},
+  {path:'template1',component:Home1Component},
+  {path:'listeproducts',component:ListProductsComponent},
+  {path:'listproduct1client',component:ListProductsClientComponent},
+  {path:'homeVend',component:HomeVendeurComponent},
 ];
 
 @NgModule({

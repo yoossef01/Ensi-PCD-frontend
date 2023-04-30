@@ -58,6 +58,9 @@ getIdVendeur() {
   getVendeurByEmail(email:string):Observable<Vendeur>{
     return this.http.get<Vendeur>("http://localhost:8080/api/vendeur/email/"+email);
   }
+  getAllVendeurs():Observable<Vendeur[]>{
+    return this.http.get<Vendeur[]>("http://localhost:8080/api/vendeur/all");
+  }
   UpdateVendeur (vendeur:Vendeur):Observable<Vendeur>{
     return this.http.put<Vendeur>("http://localhost:8080/api/vendeur/update",vendeur)
   }

@@ -25,7 +25,7 @@ export class ListProductsComponent implements OnInit {
   private catadded =false;
   produitF!:Produit[];
   nomNewCat:string;
-  newCategory: Categorie=new Categorie(0,"",{id:0})
+  newCategory: Categorie=new Categorie(0,"",{id:0}); 
   categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
   produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
   produitModifie:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
@@ -64,7 +64,7 @@ export class ListProductsComponent implements OnInit {
   getcategoriie(i : number)
   {
     this.sc.getAllCategoriesByVendeur(i).subscribe(data=>{this.categories=data; this.categories=this.categories
-    console.log(data)})
+    })
   }
   
   navigation() {

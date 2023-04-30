@@ -51,7 +51,7 @@ const routes: Routes = [
   {path: 'templateclient/2/:id', component:HomeclientComponent},
   {path:'achat', component:AchatComponent},
 
-{path:'dashboard', component: DashboardComponent},
+{path:'dashboard/:id', component: DashboardComponent},
 //component de temaplte1
 //*****************************
   {path:'templateclient/1/:id',component:Home1Component},

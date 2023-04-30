@@ -44,7 +44,7 @@ getIdVendeur() {
   }
   getCurrentVendeur(): Observable<Vendeur|null> {
     const token = this.getToken();
-    console.log(token);
+
     if (token) {
       const decodedToken = jwt_decode(token) as { sub: string, exp: string };
       const email = decodedToken.sub;

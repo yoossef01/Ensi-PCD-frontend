@@ -13,7 +13,7 @@ export class CommandeService {
   getAllCommandes(): Observable<Commande[]> {
     return this.client.get<Commande[]>(this.host+"/all");
   }
-  getCommandeById(id: string): Observable<Commande> {
+  getCommandeById(id: number): Observable<Commande> {
     const url = `${this.host}/${id}`;
     return this.client.get<Commande>(url);
   }
@@ -29,7 +29,7 @@ export class CommandeService {
     return this.client.put<Commande>(url, achat);
   }
 
-  deleteCommande(id: string): Observable<Commande> {
+  deleteCommande(id: number): Observable<Commande> {
     const url = `${this.host}/del/${id}`;
     return this.client.delete<Commande>(url);
   }

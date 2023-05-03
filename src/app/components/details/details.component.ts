@@ -31,7 +31,7 @@ quantity:number;
   produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
   description:Description=new Description("","","","","",{id:""});
   commandes:Commande[]=[];
-  commande: Commande = new Commande("", "", 0, new Date(), 0, this.produit, { id: 0 });
+  commande: Commande = new Commande(10, "", 0, new Date(), 0, this.produit, { id: 0 });
   c :Client;
 
   ngOnInit(): void {
@@ -59,9 +59,8 @@ quantity:number;
     this.produit.quantite=this.produit.quantite-this.commande.quantite;
     this.commande.date=new Date();
     this.commande.product.id=this.produit.id;
-    this.commande.id=uuidv4();
     this.commande.client.id=this.c.id;
-    this.service.saveP(this.produit).subscribe(data=>{this.produit=data
+    this.service.saveP(this.produit).subscribe(data=>{this.produit=data;console.log(this.commande);
       this.commandeService.addCommande(this.commande)
         .subscribe(data => console.log(data));})}
         

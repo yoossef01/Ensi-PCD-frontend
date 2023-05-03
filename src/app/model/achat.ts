@@ -2,14 +2,14 @@ import { Produit } from "./produit";
 import { Vendeur } from "./vendeur";
 
 export class Achat {
-    id:string;
+    id:number;
     date:Date;
     montant:number;
     nom:string;
     quantite:number;
     product:Produit;
     vendeur:{id: number};
-    constructor(id: string, date: Date, montant: number, nom: string, quantite: number, product: Produit, vendeur: { id: number }) {
+    constructor(id: number, date: Date, montant: number, nom: string, quantite: number, product: Produit, vendeur: { id: number }) {
         this.id = id;
         this.date = date;
         this.montant = montant;

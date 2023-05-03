@@ -22,7 +22,7 @@ export class PanierComponent implements OnInit{
   vendeur! : Vendeur;
   categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
   produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
-  achat: Achat = new Achat('', new Date(), 0, '', 0, this.produit,{id:0});
+  achat: Achat = new Achat(10, new Date(), 0, '', 0, this.produit,{id:0});
   client!:Client;
   somme:number=0;
   order:boolean=false;
@@ -73,7 +73,7 @@ export class PanierComponent implements OnInit{
     this.UpdateMontantTotal(c);
   }
   
-  DeleteCommande(id: string) {
+  DeleteCommande(id: number) {
    const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -116,7 +116,6 @@ export class PanierComponent implements OnInit{
 
   addAchat(): void {
   for(let com of this.commandes){
-  this.achat.id=uuidv4(); 
   this.achat.nom=com.nom;
   this.achat.montant=com.montant;
   this.achat.date=new Date();
@@ -127,6 +126,9 @@ export class PanierComponent implements OnInit{
   console.log(this.achat);
    this.achatservice.saveAchat(this.achat).subscribe(data => console.log(data));
    this.order=true;
+   this.cs.deleteCommande(com.id).subscribe(
+    data => {
+      console.log(data);})
 }}
 
 

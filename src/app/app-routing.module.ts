@@ -28,6 +28,8 @@ import { Home1Component } from './components/template1/home1/home1.component';
 import { ListProductsComponent } from './components/template1/list-products/list-products.component';
 import { ListProductsClientComponent } from './components/template1/list-products-client/list-products-client.component';
 import { HomeVendeurComponent } from './components/template1/home-vendeur/home-vendeur.component';
+import { AdmindashComponent } from './components/admindash/admindash.component';
+import { Home3Component } from './components/template3/home3/home3.component';
 
 
 
@@ -65,6 +67,9 @@ const routes: Routes = [
   {path:'listeproducts',component:ListProductsComponent},
   {path:'listproduct1client',component:ListProductsClientComponent},
   {path:'homeVend',component:HomeVendeurComponent},
+
+  {path:'admin',component:AdmindashComponent},
+  {path:'home3',component:Home3Component}
 ];
 
 @NgModule({

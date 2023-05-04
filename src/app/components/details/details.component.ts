@@ -48,7 +48,7 @@ quantity:number;
      //connaitre le client connecté ,on l'a besoin pour créer les nouveaux commandes
   getCurrentClient(){
     this.clientservice.getCurrentClient().subscribe(client =>
-      {if(client) this.c=client;console.log("le client: "+this.c.id+" est connecté")});}
+      {if(client) this.c=client;console.log("le client: "+this.c.id+" est connecté");       });}
        
     
   addCommande() {

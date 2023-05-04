@@ -22,7 +22,7 @@ export class PanierComponent implements OnInit{
   vendeur! : Vendeur;
   categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
   produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
-  achat: Achat = new Achat('', new Date(), 0, '', 0, this.produit,{id:0});
+  achat: Achat = new Achat('', new Date(), 0, '', 0, this.produit,{id:0},{id:0});
   client!:Client;
   somme:number=0;
   order:boolean=false;
@@ -125,6 +125,7 @@ export class PanierComponent implements OnInit{
   console.log(com.product.vendeur.id);
   this.achat.vendeur.id=com.product.vendeur.id;
   console.log(this.achat);
+  this.achat.client.id = this.client.id;
    this.achatservice.saveAchat(this.achat).subscribe(data => console.log(data));
    this.order=true;
 }}

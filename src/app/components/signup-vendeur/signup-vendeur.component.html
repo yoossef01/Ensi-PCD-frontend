@@ -53,13 +53,10 @@
             </div>
           </div>
           <div class="mb-3">
-            <input type="password" class="form-control" formControlName="password" placeholder="Mot de passe" 
-            [pattern]="'^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$@$!%*?&+/\-])[A-Za-z\\d$@$!%*?&+/\-]{7,}$'" required>
-            <div class="alert alert-danger" *ngIf="formVendeur.controls['password'].touched && formVendeur.controls['password'].errors">
-                <div *ngIf="formVendeur.controls['password'].errors?.['required']">Mot de passe requis</div>
-                <div *ngIf="formVendeur.controls['password'].errors?.['pattern']">Le mot de passe doit contenir au moins 7 caractères, des chiffres, des caractères et des symboles</div>
+            <input type="password" class="form-control" formControlName="password" placeholder="Mot de passe"  required>
+
             </div>
-          </div>
+      
           <div class="mb-3 d-flex justify-content-between">
             <input [disabled]="!formVendeur.valid" class="btn btn-primary w-100" type="submit" value="S'inscrire">
           </div>

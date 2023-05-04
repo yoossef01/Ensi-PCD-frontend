@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { Vendeur } from 'src/app/model/vendeur';
 import { VendeurService } from 'src/app/vendeur.service';
 import { v4 as uuidv4 } from 'uuid';
+import { DescriptionService } from 'src/app/description.service';
+import { Description } from 'src/app/model/description';
 @Component({
   selector: 'app-ajout-produit',
   templateUrl: './ajout-produit.component.html',
@@ -25,9 +27,10 @@ produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
 categories!:Categorie[];
 photo!:File;
 vendeur:Vendeur;
+description:Description=new Description("","","","","",{id:""});
 idCategorie:number;
   
-constructor( private service:ProduitService,private sc:CategorieService,private router: Router,
+constructor( private service:ProduitService,private sc:CategorieService,private router: Router,private ds:DescriptionService,
   private vendeurservice:VendeurService) { }
 
   ngOnInit(): void {
@@ -85,7 +88,9 @@ constructor( private service:ProduitService,private sc:CategorieService,private 
     this.produit.categorie=this.categorieProduit;
     this.produit.vendeur.id=this.vendeur.id;
     this.service.addProduit(this.produit,this.photo).subscribe(()=>
-    {//fenetre de notification : le produit a été ajouté avec succès.
+    {this.description.product.id=this.produit.id;
+      this.addDescription();
+      //fenetre de notification : le produit a été ajouté avec succès.
     Swal.fire({
      //position: 'top-end',
      icon: 'success',
@@ -101,6 +106,11 @@ constructor( private service:ProduitService,private sc:CategorieService,private 
   } );
    this.router.navigate(['/template/'+this.vendeur.idTemplate+'/'+this.vendeur.id]);
  }
+ //ajout Description
+ addDescription():void{
+  this.description.id=uuidv4();
+  console.log(""+this.description.product.id)
+   this.ds.addDescription(this.description).subscribe(()=>console.log(this.description))    }
 
  
 }

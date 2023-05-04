@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Description } from 'src/app/model/description';
 import { DescriptionService } from 'src/app/description.service';
 import { Router } from '@angular/router';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dialog-box',
@@ -97,6 +97,13 @@ private ds:DescriptionService,private router: Router,) { }
     this.service.addProduit(this.produit,this.photo).subscribe(()=>
    { this.description.product.id=this.produit.id;
     this.addDescription();
+    Swal.fire({
+      //position: 'top-end',
+      icon: 'success',
+      title: 'le produit a été ajouté avec succès',
+      showConfirmButton: false,
+      timer: 1500
+ })
     this.restProduit();
     this.resetPhoto();
     this.photo=new File([], '');

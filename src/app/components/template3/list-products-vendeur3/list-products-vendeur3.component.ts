@@ -5,18 +5,16 @@ import { ClientService } from 'src/app/client.service';
 import { Categorie } from 'src/app/model/categorie';
 import { Client } from 'src/app/model/client';
 import { Produit } from 'src/app/model/produit';
-
 import { ProduitService } from 'src/app/produit.service';
 import { VendeurService } from 'src/app/vendeur.service';
 
 @Component({
-  selector: 'app-list-products-client',
-  templateUrl: './list-products-client.component.html',
-  styleUrls: ['./list-products-client.component.css']
+  selector: 'app-list-products-vendeur3',
+  templateUrl: './list-products-vendeur3.component.html',
+  styleUrls: ['./list-products-vendeur3.component.css']
 })
-export class ListProductsClientComponent implements OnInit {
- 
-  
+export class ListProductsVendeur3Component implements OnInit {
+
   produitF!:Produit[];
   produits!:Produit[];
   client:Client;
@@ -25,7 +23,8 @@ export class ListProductsClientComponent implements OnInit {
   categorie:Categorie;
   categorieProduit:Categorie;
  
-constructor(private clientservice: ClientService,private sc:CategorieService,private service:ProduitService, private vendeurservice:VendeurService, private router:Router){}
+constructor(private clientservice: ClientService,private sc:CategorieService,private service:ProduitService, 
+  private vendeurservice:VendeurService, private router:Router){}
 ngOnInit(): void {
     
   this.getAll();

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { CategorieService } from 'src/app/categorie.service';
 import { ClientService } from 'src/app/client.service';
+import { DescriptionService } from 'src/app/description.service';
 import { Categorie } from 'src/app/model/categorie';
 import { Client } from 'src/app/model/client';
+import { Description } from 'src/app/model/description';
 import { Produit } from 'src/app/model/produit';
 import { ProduitService } from 'src/app/produit.service';
 import { VendeurService } from 'src/app/vendeur.service';
@@ -22,12 +25,20 @@ export class ListProductsClient3Component implements OnInit {
   categorie:Categorie;
   categorieProduit:Categorie;
   texte:string;
+  description:Description=new Description("","","","","",{id:""});
+  descriptions: {[key: string]: Description} = {};
 constructor(private clientservice: ClientService,private sc:CategorieService,
-  private service:ProduitService, private vendeurservice:VendeurService, private router:Router){}
+  private service:ProduitService, private vendeurservice:VendeurService,
+   private router:Router,private ds:DescriptionService){}
 ngOnInit(): void {
     
   this.getAll();
   this.getCurrentClient();
+  this.ds.getAllDescriptions().subscribe((descriptions: Description[]) => {
+    descriptions.forEach(description => {
+      this.descriptions[description.product.id] = description;
+    });
+  });
 }
 
 
@@ -84,5 +95,7 @@ selectCategorie(event: any) {
     }
 }
 
-
+getDescription(id: string): string {
+  return this.descriptions[id]?.shortDescription || '';
+}
 }

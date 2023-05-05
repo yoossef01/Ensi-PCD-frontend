@@ -7,24 +7,26 @@
             <h3>Company Name</h3>
           </div>
           <div class="col-lg-6 col-sm-12">
-            <form action="#" class="search">
+            
               <div class="input-group w-100">
-                <input type="text" [(ngModel)]="texte" class="form-control" placeholder="Search">
+                <input type="text" [(ngModel)]="texte" class="form-control" placeholder="Recherche">
                 <div class="input-group-append">
-                  <button class="btn btn-primary" type="submit">
+                  <button class="btn btn-primary" (click)="searchProducts()">
                     <i class="fa fa-search"></i>
                   </button>
                 </div>
               </div>
+            
+          </div>
+          <div class="col-lg-4 col-sm-6 col-12 d-flex justify-content-end">
+            <form class="d-flex">
+              <a class="btn btn-outline-dark" href="/Panier">
+                <i class="bi-cart-fill me-1"></i>
+                Panier
+                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+              </a>
             </form>
           </div>
-          <form class="d-flex">
-            <a class="btn btn-outline-dark" href="/Panier">
-                  <i class="bi-cart-fill me-1"></i>
-                  Cart
-                  <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-            </a>
-          </form>
         </div>
       </div>
     </section>
@@ -83,10 +85,9 @@
     <article class="card card-product-list"*ngFor="let p of produitF">
         <div class="row no-gutters">
             <aside class="col-md-3">
-                <a href="#" class="img-wrap">
-                    <span class="badge badge-danger"> NEW </span>
-                    <img src="http://localhost:8080/apiproduit/getimage/{{p.id}}">
-                </a>
+                
+                    <img src="http://localhost:8080/apiproduit/getimage/{{p.id}}" style="width:200px;height:200px;">
+                
             </aside> <!-- col.// -->
             <div class="col-md-6">
                 <div class="info-main">
@@ -107,7 +108,7 @@
                         
                     </div> <!-- rating-wrap.// -->
                     
-                    <p> Take it as demo specs, ipsum dolor sit amet, consectetuer adipiscing elit, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Ut wisi enim ad minim veniam </p>
+                    <p>  {{ getDescription(p.id) }} </p>
                 </div> <!-- info-main.// -->
             </div> <!-- col.// -->
             <aside class="col-sm-3">
@@ -116,14 +117,14 @@
                         <span class="price h5">  {{p.prix}} DT </span>	
                         
                     </div> <!-- info-price-detail // -->
-                    <p class="text-success">Free shipping</p> 
+                    
                     <h6 style="color: green" *ngIf="p.quantite>0; else repture">
                             En Stock
                           </h6>
                     <br>
                     <p>
                        
-                        <a  routerLink="/products/{{p.id}}" class="btn btn-light btn-block"><i class="fa fa-heart"></i> 
+                        <a  routerLink="/products/{{p.id}}" class="btn btn-primary">
                             <span class="text">Acheter maintenant</span>
                         </a>
                     </p>

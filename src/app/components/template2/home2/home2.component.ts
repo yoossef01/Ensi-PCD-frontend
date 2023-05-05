@@ -277,4 +277,8 @@ navigation() {
   this.router.navigate(['/dashboard/'+this.vendeur.id])
 }
 
+navigation1() {
+  this.router.navigate(['/achat/'+this.vendeur.id])
+}
+
 }

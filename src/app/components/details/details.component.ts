@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import { TemplateContentService } from 'src/app/template-content.service';
 import { DescriptionService } from 'src/app/description.service';
 import { Description } from 'src/app/model/description';
+import { VendeurService } from 'src/app/vendeur.service';
 
 @Component({
   selector: 'app-details',
@@ -25,7 +26,8 @@ quantity:number;
   
   constructor(private ar:ActivatedRoute, private service:ProduitService,
     private commandeService:CommandeService,private clientservice :ClientService,
-    private descriptionService:DescriptionService
+    private descriptionService:DescriptionService, private router:Router,
+    private vendeurService: VendeurService
     ) { }
   categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
   produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
@@ -48,7 +50,7 @@ quantity:number;
      //connaitre le client connecté ,on l'a besoin pour créer les nouveaux commandes
   getCurrentClient(){
     this.clientservice.getCurrentClient().subscribe(client =>
-      {if(client) this.c=client;console.log("le client: "+this.c.id+" est connecté")});}
+      {if(client) this.c=client;console.log("le client: "+this.c.id+" est connecté");       });}
        
     
   addCommande() {
@@ -71,7 +73,9 @@ quantity:number;
             text: 'La quantité demandée est supérieure au stock disponible!',
             footer: 'Quantité currente est '+this.produit.quantite
           })
-        }}
+        }
+        this.router.navigate(['templateclient/'+this.vendeurService.getIdTemplate()+'/'+this.vendeurService.getIdVendeur()])
+      }
     
     decrementQuantity() {
       if (this.commande.quantite > 0) {

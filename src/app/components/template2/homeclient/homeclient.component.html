@@ -25,6 +25,18 @@
       </a>
     </form>
   </header>
+    <header class="row">
+      <nav class="col-md-4">
+        <ul>
+          <li><a href="#">Accueil</a></li>
+          <li><a (click)="navigation()">panier</a></li>
+        </ul>
+      </nav>
+      <div class="search-bar col-md-8">
+        <input type="text"  placeholder="Recherche..." [(ngModel)]="texte"  >
+        <button type="submit">Recherche</button>
+      </div>
+    </header>
   
   
   

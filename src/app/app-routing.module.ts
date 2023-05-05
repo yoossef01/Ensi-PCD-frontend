@@ -29,6 +29,8 @@ import { ListProductsComponent } from './components/template1/list-products/list
 import { ListProductsClientComponent } from './components/template1/list-products-client/list-products-client.component';
 import { HomeVendeurComponent } from './components/template1/home-vendeur/home-vendeur.component';
 import { ListProductsClient3Component } from './components/template3/list-products-client3/list-products-client3.component';
+import { AdmindashComponent } from './components/admindash/admindash.component';
+import { Home3Component } from './components/template3/home3/home3.component';
 
 
 
@@ -41,7 +43,7 @@ const routes: Routes = [
   {path:'template12',component:Template1Component},{
    path:'insc',component:InscriptionComponent
   }
-  ,{path:'Panier',component:PanierComponent}
+  ,{path:'panier/:id',component:PanierComponent}
   ,{path:'loginClient', component:LoginComponent},
   {path:'template/2/:id',component:Home2Component},
   {path:'template2Client',component:HomeclientComponent},
@@ -61,7 +63,7 @@ const routes: Routes = [
   {path:'listeproduitclient/:id',component:ListProductsClientComponent},
   {path:'template/1/:id',component:HomeVendeurComponent},
   //************************** */
-  {path:'achat', component:AchatComponent},
+  {path:'achat/:id', component:AchatComponent},
   {path:'comparateur', component:ComparateurComponent},
   {path:'template1',component:Home1Component},
   {path:'listeproducts',component:ListProductsComponent},
@@ -70,6 +72,10 @@ const routes: Routes = [
   //component de temaplte1
 //*****************************
 {path:'template3',component:ListProductsClient3Component},
+
+  {path:'admin',component:AdmindashComponent},
+  {path:'home3',component:Home3Component},
+  {path:'list3',component:ListProductsClient3Component}
 ];
 
 @NgModule({

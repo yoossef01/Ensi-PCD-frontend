@@ -53,6 +53,9 @@ import { ListProductsClientComponent } from './components/template1/list-product
 import { HomeVendeurComponent } from './components/template1/home-vendeur/home-vendeur.component';
 import { EditProfilComponent } from './components/edit-profil/edit-profil.component';
 import { ListProductsClient3Component } from './components/template3/list-products-client3/list-products-client3.component';
+import { AdmindashComponent } from './components/admindash/admindash.component';
+import { Home3Component } from './components/template3/home3/home3.component';
+import { ListProductsVendeur3Component } from './components/template3/list-products-vendeur3/list-products-vendeur3.component';
 
 const materiel=[
   MatAutocompleteModule, MatIconModule, MatButtonModule,
@@ -100,6 +103,11 @@ const materiel=[
       ListProductsClient3Component,
               
               
+      
+      HomeVendeurComponent,
+              AdmindashComponent,
+              Home3Component,
+              ListProductsVendeur3Component
 
   ],
    schemas:[CUSTOM_ELEMENTS_SCHEMA]

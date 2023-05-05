@@ -111,9 +111,12 @@ updateProductsCompared(id:string){
   console.log(this.ids)
 }
 
+
+
 getVendeurById(n : number) {
   this.vendeurservice.getVendeurById(n).subscribe(data=>{this.vendeur = data;
   this.vendeurservice.setIdVendeur(n);
+  this.vendeurservice.setIdTemplate(this.vendeur.idTemplate);
   this.router.navigate(['/templateclient/'+this.vendeur.idTemplate+'/'+n])})
 }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AchatService } from 'src/app/achat.service';
 import { ClientService } from 'src/app/client.service';
 import { CommandeService } from 'src/app/commande.service';
@@ -8,6 +9,7 @@ import { Client } from 'src/app/model/client';
 import { Commande } from 'src/app/model/commande';
 import { Produit } from 'src/app/model/produit';
 import { Vendeur } from 'src/app/model/vendeur';
+import { VendeurService } from 'src/app/vendeur.service';
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -22,11 +24,11 @@ export class PanierComponent implements OnInit{
   vendeur! : Vendeur;
   categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
   produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
-  achat: Achat = new Achat(10, new Date(), 0, '', 0, this.produit,{id:0});
+  achat: Achat = new Achat(10, new Date(), 0, '', 0, this.produit,{id:0},{id:0});
   client!:Client;
   somme:number=0;
   order:boolean=false;
-  constructor(private cs:CommandeService, private achatservice: AchatService,private clientservice:ClientService){}
+  constructor(private cs:CommandeService, private achatservice: AchatService,private clientservice:ClientService, private router: Router,private vendeurservice: VendeurService){}
   ngOnInit(): void {
     this.getCurrentClient()};
    
@@ -124,12 +126,15 @@ export class PanierComponent implements OnInit{
   console.log(com.product.vendeur.id);
   this.achat.vendeur.id=com.product.vendeur.id;
   console.log(this.achat);
+  this.achat.client.id = this.client.id;
    this.achatservice.saveAchat(this.achat).subscribe(data => console.log(data));
    this.order=true;
    this.cs.deleteCommande(com.id).subscribe(
     data => {
       console.log(data);})
-}}
+}
+this.router.navigate(['templateclient/'+this.vendeurservice.getIdTemplate()+'/'+this.vendeurservice.getIdVendeur()])
+}
 
 
 }

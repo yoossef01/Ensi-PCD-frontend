@@ -42,7 +42,7 @@ const routes: Routes = [
   {path:'template12',component:Template1Component},{
    path:'insc',component:InscriptionComponent
   }
-  ,{path:'Panier',component:PanierComponent}
+  ,{path:'panier/:id',component:PanierComponent}
   ,{path:'loginClient', component:LoginComponent},
   {path:'template/2/:id',component:Home2Component},
   {path:'template2Client',component:HomeclientComponent},
@@ -53,7 +53,8 @@ const routes: Routes = [
   {path: 'templateclient/2/:id', component:HomeclientComponent},
   {path:'achat', component:AchatComponent},
 
-{path:'dashboard/:id', component: DashboardComponent},
+{path:'dashboard/:id', component: DashboardComponent},{path:'dashboard', component: DashboardComponent},
+
 //component de temaplte1
 //*****************************
   {path:'templateclient/1/:id',component:Home1Component},
@@ -61,7 +62,7 @@ const routes: Routes = [
   {path:'listeproduitclient/:id',component:ListProductsClientComponent},
   {path:'template/1/:id',component:HomeVendeurComponent},
   //************************** */
-  {path:'achat', component:AchatComponent},
+  {path:'achat/:id', component:AchatComponent},
   {path:'comparateur', component:ComparateurComponent},
   {path:'template1',component:Home1Component},
   {path:'listeproducts',component:ListProductsComponent},

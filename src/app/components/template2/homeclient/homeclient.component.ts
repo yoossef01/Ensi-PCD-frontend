@@ -14,6 +14,8 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VendeurService } from 'src/app/vendeur.service';
 import { Vendeur } from 'src/app/model/vendeur';
+import { ClientService } from 'src/app/client.service';
+import { Client } from 'src/app/model/client';
 
 @Component({
   selector: 'app-homeclient',
@@ -39,6 +41,9 @@ export class HomeclientComponent implements OnInit {
   categories!:Categorie[];
   photo:File;
   vendeur:Vendeur=new Vendeur(0,0,"","","","","","","");
+  idVendeur: number;
+  client!:Client;
+
 
   set texte(ch:string)
   {
@@ -48,22 +53,29 @@ export class HomeclientComponent implements OnInit {
   {
    return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
   }
-   constructor(private ar:ActivatedRoute,private service:ProduitService,private sc:CategorieService,public dialog:MatDialog,private router: Router,private vendeurservice:VendeurService) { }
+   constructor(private ar:ActivatedRoute,private service:ProduitService,private sc:CategorieService,public dialog:MatDialog,private clientservice:ClientService,private router: Router,private vendeurservice:VendeurService) {
+    this.idVendeur = this.vendeurservice.getIdVendeur();
+    }
 
-   getcategoriie(i : number)
+   getcategoriie()
    {
-     this.sc.getAllCategoriesByVendeur(i).subscribe(data=>{this.categories=data; this.categories=this.categories
+     this.sc.getAllCategoriesByVendeur(this.idVendeur).subscribe(data=>{this.categories=data; this.categories=this.categories
      console.log(data)})
    }
-   getproduitByVendeur(i : number)
+   getproduitByVendeur()
    {
-    this.service.getProductsByVendeur(i).subscribe(data=>{this.produitF=data;})
+    this.service.getProductsByVendeur(this.idVendeur).subscribe(data=>{this.produitF=data;})
    }
 
+   getCurrentClient(){
+    this.clientservice.getCurrentClient().subscribe(client =>
+    {if(client) this.client=client;console.log("le client "+this.client.id+" est connecté");
+  })}
+
  getAll()
- {
-  this.getproduitByVendeur(this.vendeurservice.getIdVendeur())
-  this.getcategoriie(this.vendeurservice.getIdVendeur())
+ {this.getCurrentClient()
+  this.getproduitByVendeur()
+  this.getcategoriie()
  }
    ngOnInit(): void {
     
@@ -256,6 +268,8 @@ navigate(): void {
   this.router.navigate(['/deta'])
 }
 
-
+navigation() {
+  this.router.navigate(['panier/'+this.client.id])
+}
 
 }

@@ -48,22 +48,43 @@
             </div>
           </div>
          
-            
-         
-          <div class="row">
-            <div class="col-md-12 form-group mb-3">
-              <label for="Address" class="form-label">Description</label>
-              <textarea id="Address" type="text" name="address"  formControlName="address" class="form-control" placeholder="Description" rows="3" required></textarea>
-            </div>
-          </div>
-
-
           <div class="row mb-3">
             <div>
                 <label for="photo">Photo</label>
                 <input #myInput type="file" id="photo" name="photo" (change)="onPhotoSelected($event)" [(ngModel)]="photo" required>
               </div>
         </div>
+            
+         
+          <div class="row">
+            <div class="col-md-12 form-group mb-3">
+              <label for="color" class="form-label">Couleur</label>
+              <input id="color"   type="text" name="nom" class="form-control" placeholder="Couleur" [(ngModel)]="description.color" required>
+            </div>
+          </div>
+ 
+          <div class="row">
+            <div class="col-md-12 form-group mb-3">
+              <label for="Matière" class="form-label">Matière</label>
+              <input id="Matière"   type="text" name="nom" class="form-control" placeholder="Matière" [(ngModel)]="description.material" required>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-12 form-group mb-3">
+              <label for="Description" class="form-label">Description courte</label>
+              <input id="Description"   type="text" name="nom" class="form-control" placeholder="Description courte" [(ngModel)]="description.shortDescription" required>
+            </div>
+          </div>
+         
+          <div class="row">
+            <div class="col-md-12 form-group mb-3">
+              <label for="Description" class="form-label">Description longue</label>
+              <input id="Description"   type="text" name="nom" class="form-control" placeholder="Description longue" [(ngModel)]="description.longDescription" required>
+            </div>
+          </div>
+
+         
 
          
           <div class="row">

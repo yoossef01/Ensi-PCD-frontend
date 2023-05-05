@@ -3,7 +3,7 @@
     <div class="transaction-wrapper">
       <div class="transaction" *ngFor="let transaction of transactions">
         <div class="image">
-          <img [src]="transaction.imgSrc" alt="" />
+          <img src="http://localhost:8080/apiproduit/getimage/{{transaction.imgSrc}}" alt="" />
         </div>
         <div class="title">{{ transaction.title }}</div>
         <div class="price">{{ transaction.price }}</div>

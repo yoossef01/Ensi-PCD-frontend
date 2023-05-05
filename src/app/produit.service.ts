@@ -63,6 +63,4 @@ getProductsByCat(id:number):Observable<Produit[]>{
 }
 getProductsByVendeur(id:number):Observable<Produit[]>{
   return this.client.get<Produit[]>(this.host+"/productsByVendeur/"+id);
-}
-
-}
+}}

@@ -21,17 +21,7 @@
                 
                 <li  type="button"  class="nav-link text-white" *ngFor="let cat of categories" [value]="cat.id" >
                   <i type="button" class="fa fa-trash" style="color: red;"  ></i>  {{ cat.nom }}</li>
-               <li type="button"  class="nav-link text-white dropdown-toggle"  data-toggle="collapse" (click)="isCollapsed2 = !isCollapsed2"
-                [attr.aria-expanded]="!isCollapsed2" aria-controls="collapseExample2">
-                 <i  class="Ajout fa fa-plus-square "></i>
-                 <span class=" ms-2">Ajouter</span> 
-               </li>
-                 <div id="collapseExample2" [ngbCollapse]="isCollapsed2">
-                                    <label for="nom">Nom</label> 
-                  <input type="text" id="nom" name="nom" [(ngModel)]="this.nomNewCat"
-                   required>
-                   <button (click)="isCollapsed2 = !isCollapsed2">Ajouter</button>
-</div>
+               
              </ul>
          </div> 
                </li>

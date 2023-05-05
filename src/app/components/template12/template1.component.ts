@@ -41,7 +41,7 @@ public isCollapsed2 = false;
    categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
    produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
    photo:File;
-   commande: Commande = new Commande("1", "commande 1", 100, new Date(), 2, this.produit, { id: 0 });
+   commande: Commande = new Commande(0, "commande 1", 100, new Date(), 2, this.produit, { id: 0 });
    v:Vendeur;
  
   set texte(ch:string)
@@ -268,7 +268,7 @@ addCommande(id:string) {
  this.produit.quantite=this.produit.quantite-this.commande.quantite;
  this.commande.date=new Date();
  this.commande.product.id=id;
- this.commande.id=uuidv4();
+
  this.service.saveP(this.produit).subscribe(data=>{this.produit=data})
    this.commandeService.addCommande(this.commande)
      .subscribe(data => console.log(data));

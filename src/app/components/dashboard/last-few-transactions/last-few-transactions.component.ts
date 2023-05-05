@@ -1,4 +1,5 @@
 import { Component , OnInit} from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { AchatService } from 'src/app/achat.service';
 import { ClientService } from 'src/app/client.service';
 import { Achat } from 'src/app/model/achat';
@@ -26,6 +27,7 @@ export class LastFewTransactionsComponent implements OnInit {
   constructor(private achatService: AchatService, private vendeurservice : VendeurService, private service: ProduitService, private clientService: ClientService, private produitService : ProduitService) { }
 
   ngOnInit(): void {
+    this.getCurrentVendeur();
   }
 
 
@@ -35,34 +37,41 @@ export class LastFewTransactionsComponent implements OnInit {
     this.service.getProductsByVendeur(this.vendeur.id).subscribe(data=>{this.produitF=data; this.getNombreAchat(this.vendeur.id)}    )});}
 
 
-
-
-    getNombreAchat(i : number): void {
+    getNombreAchat(i: number): void {
       let nombre = 0;
       let totalerevenu: number = 0;
-      this.achatService.getAchatByVendeur(i).subscribe(achats => { this.achat = achats;
-        
+      this.achatService.getAchatByVendeur(i).subscribe(achats => {
+        this.achat = achats;
+        const observables = [];
+    
         for (let a of achats) {
-          this.clientService.getClientById(a.client.id).subscribe(data => {this.client = data});
-          this.produitService.getProduct(a.product.id).subscribe(data => {this.produit = data})
-          this.data.push({
-            id: a.id,
-            title: a.nom,
-            price: a.montant,
-            shop: this.client.nom,
-            location: this.client.tel,
-            status: "vendu",
-            imgSrc: this.produit.photo
-
-          })
-  
+          observables.push(
+            this.clientService.getClientById(a.client.id),
+            this.produitService.getProduct(a.product.id)
+          );
         }
-      })
+    
+        forkJoin(observables).subscribe(results => {
+          for (let i = 0; i < results.length; i += 2) {
+            const client = results[i];
+            const produit = results[i + 1];
+            const achat = achats[i / 2];
+            this.data.push({
+              id: achat.id,
+              title: achat.nom,
+              price: achat.montant,
+              shop: this.client.nom,
+              location: this.client.tel,
+              status: "vendu",
+              imgSrc: produit.id
+            });
+          }
+
+        });
+      });
     }
 
 
-  transactions = [
-    this.data
-  ];
+  transactions = this.data;
 
 }

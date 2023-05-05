@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import { TemplateContentService } from 'src/app/template-content.service';
 import { DescriptionService } from 'src/app/description.service';
 import { Description } from 'src/app/model/description';
+import { VendeurService } from 'src/app/vendeur.service';
 
 @Component({
   selector: 'app-details',
@@ -25,13 +26,14 @@ quantity:number;
   
   constructor(private ar:ActivatedRoute, private service:ProduitService,
     private commandeService:CommandeService,private clientservice :ClientService,
-    private descriptionService:DescriptionService
+    private descriptionService:DescriptionService, private router:Router,
+    private vendeurService: VendeurService
     ) { }
   categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
   produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
   description:Description=new Description("","","","","",{id:""});
   commandes:Commande[]=[];
-  commande: Commande = new Commande("", "", 0, new Date(), 0, this.produit, { id: 0 });
+  commande: Commande = new Commande(10, "", 0, new Date(), 0, this.produit, { id: 0 });
   c :Client;
 
   ngOnInit(): void {
@@ -59,9 +61,8 @@ quantity:number;
     this.produit.quantite=this.produit.quantite-this.commande.quantite;
     this.commande.date=new Date();
     this.commande.product.id=this.produit.id;
-    this.commande.id=uuidv4();
     this.commande.client.id=this.c.id;
-    this.service.saveP(this.produit).subscribe(data=>{this.produit=data
+    this.service.saveP(this.produit).subscribe(data=>{this.produit=data;console.log(this.commande);
       this.commandeService.addCommande(this.commande)
         .subscribe(data => console.log(data));})}
         
@@ -72,7 +73,9 @@ quantity:number;
             text: 'La quantité demandée est supérieure au stock disponible!',
             footer: 'Quantité currente est '+this.produit.quantite
           })
-        }}
+        }
+        this.router.navigate(['templateclient/'+this.vendeurService.getIdTemplate()+'/'+this.vendeurService.getIdVendeur()])
+      }
     
     decrementQuantity() {
       if (this.commande.quantite > 0) {

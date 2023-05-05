@@ -54,14 +54,14 @@ export class ListProductsComponent implements OnInit {
     this.vendeurservice.getCurrentVendeur().subscribe(vendeur =>
     {if(vendeur) this.vendeur=vendeur;console.log("le vendeur "+this.vendeur.id+" est connecté")
     //affichage de liste de produit de currentVendeur
-    this.service.getProductsByVendeur(this.vendeur.id).subscribe(data=>{this.produitF=data; this.getcategoriie(this.vendeur.id)} )});}
+    this.getAllProducts(this.vendeur.id); this.getAllcategorie(this.vendeur.id) });}
   
   ngOnInit(): void {
     this.getCurrentVendeur();
   }
 
-  
-  getcategoriie(i : number)
+  getAllProducts(i:number){this.service.getProductsByVendeur(i).subscribe(data=>{this.produitF=data;} )}
+  getAllcategorie(i : number)
   {
     this.sc.getAllCategoriesByVendeur(i).subscribe(data=>{this.categories=data; this.categories=this.categories
     })
@@ -181,7 +181,8 @@ createNewCategory() {
  
   this.sc.addCategorie(this.newCategory).subscribe(() => {
        this.catadded=true;
-          this.nomNewCat = "";},);
+          this.nomNewCat = "";
+          this.getAllcategorie(this.vendeur.id)},);
 
 }
 modifierCategorie(id:number ,nom:string): void {
@@ -201,13 +202,21 @@ openDialog(){
   let dialogRef = this.dialog.open(DialogBoxComponent, {
     width: '700px'
   });
-  
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    this.getAllProducts(this.vendeur.id); // récupérer la liste des produits après avoir fermé la dialog box
+  });
   }
+  
   openDialogUpdate(id:string){
   let dialogRef = this.dialog.open(UpdateProductDialogComponent, {
     width: '700px',
     data: {id}
     
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    this.getAllProducts(this.vendeur.id); // récupérer la liste des produits après avoir fermé la dialog box
   });
   }
 

@@ -14,10 +14,34 @@ export class VendeurService {
 
  private idvendeur : number;
 
+ private idtemplate : number;
+
+ setIdTemplate(idtemplate : number) {
+  this.idtemplate= idtemplate;
+  localStorage.setItem('idtemplate', idtemplate.toString());
+ }
+ getIdTemplate() {
+  if (!this.idtemplate) {
+    const idtemplateStr = localStorage.getItem('idtemplate');
+    if (idtemplateStr) {
+      this.idtemplate = Number(idtemplateStr);
+    }
+  }
+  return this.idtemplate;
+ }
+
+
  setIdVendeur(idvendeur : number) {
   this.idvendeur = idvendeur;
+  localStorage.setItem('idvendeur', idvendeur.toString());
  }
 getIdVendeur() {
+  if (!this.idvendeur) {
+    const idvendeurStr = localStorage.getItem('idvendeur');
+    if (idvendeurStr) {
+      this.idvendeur = Number(idvendeurStr);
+    }
+  }
   return this.idvendeur;
 }
 

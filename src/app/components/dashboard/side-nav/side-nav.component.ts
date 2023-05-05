@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AchatService } from 'src/app/achat.service';
 
 
 @Component({
@@ -8,11 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavComponent implements OnInit {
 
+  main= 'main';
+  editProfil= 'edit';
+  achat= 'achat';
+  
 
+  
 
-  constructor() { }
+  constructor(private achatservice:AchatService) { }
 
   ngOnInit(): void {
   }
-
+  PageMain() {
+    this.achatservice.Page = this.main;console.log("this.achatservice.Page")
+  }
+  PageEdit() {
+    this.achatservice.Page = this.editProfil;
+  }
+  PageAchat() {
+    this.achatservice.Page = this.achat;
+  }
 }

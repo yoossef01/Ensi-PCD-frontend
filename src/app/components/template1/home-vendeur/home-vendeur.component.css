@@ -75,11 +75,9 @@ header {
     justify-content: center;
     align-items: center;
   }
-  .hero-image .hero-text .flex-container:hover .fa.fa-edit {
-    display: inline;
-  }
+  
   .hero-image .hero-text .flex-container .fa.fa-edit {
-    display: none;
+    display: inline;
   }
   .hero-text {
     text-align: center;

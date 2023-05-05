@@ -34,11 +34,9 @@ export class ListProductsComponent implements OnInit {
   categorie: Categorie;
   photo:File;
   vendeur:Vendeur=new Vendeur(0,0,"","","","","","","");
-  selectedValue = 'Vendeur';
+  selectedCategoryId: number;
   isEditMode = false;
-  Client = 'Client';
  
-  Vendeur='Vendeur';
   
   set texte(ch:string)
   {
@@ -60,7 +58,7 @@ export class ListProductsComponent implements OnInit {
     this.getCurrentVendeur();
   }
 
-  getAllProducts(i:number){this.service.getProductsByVendeur(i).subscribe(data=>{this.produitF=data;} )}
+  getAllProducts(i:number){this.service.getProductsByVendeur(i).subscribe(data=>{this.produitF=data;this.produits=this.produitF;} )}
   getAllcategorie(i : number)
   {
     this.sc.getAllCategoriesByVendeur(i).subscribe(data=>{this.categories=data; this.categories=this.categories
@@ -162,11 +160,19 @@ getCategoryById(id:number){
   this.sc.getCategory(id).subscribe(data=>{this.categorieProduit=data; 
    });
 }
-selectCategorie(event:any){
-  this.idCategorie=parseInt(event.target.value);
-  this.sc.getCategory(this.idCategorie).subscribe(data=>{this.categorieProduit=data; 
-  this.produitF=this.produits.filter(x=>x.categorie.nom.indexOf(this.categorieProduit.nom)!=-1)});
-   }
+selectCategorie(event: any) {
+  if (event.target.checked) {
+      this.selectedCategoryId = parseInt(event.target.value);
+      this.sc.getCategory(this.selectedCategoryId).subscribe(data => {
+          this.categorie = data;
+          this.categorieProduit = this.categorie;
+          this.produitF = this.produits.filter(x => x.categorie.nom.indexOf(this.categorieProduit.nom) != -1);
+      });
+  } else {
+      this.selectedCategoryId = 0;
+      this.produitF = this.produits;
+  }
+}
 
 createNewCategory() {
   if (this.nomNewCat=='') {
@@ -185,6 +191,7 @@ createNewCategory() {
           this.getAllcategorie(this.vendeur.id)},);
 
 }
+
 modifierCategorie(id:number ,nom:string): void {
   const cat :Categorie={id:id ,nom:nom,vendeur: {id:this.vendeur.id}}
   this.sc.modifierCategorie(id, cat)

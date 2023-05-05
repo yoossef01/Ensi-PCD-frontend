@@ -9,7 +9,7 @@ import { Categorie } from './model/categorie';
 })
 export class AchatService {
 
-
+Page:string;
 
 
 

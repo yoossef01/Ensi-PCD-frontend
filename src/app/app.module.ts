@@ -56,6 +56,9 @@ import { ListProductsClient3Component } from './components/template3/list-produc
 import { AdmindashComponent } from './components/admindash/admindash.component';
 import { Home3Component } from './components/template3/home3/home3.component';
 import { ListProductsVendeur3Component } from './components/template3/list-products-vendeur3/list-products-vendeur3.component';
+import { DialogBox3Component } from './components/dialog-box3/dialog-box3.component';
+import { UpdateProductDialog3Component } from './components/update-product-dialog3/update-product-dialog3.component';
+import { HomeVendeur3Component } from './components/template3/home-vendeur3/home-vendeur3.component';
 
 const materiel=[
   MatAutocompleteModule, MatIconModule, MatButtonModule,
@@ -107,7 +110,11 @@ const materiel=[
       HomeVendeurComponent,
               AdmindashComponent,
               Home3Component,
-              ListProductsVendeur3Component
+              ListProductsVendeur3Component,
+              DialogBox3Component,
+              UpdateProductDialog3Component,
+              HomeVendeur3Component,
+             
 
   ],
    schemas:[CUSTOM_ELEMENTS_SCHEMA]
@@ -120,7 +127,8 @@ const materiel=[
     HttpClientModule,
     NgbModule,materiel,CommonModule,ReactiveFormsModule,
     NgChartsModule,
-    ChartModule,    
+    ChartModule, 
+
 
     
   

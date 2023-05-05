@@ -25,7 +25,6 @@ export class ListProductsClient3Component implements OnInit {
   categorie:Categorie;
   categorieProduit:Categorie;
   texte:string;
-  description:Description=new Description("","","","","",{id:""});
   descriptions: {[key: string]: Description} = {};
 constructor(private clientservice: ClientService,private sc:CategorieService,
   private service:ProduitService, private vendeurservice:VendeurService,

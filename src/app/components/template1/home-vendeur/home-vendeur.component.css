@@ -68,13 +68,16 @@ header {
    justify-content:baseline;
     align-items: center;
   }
-  .hero-image {
-    background-size: cover;
+   .hero-image {
     height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+    background-size: 1100px auto;
+    background-repeat: no-repeat;
+    background-position: center;
+  } 
+  
   
   .hero-image .hero-text .flex-container .fa.fa-edit {
     display: inline;

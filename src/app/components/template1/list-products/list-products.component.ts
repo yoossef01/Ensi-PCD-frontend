@@ -20,9 +20,7 @@ import { Router } from '@angular/router';
 })
 export class ListProductsComponent implements OnInit {
   produits: Produit[]=[] ;
-  public isCollapsed = false;
-  public isCollapsed2 = false;
-  private catadded =false;
+  
   produitF!:Produit[];
   nomNewCat:string;
   newCategory: Categorie=new Categorie(0,"",{id:0}); 
@@ -186,7 +184,7 @@ createNewCategory() {
   console.log(this.newCategory);
  
   this.sc.addCategorie(this.newCategory).subscribe(() => {
-       this.catadded=true;
+       
           this.nomNewCat = "";
           this.getAllcategorie(this.vendeur.id)},);
 

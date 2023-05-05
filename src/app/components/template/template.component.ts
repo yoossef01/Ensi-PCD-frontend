@@ -11,7 +11,7 @@ export class TemplateComponent implements OnInit {
   constructor(public numtemplate:TemplateserviceService) { }
 
   ngOnInit(): void {
-    this.NumTemplate=this.numtemplate.NumTemplate;
+    this.NumTemplate=3;
 
   }
   getNumtemplate(){

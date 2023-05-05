@@ -31,6 +31,8 @@ import { HomeVendeurComponent } from './components/template1/home-vendeur/home-v
 import { ListProductsClient3Component } from './components/template3/list-products-client3/list-products-client3.component';
 import { AdmindashComponent } from './components/admindash/admindash.component';
 import { Home3Component } from './components/template3/home3/home3.component';
+import { ListProductsVendeur3Component } from './components/template3/list-products-vendeur3/list-products-vendeur3.component';
+import { HomeVendeur3Component } from './components/template3/home-vendeur3/home-vendeur3.component';
 
 
 
@@ -75,7 +77,8 @@ const routes: Routes = [
 
   {path:'admin',component:AdmindashComponent},
   {path:'home3',component:Home3Component},
-  {path:'list3',component:ListProductsClient3Component}
+  {path:'list3',component:ListProductsVendeur3Component},
+  {path:'homeVendeur3',component:HomeVendeur3Component}
 ];
 
 @NgModule({

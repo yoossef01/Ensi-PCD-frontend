@@ -781,7 +781,7 @@ body{
             transform: translateY(-50%);
 }
 
-/* collection */
+/* lection */
 .active-filter-btn{
     background-color: var(--pink)!important;
     color: #fff!important;
@@ -877,7 +877,7 @@ footer a{
 footer a:hover{
     color: var(--pink)!important;
 }
-
+/************************************template1*/
 /* media queries */
 @media(min-width: 992px){
     .nav-item{

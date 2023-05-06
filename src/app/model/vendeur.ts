@@ -3,6 +3,7 @@ export class Vendeur {
    idTemplate :number;
    nom :string ;
   prenom   :string ;
+  nomboutique : string;
   adresse  :string ;
    tel  :string ;
    email  :string ;

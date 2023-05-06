@@ -19,10 +19,12 @@ export class SignupVendeurComponent implements OnInit{
   formVendeur = new FormGroup({
     nom: new FormControl('', [Validators.required]),
     prenom: new FormControl('', [Validators.required]),
+    nomboutique : new FormControl('', [Validators.required]),
     adresse : new FormControl('', [Validators.required]),
     tel: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')]),
-    password: new FormControl('', [Validators.required])
+    password: new FormControl('', [Validators.required]),
+    fax: new FormControl('', [Validators.required]),
   })
 
 
@@ -35,9 +37,7 @@ export class SignupVendeurComponent implements OnInit{
       console.log('res',res)
       localStorage.setItem('token',res.token)
       this.service.isLoggedIn.next(true);
-      
-      
-      
+ 
         this.router.navigate(['/choose']);
       })
       

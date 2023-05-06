@@ -39,7 +39,7 @@
               </button>
                 <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1" >
                   <li *ngFor="let boutique of vendeurs">
-                    <a ngbDropdownItem >{{boutique.nom}}</a>
+                    <a ngbDropdownItem (click)="onBoutiqueSelected(boutique)">{{boutique.nomboutique}}</a>
                   </li>
                   
                 </ul>

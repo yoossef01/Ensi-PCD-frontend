@@ -91,6 +91,9 @@ getIdVendeur() {
   DeleteVendeur (id:number):Observable<void> {
     return this.http.delete<void>("http://localhost:8080/api/del/" + id)
   }
+  getVendeurByNomboutique (nomboutique:string):Observable<Vendeur>{
+    return this.http.get<Vendeur>("http://localhost:8080/api/vendeur/nomboutique/"+nomboutique);
+  }
 
 
   logout():Observable<any> {

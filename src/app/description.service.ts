@@ -14,7 +14,9 @@ export class DescriptionService {
   {
     return this.client.get<Description >(this.host+"/"+ id)
   }
-
+public getAllDescriptions():Observable<Description[]>{
+  return this.client.get<Description[]>(this.host+"/all")
+}
   public getDescriptionByProduct(id: string):Observable<Description>{
     return this.client.get<Description >(this.host+"/product/"+ id)
   }

@@ -38,6 +38,8 @@
     "jquery": "^3.6.3",
     "jwt-decode": "^3.1.2",
     "ng2-charts": "^4.1.1",
+    "ng2-img-max": "^2.2.8",
+    "pica": "^9.0.1",
     "primeicons": "^6.0.1",
     "primeng": "^14.2.5-lts",
     "rxjs": "~7.5.0",

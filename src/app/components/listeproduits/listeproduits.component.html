@@ -1,37 +1,5 @@
-<div class="px-0 bg-light">
-  <div class="d-md-flex" > 
-  <div class="d-flex flex-column vh-00 flex-shrink-0 p-3 text-white bg-dark  " style="width: 250px;"> 
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" > 
-    <svg class="bi me-2" width="40" height="32"> </svg> <span class="fs-4">Boutique</span>
-   </a> 
-   <hr>
-     <ul class="nav nav-pills flex-column mb-auto" >
-       <li class="nav-item"> <a href="#" class="nav-link active" aria-current="page">
-          <i class="fa fa-home"></i>
-          <span class="ms-2">Home</span>
-         </a> </li>
-    <li> <a href="#" class="nav-link text-white">
-               <i class="fa fa-dashboard"></i>
-               <span class="ms-2">Dashboard</span> </a> </li> 
-               <li> <a type="button" class="nav-link text-white dropdown-toggle" data-toggle="collapse" (click)="collapse.toggle()" 
-                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample"> <i class="fa fa-first-order"></i>
-               <span class="ms-2">Categories</span> </a>
-               <div class="icone" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-               <ul class="item-show-1"  >
-                
-                <li  type="button"  class="nav-link text-white" *ngFor="let cat of categories" [value]="cat.id" >
-                  <i type="button" class="fa fa-trash" style="color: red;"  ></i>  {{ cat.nom }}</li>
-               
-             </ul>
-         </div> 
-               </li>
-                
-                <li> <a href="#" class="nav-link text-white">
-                    <i class="fa fa-cog"></i><span class="ms-2">Mes commandes</span> </a> </li> <li>
-                         <a href="#" class="nav-link text-white"> <i class="fa fa-bookmark"></i>
-                         <span class="ms-2">Bookmarks</span> </a> </li> </ul> <hr> 
-                                  
-</div> <div class="container">
+
+<div class="container">
     <div class="row  ">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -40,7 +8,7 @@
         <input type="text"  [(ngModel)]="texte" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
       </div>
     </div>
-    
+
     <div class="row ">
         <div class="col-sm-4 my-2"  *ngFor="let p of produitF">
             <div class="card" style="width: 18rem;">
@@ -67,9 +35,7 @@
                   <a class ="btn btn-primary m-2" (click)="updateProductsCompared(p.id)" >
                     <span class="fa-solid fa-columns"></span>
                   </a>
-
                 </p>
-                
                 </div>
                 
                 

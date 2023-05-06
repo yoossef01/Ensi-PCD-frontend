@@ -51,8 +51,14 @@ import { Home1Component } from './components/template1/home1/home1.component';
 import { ListProductsComponent } from './components/template1/list-products/list-products.component';
 import { ListProductsClientComponent } from './components/template1/list-products-client/list-products-client.component';
 import { HomeVendeurComponent } from './components/template1/home-vendeur/home-vendeur.component';
+import { EditProfilComponent } from './components/edit-profil/edit-profil.component';
+import { ListProductsClient3Component } from './components/template3/list-products-client3/list-products-client3.component';
 import { AdmindashComponent } from './components/admindash/admindash.component';
 import { Home3Component } from './components/template3/home3/home3.component';
+import { ListProductsVendeur3Component } from './components/template3/list-products-vendeur3/list-products-vendeur3.component';
+import { DialogBox3Component } from './components/dialog-box3/dialog-box3.component';
+import { UpdateProductDialog3Component } from './components/update-product-dialog3/update-product-dialog3.component';
+import { HomeVendeur3Component } from './components/template3/home-vendeur3/home-vendeur3.component';
 
 const materiel=[
   MatAutocompleteModule, MatIconModule, MatButtonModule,
@@ -95,10 +101,20 @@ const materiel=[
       Home1Component,
       ListProductsComponent,
       ListProductsClientComponent,
+      EditProfilComponent,
+      HomeVendeurComponent,
+      ListProductsClient3Component,
+              
+              
       
       HomeVendeurComponent,
               AdmindashComponent,
-              Home3Component
+              Home3Component,
+              ListProductsVendeur3Component,
+              DialogBox3Component,
+              UpdateProductDialog3Component,
+              HomeVendeur3Component,
+             
 
   ],
    schemas:[CUSTOM_ELEMENTS_SCHEMA]
@@ -111,7 +127,8 @@ const materiel=[
     HttpClientModule,
     NgbModule,materiel,CommonModule,ReactiveFormsModule,
     NgChartsModule,
-    ChartModule,    
+    ChartModule, 
+
 
     
   

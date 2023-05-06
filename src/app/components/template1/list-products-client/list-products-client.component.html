@@ -29,59 +29,118 @@
         </div>
     </div>
 </nav>
-<div class="px-0 bg-light" >
-    <div class="d-md-flex" > 
-    <div class="d-flex flex-column vh-00 flex-shrink-0 p-3 text-white bg-dark  " style="width: 250px; height: 100%;" > 
-      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" > 
-      <svg class="bi me-2" width="40" height="32"> </svg> <span class="fs-4">Boutique</span>
-     </a> 
-     <hr>
-     <ul class="nav nav-pills flex-column mb-auto" id="nav ul">
-     <li id="nav li"> <a type="button" class="nav-link text-white dropdown-toggle" data-toggle="collapse" (click)="collapse.toggle()" 
-        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample" id="nav a"> <i class="fa fa-first-order"></i>
-       <span class="ms-2">Categories</span> </a>
-       <div class="icone" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-       <ul class="item-show-1"  >
-        
-        <li   type="button"  class="nav-link text-white" *ngFor="let cat of categories" [value]="cat.id" id="nav li">
-            {{ cat.nom }}</li>
-        </ul>
-    </div> 
-    </li></ul>  </div>
-    <div class="container">
-        <div class="row  ">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-default">Key Word</span>
-            </div>
-            <input type="text"  [(ngModel)]="texte" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-          </div>
-        </div>
 
-        <div class="row ">
-            <div class="col-sm-4 my-2"  *ngFor="let p of produitF">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="http://localhost:8080/apiproduit/getimage/{{p.id}}" width="50" height= "170" alt="Card image cap">
-                    <div class="card-body">
-                      <h5 class="card-title">{{p.nom}}</h5>
-                      <h6 style="color:red">
-        
-                        {{p.prix}} DT
-                      </h6>
-                      <h6 style="color: green" *ngIf="p.quantite>0; else repture">
-                        En Stock
-                      </h6>
-                      <p> <a class="btn btn-primary" id="btn" routerLink="/products/{{p.id}}">Acheter Maintenant</a>
-                    </p>
-                    
-                    </div>
-                    
-                    
-                  </div>
+       
+       
+          
+          <!-- ========================= SECTION CONTENT ========================= -->
+          <section class="section-content padding-y">
+          <div class="container">
+          
+          <div class="row">
+              <aside class="col-md-3">
                   
-        <ng-template #repture><h6 style="color: brown"> Rupture de Stock</h6>
-        </ng-template>
-            </div>
+          <div class="card">
+              <article class="filter-group">
+                  <header class="card-header">
+                      <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+                          <i class="icon-control fa fa-chevron-down"></i>
+                          <h6 class="title">Categorie</h6>
+                      </a>
+                  </header>
+                  <div class="filter-content collapse show" id="collapse_1" >
+                      <div class="card-body">
+                          <form class="pb-3">
+                            
+                          </form>
+                          
+                          <ul class="item-show-1"  >
+        
+                            <div *ngFor="let cat of categories">
+                              <label>
+                                <input type="checkbox" [value]="cat.id" [ngModel]="selectedCategoryId === cat.id" (change)="selectCategorie($event)">
+                                {{cat.nom}}
+                              </label>
+                            </div>
+                            </ul>
+          
+                      </div> <!-- card-body.// -->
+                  </div>
+              </article> <!-- filter-group  .// -->
+              <article class="filter-group">
+                  <header class="card-header">
+                      <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+                          <i class="icon-control fa fa-chevron-down"></i>
+                          <h6 class="title">Échelle des prix </h6>
+                      </a>
+                  </header>
+                  <div class="filter-content collapse show" id="collapse_3" style="">
+                      <div class="card-body">
+                          <input type="range" class="custom-range" min="0" max="100" name="">
+                          <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label>Min</label>
+                            <input class="form-control" placeholder="$0" type="number">
+                          </div>
+                          <div class="form-group text-right col-md-6">
+                            <label>Max</label>
+                            <input class="form-control" placeholder="$1,0000" type="number">
+                          </div>
+                          </div> <!-- form-row.// -->
+                          <button class="btn btn-block btn-primary">Apply</button>
+                      </div><!-- card-body.// -->
+                  </div>
+              </article> <!-- filter-group .// -->
+              
+               
+          </div> <!-- card.// -->
+          
+              </aside> <!-- col.// -->
+              
+              <main class="col-md-9">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Recherche</span>
+                  </div>
+                  <input type="text"  [(ngModel)]="texte" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+         
+          
+                <div class="row ">
+                  <div class="col-sm-4 my-2"  *ngFor="let p of produitF">
+                      <div class="card" style="width: 18rem;">
+                          <img class="card-img-top" src="http://localhost:8080/apiproduit/getimage/{{p.id}}" width="50" height= "170" alt="Card image cap">
+                          <div class="card-body">
+                            <h5 class="card-title">{{p.nom}}</h5>
+                            <h6 style="color:red">
+              
+                              {{p.prix}} DT
+                            </h6>
+                            <h6 style="color: green" *ngIf="p.quantite>0; else repture">
+                              En Stock
+                            </h6>
+                            <p> <a class="btn btn-primary" id="btn" routerLink="/products/{{p.id}}">Acheter Maintenant</a>
+                          </p>
+                          
+                          </div>
+                          
+                          
+                        </div>
+                        
+              <ng-template #repture><h6 style="color: brown"> Rupture de Stock</h6>
+              </ng-template>
+                  </div>
+                     
+              
+        
+          </div> <!-- row end.// -->
+              </main> <!-- col.// -->
+          </div>
+          
+          </div> <!-- container .//  -->
+          </section>
+         
+ 
 
    
 

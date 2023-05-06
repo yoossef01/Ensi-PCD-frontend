@@ -1,107 +1,99 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container px-4 px-lg-5">
-      <a class="navbar-brand" >My shop</a>
+      <a class="navbar-brand" href="#">My shop</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-target="#navbarSupportedContent" 
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-              <li class="nav-item"><a class="nav-link active" aria-current="page" (click)="navigation()"  type="button" >Home</a></li>
+              <li class="nav-item"><a class="nav-link active" aria-current="page" (click)="navigation()"  type="button">Home</a></li>
               <li class="nav-item"><a class="nav-link" href="#">About</a></li>
               <li ngbDropdown class="dropdown">
                   <a  ngbDropdownToggle class="nav-link dropdown-toggle"type="button" id="dropdownMenuButton1" aria-expanded="false">Shop</a>
                   <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
-                      <li><a routerLink="/listproducts1" ngbDropdownItem type="button" >All Products</a></li>
+                      <li><a ngbDropdownItem type="button" >All Products</a></li>
                       <li><hr class="dropdown-divider" /></li>
                       <li><a ngbDropdownItem href="#">Popular Items </a></li>
                       <li><a ngbDropdownItem href="#">New Arrivals </a></li>
                     </ul>
               </li>
           </ul>
-          
- 
+
           <form class="d-flex">
             <a class="btn btn-primary rounded-circle">
               <i class="bi bi-person-fill me-1"></i>
               Profile
               <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
             </a>
-          </form></div></div>
-                    
-                </nav>
-
-<div class="px-0 bg-light">
-    <div class="d-md-flex"  > 
-    <div class="d-flex flex-column h-100 flex-shrink-0 p-3 text-white bg-dark  " style="width: 300px;"> 
-      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" > 
-      <svg class="bi me-2" width="40" height="32"> </svg> <span class="fs-4">Boutique</span>
-     </a> 
-     <hr>
-       <ul class="nav nav-pills flex-column mb-auto"   id="navul">
-         <li class="nav-item"  id="navli"> <a href="#" class="nav-link active" aria-current="page"  id="nava">
-            <i class="fa fa-home"></i>
-            <span class="ms-2">Home</span>
-           </a> </li>
-      <li> <a href="#" class="nav-link text-white"  id="nava">
-                 <i class="fa fa-dashboard"></i>
-                 <span class="ms-2">Dashboard</span> </a> </li> 
-                 <li> <a type="button" class="nav-link text-white dropdown-toggle" data-toggle="collapse" (click)="collapse.toggle()" 
-                  [attr.aria-expanded]="!isCollapsed"  id="nava" aria-controls="collapseExample"> <i class="fa fa-first-order"></i>
-                 <span class="ms-2">Categories</span> </a>
-                 <div class="icone" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-                 <ul class="item-show-1"  >
-                  
-                  <li  (click)="selectCategorie($event)" type="button"  class="nav-link text-white"  id="navli" *ngFor="let cat of categories" [value]="cat.id" >
-                    <i class="fa fa-trash" style="color: red;" (click)="deletecat(categorie)"></i>
-<span>&nbsp;&nbsp;</span>
-<ng-container classe="ng" *ngIf="!isEditMode; else editMode">
-<i class="fa fa-edit" style="color: rgb(42, 42, 255);" (click)="enableEditMode(cat.id)"></i> {{cat.nom }}
-</ng-container>
-<ng-template #editMode>
-<div class="edit-mode-container">
-  <input class="input-narrow" type="text" [(ngModel)]="cat.nom">
-  <div class="edit-mode-icons">
-    <i class="fa fa-check" style="color: green;" (click)="modifierCategorie(cat.id,cat.nom); cancelEditMode()"></i>
-    <i class="fa fa-times" style="color: red;" (click)="cancelEditMode()"></i>
-  </div>
-</div>
-</ng-template>
-</li>
-
-
-                 <li type="button"  class="nav-link text-white dropdown-toggle"  data-toggle="collapse" (click)="isCollapsed2 = !isCollapsed2"
-                  [attr.aria-expanded]="!isCollapsed2" aria-controls="collapseExample2"id="navli" >
-                   <i  class="Ajout fa fa-plus-square "></i>
-                   <span class=" ms-2">Ajouter</span> 
-                 </li>
-                   <div id="collapseExample2" [ngbCollapse]="isCollapsed2">
-                                      <label for="nom">Nom</label> 
-                    <input type="text" id="nom" name="nom" [(ngModel)]="this.nomNewCat"
-                     required>
-                     <button (click)="createNewCategory()" (click)="isCollapsed2 = !isCollapsed2">Ajouter</button>
-  </div>
-               </ul>
-           </div> 
-                 </li>
-                  
-                  <li> <a href="#" class="nav-link text-white"  id="nava">
-                      <i class="fa fa-cog"></i><span class="ms-2">Mes commandes</span> </a> </li> <li>
-                           <a href="#" class="nav-link text-white"  id="nav a"> <i class="fa fa-bookmark"></i>
-                           <span class="ms-2">Bookmarks</span> </a> </li> </ul> <hr> 
-                                    
-  </div> 
- 
-  
-  
-  <div class="container">
-      <div class="row  ">
-      <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Key Word</span>
-          </div>
-          <input type="text"  [(ngModel)]="texte" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-        </div>
+          </form>
       </div>
+  </div>
+</nav>
+<section class="section-content padding-y">
+  <div class="container">
+  
+  <div class="row">
+      <aside class="col-md-3">
+          
+  <div class="card">
+      <article class="filter-group">
+          <header class="card-header">
+              <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+                  <i class="icon-control fa fa-chevron-down"></i>
+                  <h6 class="title">Categorie</h6>
+              </a>
+          </header>
+          <div class="filter-content collapse show" id="collapse_1" >
+              <div class="card-body">
+                  <form class="pb-3">
+                    
+                  </form>
+                  
+                  <ul class="item-show-1"  >
+                  
+                    <li *ngFor="let cat of categories">
+                      <label>
+                        <input type="checkbox" [value]="cat.id" [ngModel]="selectedCategoryId === cat.id" (change)="selectCategorie($event)">
+                        {{cat.nom}}
+                      </label>
+                      <ng-container *ngIf="!isEditMode; else editMode">
+                        <i  type="button" class="fa fa-edit" style="color: rgb(42, 42, 255); float: right;" (click)="enableEditMode(cat.id)"></i>
+                        <i  type="button" class="fa fa-trash" style="color: red; float: right;" (click)="deletecat(categorie)"></i>
+                      </ng-container>
+                      <ng-template #editMode>
+                        <div class="edit-mode-container">
+                          <input class="input-narrow" type="text" [(ngModel)]="cat.nom">
+                          <div class="edit-mode-icons">
+                            <i type="button" class="fa fa-check" style="color: green;" (click)="modifierCategorie(cat.id,cat.nom); cancelEditMode()"></i>
+                            <i  type="button"class="fa fa-times" style="color: red;" (click)="cancelEditMode()"></i>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </li>
+  <div>
+    <label for="nom">Nom</label> 
+<input type="text" id="nom" name="nom" [(ngModel)]="this.nomNewCat"required>
+<button class="btn btn-primary" (click)="createNewCategory()" >Ajouter une categorie</button></div>
+</ul>
+  
+              </div> <!-- card-body.// -->
+          </div>
+      </article>   </div> <!-- card.// -->
+          
+    </aside> <!-- col.// -->
+                
+
+
+  
+<main class="col-md-9">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Recherche</span>
+    </div>
+    <input type="text"  [(ngModel)]="texte" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+  </div>
+
+      
       
       <div class="row ">
           <div class="col-sm-4 my-2"  *ngFor="let p of this.produitF">
@@ -151,7 +143,7 @@
                 
               </div>
 </div></div>
-</div></div>
+
 
 <!-- <div [ngSwitch]="this.selectedValue">
   <div *ngSwitchCase="Client">

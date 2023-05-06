@@ -1,24 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 import { CategorieService } from 'src/app/categorie.service';
+import { ClientService } from 'src/app/client.service';
+import { DescriptionService } from 'src/app/description.service';
 import { Categorie } from 'src/app/model/categorie';
+import { Client } from 'src/app/model/client';
+import { Description } from 'src/app/model/description';
 import { Produit } from 'src/app/model/produit';
 import { Vendeur } from 'src/app/model/vendeur';
 import { ProduitService } from 'src/app/produit.service';
 import { VendeurService } from 'src/app/vendeur.service';
+import { UpdateProductDialog3Component } from '../../update-product-dialog3/update-product-dialog3.component';
 import Swal from 'sweetalert2';
-import { DialogBoxComponent } from '../../dialog-box/dialog-box.component';
-import { UpdateProductDialogComponent } from '../../update-product-dialog/update-product-dialog.component';
-import { Router } from '@angular/router';
-
-
+import { DialogBox3Component } from '../../dialog-box3/dialog-box3.component';
 
 @Component({
-  selector: 'app-list-products',
-  templateUrl: './list-products.component.html',
-  styleUrls: ['./list-products.component.css']
+  selector: 'app-list-products-vendeur3',
+  templateUrl: './list-products-vendeur3.component.html',
+  styleUrls: ['./list-products-vendeur3.component.css']
 })
-export class ListProductsComponent implements OnInit {
+export class ListProductsVendeur3Component implements OnInit {
+
   produits: Produit[]=[] ;
   
   produitF!:Produit[];
@@ -34,18 +37,10 @@ export class ListProductsComponent implements OnInit {
   vendeur:Vendeur=new Vendeur(0,0,"","","","","","","");
   selectedCategoryId: number;
   isEditMode = false;
- 
-  
-  set texte(ch:string)
-  {
- this.produitF=this.filtrer(ch);
-  }
-  filtrer(mot:string)
-  {
-   return this.produitF.filter(x=>x.nom.indexOf(mot)!=-1)
-  }
-   
-  constructor(private service:ProduitService,private sc:CategorieService,private router: Router,public dialog:MatDialog,private vendeurservice:VendeurService ) { }
+  descriptions: {[key: string]: Description} = {};
+  texte:string;
+constructor(private sc:CategorieService,private service:ProduitService,public dialog:MatDialog,
+  private vendeurservice:VendeurService, private router:Router,private ds:DescriptionService){}
   getCurrentVendeur(){
     this.vendeurservice.getCurrentVendeur().subscribe(vendeur =>
     {if(vendeur) this.vendeur=vendeur;console.log("le vendeur "+this.vendeur.id+" est connecté")
@@ -54,6 +49,19 @@ export class ListProductsComponent implements OnInit {
   
   ngOnInit(): void {
     this.getCurrentVendeur();
+    this.ds.getAllDescriptions().subscribe((descriptions: Description[]) => {
+      descriptions.forEach(description => {
+        this.descriptions[description.product.id] = description;
+      });
+    });
+  }
+  searchProducts()
+  {
+  this.produitF=this.filtrer(this.texte);
+  }
+  filtrer(mot:string)
+  {
+   return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
   }
 
   getAllProducts(i:number){this.service.getProductsByVendeur(i).subscribe(data=>{this.produitF=data;this.produits=this.produitF;} )}
@@ -184,7 +192,6 @@ createNewCategory() {
   console.log(this.newCategory);
  
   this.sc.addCategorie(this.newCategory).subscribe(() => {
-       
           this.nomNewCat = "";
           this.getAllcategorie(this.vendeur.id)},);
 
@@ -204,7 +211,7 @@ cancelEditMode(): void {
   this.isEditMode = false;
 }
 openDialog(){
-  let dialogRef = this.dialog.open(DialogBoxComponent, {
+  let dialogRef = this.dialog.open(DialogBox3Component, {
     width: '700px'
   });
   dialogRef.afterClosed().subscribe(result => {
@@ -214,7 +221,7 @@ openDialog(){
   }
   
   openDialogUpdate(id:string){
-  let dialogRef = this.dialog.open(UpdateProductDialogComponent, {
+  let dialogRef = this.dialog.open(UpdateProductDialog3Component, {
     width: '700px',
     data: {id}
     
@@ -226,4 +233,10 @@ openDialog(){
   }
 
 
+
+
+
+getDescription(id: string): string {
+  return this.descriptions[id]?.shortDescription || '';
+}
 }

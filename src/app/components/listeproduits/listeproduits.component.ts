@@ -31,8 +31,6 @@ import { Router } from '@angular/router';
 export class ListeproduitsComponent implements OnInit {
   produits: Produit[] ;
   public ids:string[]=[]
-  public isCollapsed = false;
-  public isCollapsed2 = false;
   private catadded =false;
   produitF!:Produit[];
   nomNewCat:string;
@@ -67,7 +65,7 @@ export class ListeproduitsComponent implements OnInit {
       {if(vendeur) this.vendeur=vendeur;console.log("le vendeur "+this.vendeur.id+" est connecté")})}
     getAll()
     {
-      this.service.getAllProducts().subscribe(data=>{this.produitF=data; })
+      this.service.getAllProducts().subscribe(data=>{this.produitF=data;this.produits=this.produitF})
       this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
     }
     //les fonctions de barre de rechreche

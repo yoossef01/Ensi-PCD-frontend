@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { CategorieService } from 'src/app/categorie.service';
 import { ClientService } from 'src/app/client.service';
+import { DescriptionService } from 'src/app/description.service';
 import { Categorie } from 'src/app/model/categorie';
 import { Client } from 'src/app/model/client';
+import { Description } from 'src/app/model/description';
 import { Produit } from 'src/app/model/produit';
-
 import { ProduitService } from 'src/app/produit.service';
 import { VendeurService } from 'src/app/vendeur.service';
 
 @Component({
-  selector: 'app-list-products-client',
-  templateUrl: './list-products-client.component.html',
-  styleUrls: ['./list-products-client.component.css']
+  selector: 'app-list-products-client3',
+  templateUrl: './list-products-client3.component.html',
+  styleUrls: ['./list-products-client3.component.css']
 })
-export class ListProductsClientComponent implements OnInit {
- 
-  
+export class ListProductsClient3Component implements OnInit {
   produitF!:Produit[];
   produits!:Produit[];
   client:Client;
@@ -24,18 +24,26 @@ export class ListProductsClientComponent implements OnInit {
   selectedCategoryId: number;
   categorie:Categorie;
   categorieProduit:Categorie;
- 
-constructor(private clientservice: ClientService,private sc:CategorieService,private service:ProduitService, private vendeurservice:VendeurService, private router:Router){}
+  texte:string;
+  descriptions: {[key: string]: Description} = {};
+constructor(private clientservice: ClientService,private sc:CategorieService,
+  private service:ProduitService, private vendeurservice:VendeurService,
+   private router:Router,private ds:DescriptionService){}
 ngOnInit(): void {
     
   this.getAll();
   this.getCurrentClient();
+  this.ds.getAllDescriptions().subscribe((descriptions: Description[]) => {
+    descriptions.forEach(description => {
+      this.descriptions[description.product.id] = description;
+    });
+  });
 }
 
 
-set texte(ch:string)
+searchProducts()
 {
-this.produitF=this.filtrer(ch);
+this.produitF=this.filtrer(this.texte);
 }
 filtrer(mot:string)
 {
@@ -86,5 +94,7 @@ selectCategorie(event: any) {
     }
 }
 
-
+getDescription(id: string): string {
+  return this.descriptions[id]?.shortDescription || '';
+}
 }

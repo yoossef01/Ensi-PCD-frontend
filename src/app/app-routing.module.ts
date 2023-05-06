@@ -28,8 +28,11 @@ import { Home1Component } from './components/template1/home1/home1.component';
 import { ListProductsComponent } from './components/template1/list-products/list-products.component';
 import { ListProductsClientComponent } from './components/template1/list-products-client/list-products-client.component';
 import { HomeVendeurComponent } from './components/template1/home-vendeur/home-vendeur.component';
+import { ListProductsClient3Component } from './components/template3/list-products-client3/list-products-client3.component';
 import { AdmindashComponent } from './components/admindash/admindash.component';
 import { Home3Component } from './components/template3/home3/home3.component';
+import { ListProductsVendeur3Component } from './components/template3/list-products-vendeur3/list-products-vendeur3.component';
+import { HomeVendeur3Component } from './components/template3/home-vendeur3/home-vendeur3.component';
 
 
 
@@ -68,9 +71,14 @@ const routes: Routes = [
   {path:'listeproducts',component:ListProductsComponent},
   {path:'listproduct1client',component:ListProductsClientComponent},
   {path:'homeVend',component:HomeVendeurComponent},
+  //component de temaplte1
+//*****************************
+{path:'template3',component:ListProductsClient3Component},
 
   {path:'admin',component:AdmindashComponent},
-  {path:'home3',component:Home3Component}
+  {path:'home3',component:Home3Component},
+  {path:'list3',component:ListProductsVendeur3Component},
+  {path:'homeVendeur3',component:HomeVendeur3Component}
 ];
 
 @NgModule({

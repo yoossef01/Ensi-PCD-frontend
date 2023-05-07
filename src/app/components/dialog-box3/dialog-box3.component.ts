@@ -12,6 +12,7 @@ import { Description } from 'src/app/model/description';
 import { DescriptionService } from 'src/app/description.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { DataService } from 'src/app/data.service';
 @Component({
   selector: 'app-dialog-box3',
   templateUrl: './dialog-box3.component.html',
@@ -31,10 +32,10 @@ export class DialogBox3Component  implements OnInit {
   suivant:boolean=false;
   precedent:boolean=false;
   description:Description=new Description("","","","","",{id:""});
-  
+  dat: any[] = [];
   constructor(public dialogRef: MatDialogRef<DialogBox3Component>, @Inject(MAT_DIALOG_DATA) public data: any,
   private service:ProduitService,private sc:CategorieService,private vendeurservice :VendeurService,
-  private ds:DescriptionService,private router: Router,) { }
+  private ds:DescriptionService,private router: Router,private dataservice : DataService) { }
   
   
    ngOnInit(): void {
@@ -47,6 +48,17 @@ export class DialogBox3Component  implements OnInit {
       this.sc.getAllCategoriesByVendeur(i).subscribe(data=>{this.categories=data; this.categories=this.categories
       })
     }
+
+    getdata()
+    {
+      this.dataservice.getAllData().subscribe(data=>{
+        for (let a of data) {
+          if (a.product_nom == this.produit.nom)
+           {this.dat.push({id : a.product_prix})}
+        }
+      })
+    }
+
     
     getCurrentVendeur(){
       this.vendeurservice.getCurrentVendeur().subscribe(vendeur => {if(vendeur) 

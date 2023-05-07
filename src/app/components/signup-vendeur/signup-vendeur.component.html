@@ -1,20 +1,12 @@
-
-<body>
-    <div class="container">
-
-        <div class="card o-hidden border-0 shadow-lg my-0 " >
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
-                            </div>
+<div class="container mycontainer" >
+  <div class="card justify-content-md-center">
+      <div class="card-header text-center">
+          <h3>S'inscrire</h3>
+      </div>
+      <div class="card-body">
         <form [formGroup]="formVendeur" (ngSubmit)="submit()">
           <div class="form-group row">
-          <div class="col-sm-6 mb-3 mb-sm-3">
+          <div class=" mb-3 ">
             <input type="text" class="form-control " formControlName="nom" placeholder="Nom" required minlength="3" maxlength="20">
             <div class="alert alert-danger" *ngIf="formVendeur.controls['nom'].touched && formVendeur.controls['nom'].errors">
               <div *ngIf="formVendeur.controls['nom'].errors?.['required']">Nom requis</div>
@@ -22,7 +14,7 @@
               <div *ngIf="formVendeur.controls['nom'].errors?.['maxlength']">Le nom ne doit pas dépasser 20 caractères</div>
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="mb-3">
             <input type="text" class="form-control" formControlName="prenom" placeholder="Prenom" required minlength="3" maxlength="20">
             <div class="alert alert-danger" *ngIf="formVendeur.controls['prenom'].touched && formVendeur.controls['prenom'].errors">
               <div *ngIf="formVendeur.controls['prenom'].errors?.['required']">Prenom requis</div>
@@ -30,7 +22,7 @@
               <div *ngIf="formVendeur.controls['prenom'].errors?.['maxlength']">Le prenom ne doit pas dépasser 20 caractères</div>
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="mb-3">
             <input type="text" class="form-control" formControlName="nomboutique" placeholder="Nomboutique" required minlength="3" maxlength="20">
             <div class="alert alert-danger" *ngIf="formVendeur.controls['prenom'].touched && formVendeur.controls['prenom'].errors">
               <div *ngIf="formVendeur.controls['prenom'].errors?.['required']">Prenom requis</div>
@@ -68,7 +60,7 @@
             <input type="password" class="form-control" formControlName="password" placeholder="Mot de passe"  required>
             </div>
 
-            <div class="col-sm-6">
+            <div class="mb-3">
               <input type="text" class="form-control" formControlName="fax" placeholder="Fax" required minlength="3" maxlength="20">
             </div>
       
@@ -79,5 +71,5 @@
       </div>
     </div>
   </div>
-            </div></div></div>
-</body>
+        
+

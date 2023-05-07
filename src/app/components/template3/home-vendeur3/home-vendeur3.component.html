@@ -52,7 +52,7 @@
             <i type="button" class="fa fa-edit" style="color: rgb(42, 42, 255);" (click)="enableEditMode2()"></i> </h4>
          </ng-container>
          
-        <button id="shopnow">Acheter maintenant</button>
+        <button id="shopnow" (click)="navigation()">Acheter maintenant</button>
     </div>
     <div class="img">
       <img *ngIf="img" [src]="img" [style.max-width.px]="800" [style.max-height.px]="400">

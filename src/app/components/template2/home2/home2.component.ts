@@ -269,7 +269,7 @@ BuildTemplate() {
 logout() {
   this.vendeurservice.logout().subscribe(() =>{
   localStorage.removeItem('token');
-  this.router.navigate(['/loginVendeur'])}
+  this.router.navigate(['/home'])}
   )
 }
 
@@ -279,6 +279,10 @@ navigation() {
 
 navigation1() {
   this.router.navigate(['/achat/'+this.vendeur.id])
+}
+
+update(id :string) {
+  this.router.navigate(['/template2updateproduit/'+ id])
 }
 
 }

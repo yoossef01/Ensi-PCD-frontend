@@ -17,8 +17,14 @@
         </div>
         <div class="auth-links">
           <a routerLink="/insc">Sign Up</a>
-          <a routerLink="/login">Log In</a>
+          <div ngbDropdown class="dropdown">
+          <a  ngbDropdownToggle class="nav-link dropdown-toggle"type="button" id="dropdownMenuButton1" aria-expanded="false">Login</a>
+          <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+              <li><a ngbDropdownItem routerLink="/loginVendeur">Vendeur </a></li>
+              <li><a ngbDropdownItem routerLink="/loginClient">Client </a></li>
+            </ul>
         </div>
+      </div>
       </div>
       <div class="container">
 
@@ -79,7 +85,7 @@
                   Créez votre espace de vente en ligne, enregistrez vos produits sur le site, gérez les clients et les commandes 
                   et présentez vos produits aux clients comme s'ils étaient sur votre propre site.<br><br>
 
-                  <a href="#" class="btn btn-primary" style="height: 3rem;">Créer un nouveau magasin</a>
+                  <a class="btn btn-primary" style="height: 3rem;" routerLink="/signupVendeur">Créer un nouveau magasin</a>
                 </div>
                
               </div>

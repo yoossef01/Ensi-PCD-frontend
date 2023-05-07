@@ -34,6 +34,7 @@ ngOnInit(): void {
   this.getAll();
   this.getCurrentClient();
   this.ds.getAllDescriptions().subscribe((descriptions: Description[]) => {
+    console.log("des",descriptions);
     descriptions.forEach(description => {
       this.descriptions[description.product.id] = description;
     });
@@ -96,5 +97,8 @@ selectCategorie(event: any) {
 
 getDescription(id: string): string {
   return this.descriptions[id]?.shortDescription || '';
+}
+navigation1() {
+  this.router.navigate(['Panier/'+ this.client.id])
 }
 }

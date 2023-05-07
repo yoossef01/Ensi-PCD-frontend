@@ -63,6 +63,7 @@ export class HomeVendeur3Component implements OnInit{
        };
      }
    }
+
   
   enableEditMode1(): void {
     this.isEditMode1 = true;
@@ -108,7 +109,7 @@ export class HomeVendeur3Component implements OnInit{
   );
   }
   navigation() {
-    this.router.navigate(['/listeproduit/'+this.vendeur.id]);
+    this.router.navigate(['/listeproduit3/'+this.vendeur.id]);
   }
   BuildTemplate() {
     let timerInterval: NodeJS.Timeout;

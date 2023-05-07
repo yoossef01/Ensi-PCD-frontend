@@ -46,6 +46,6 @@ secondchoice(){
 thirdchoice(){
   this.v.idTemplate=3;
   this.vendeurservice.UpdateVendeur(this.v).subscribe(data=>{this.v=data;console.log(this.v)})
- this.route.navigateByUrl('/template3/'+this.v.id);
+ this.route.navigateByUrl('/template/3/'+this.v.id);
 }
 }

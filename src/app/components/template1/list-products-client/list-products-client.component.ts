@@ -86,5 +86,9 @@ selectCategorie(event: any) {
     }
 }
 
+navigation1() {
+  this.router.navigate(['Panier/'+ this.client.id])
+}
+
 
 }

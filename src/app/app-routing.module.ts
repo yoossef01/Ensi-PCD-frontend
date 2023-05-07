@@ -33,52 +33,51 @@ import { AdmindashComponent } from './components/admindash/admindash.component';
 import { Home3Component } from './components/template3/home3/home3.component';
 import { ListProductsVendeur3Component } from './components/template3/list-products-vendeur3/list-products-vendeur3.component';
 import { HomeVendeur3Component } from './components/template3/home-vendeur3/home-vendeur3.component';
+import { UpdateProduitComponent } from './components/template2/update-produit/update-produit.component';
 
 
 
 const routes: Routes = [
-  {path:'home',component: HomeComponent},
-  {path:"products/:id",component: DetailsComponent},
-  {path:'choose',component:ChoosetemplateComponent},
-  {path:'template',component:TemplateComponent},{
-  path:'liste',component:ListeproduitsComponent},
-  {path:'template12',component:Template1Component},{
-   path:'insc',component:InscriptionComponent
-  }
-  ,{path:'panier/:id',component:PanierComponent}
-  ,{path:'loginClient', component:LoginComponent},
-  {path:'template/2/:id',component:Home2Component},
-  {path:'template2Client',component:HomeclientComponent},
-  {path:'signupVendeur',component:SignupVendeurComponent},
-  {path:'loginVendeur',component:LoginVendeurComponent},
-  {path:'template2ajoutproduit',component:AjoutProduitComponent},
-  {path:'template2ajoutcategorie',component:AjoutCategorieComponent},
-  {path: 'templateclient/2/:id', component:HomeclientComponent},
-  {path:'achat', component:AchatComponent},
+  { path: 'home', component: HomeComponent },
+  { path: "products/:id", component: DetailsComponent },
+  { path: 'choose', component: ChoosetemplateComponent },
+  { path: 'template', component: TemplateComponent },
+  { path: 'liste', component: ListeproduitsComponent },
+  { path: 'template12', component: Template1Component },
+  { path: 'insc', component: InscriptionComponent },
+  { path: 'signupVendeur', component: SignupVendeurComponent },
+  { path: 'loginVendeur', component: LoginVendeurComponent },
+  { path: 'Panier/:id', component: PanierComponent },
+  { path: 'loginClient', component: LoginComponent },
 
-{path:'dashboard/:id', component: DashboardComponent},{path:'dashboard', component: DashboardComponent},
+  //template2
+  { path: 'template/2/:id', component: Home2Component },
+  { path: 'templateclient/2/:id', component: HomeclientComponent },
+  { path: 'template2ajoutproduit', component: AjoutProduitComponent },
+  { path: 'template2ajoutcategorie', component: AjoutCategorieComponent },
+  { path: 'template2updateproduit/:id', component: UpdateProduitComponent },
 
-//component de temaplte1
-//*****************************
-  {path:'templateclient/1/:id',component:Home1Component},
-  {path:'listeproduit/:id',component:ListProductsComponent},
-  {path:'listeproduitclient/:id',component:ListProductsClientComponent},
-  {path:'template/1/:id',component:HomeVendeurComponent},
-  //************************** */
-  {path:'achat/:id', component:AchatComponent},
-  {path:'comparateur', component:ComparateurComponent},
-  {path:'template1',component:Home1Component},
-  {path:'listeproducts',component:ListProductsComponent},
-  {path:'listproduct1client',component:ListProductsClientComponent},
-  {path:'homeVend',component:HomeVendeurComponent},
-  //component de temaplte1
-//*****************************
-{path:'template3',component:ListProductsClient3Component},
+  //template1
+  { path: 'template/1/:id', component: HomeVendeurComponent },
+  { path: 'templateclient/1/:id', component: Home1Component },
+  { path: 'listeproduit1/:id', component: ListProductsComponent },
+  { path: 'listeproduitclient1/:id', component: ListProductsClientComponent },
 
-  {path:'admin',component:AdmindashComponent},
-  {path:'home3',component:Home3Component},
-  {path:'list3',component:ListProductsVendeur3Component},
-  {path:'homeVendeur3',component:HomeVendeur3Component}
+  //template3
+  { path: 'template/3/:id', component: HomeVendeur3Component },
+  { path: 'templateclient/3/:id', component: Home3Component },
+  { path: 'listeproduit3/:id', component: ListProductsVendeur3Component },
+  { path: 'listeproduitclient3/:id', component: ListProductsClient3Component },
+
+
+
+  //************************************* */
+  { path: 'achat/:id', component: AchatComponent },
+  { path: 'dashboard/:id', component: DashboardComponent },
+  { path: 'comparateur', component: ComparateurComponent },
+  { path: 'admin', component: AdmindashComponent },
+
+
 ];
 
 @NgModule({

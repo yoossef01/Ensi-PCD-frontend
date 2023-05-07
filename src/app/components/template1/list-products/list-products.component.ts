@@ -66,6 +66,9 @@ export class ListProductsComponent implements OnInit {
   navigation() {
     this.router.navigate(['/template/1/'+this.vendeur.id]);
   }
+  navigation1() {
+    this.router.navigate(['/dashboard/'+this.vendeur.id])
+  }
 
  
   delete(p:Produit)

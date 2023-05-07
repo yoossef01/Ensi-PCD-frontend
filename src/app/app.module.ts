@@ -59,6 +59,7 @@ import { ListProductsVendeur3Component } from './components/template3/list-produ
 import { DialogBox3Component } from './components/dialog-box3/dialog-box3.component';
 import { UpdateProductDialog3Component } from './components/update-product-dialog3/update-product-dialog3.component';
 import { HomeVendeur3Component } from './components/template3/home-vendeur3/home-vendeur3.component';
+import { UpdateProduitComponent } from './components/template2/update-produit/update-produit.component';
 
 const materiel=[
   MatAutocompleteModule, MatIconModule, MatButtonModule,
@@ -114,6 +115,7 @@ const materiel=[
               DialogBox3Component,
               UpdateProductDialog3Component,
               HomeVendeur3Component,
+              UpdateProduitComponent,
              
 
   ],

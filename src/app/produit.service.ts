@@ -11,7 +11,6 @@ import { Produit } from './model/produit';
 })
 export class ProduitService {
   public added:boolean=false;
-  public Idproducts:string[]=[];
  
 
   host="http://localhost:8080/apiproduit"
@@ -42,12 +41,7 @@ public getProduct(id:string):Observable<Produit>
     return this.client.post<Produit>(this.host+"/add", formData);
   }
   
-// public updateProduit(p: string, file: File): Observable<Produit> {
-//   const formData = new FormData();
-//   formData.append('file', file);
-//   console.log(p);
-//   formData.append('product', p );
-//   console.log(formData);
+
 updateProduct(file: File, product: Produit): Observable<any> {
   const formData: FormData = new FormData();
   formData.append('file', file);

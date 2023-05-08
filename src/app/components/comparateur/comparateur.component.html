@@ -1,15 +1,19 @@
 
-<ngb-carousel *ngIf="produits && produits.length > 0" [interval]="5000" style="background-color: silver; height: 400px;">
+<ngb-carousel *ngIf="produitsComapred && produitsComapred.length > 0" [interval]="5000" style="background-color: silver; height: 400px;">
   <ng-template ngbSlide *ngFor="let products of listeDeListes" >
     <div class="d-flex justify-content-center">
       <div *ngFor="let p of products" class="col-md-3 mr-2">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="http://localhost:8080/apiproduit/getimage/{{p.id}}" width="50" height= "170" alt="Card image cap">
+          <div class="card-close" (click)="deleteProduct(p)">
+            <i style="color:red" class="fa-solid fa-circle-xmark fa-xl"></i>
+          </div>
+          <img class="card-img-top" src="http://localhost:8080/apiproduit/getimage/{{p.product.id}}" width="50" height= "170" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">{{p.nom}}</h5>
+            <h5 class="card-title">{{p.product.nom}}</h5>            
+
             <h6 style="color:red">
 
-              {{p.prix}} DT
+              {{p.product.prix}} DT
             </h6>
             <h6 >
               En Stock
@@ -32,7 +36,7 @@
       <thead>
         <tr>
           <th scope="col">Product</th>
-          <th scope="col" *ngFor="let produit of selectedProducts">{{ produit.nom }}</th>
+          <th scope="col" *ngFor="let produit of selectedProducts">{{ produit.product.nom }}</th>
         </tr>
       </thead>
       <tbody>

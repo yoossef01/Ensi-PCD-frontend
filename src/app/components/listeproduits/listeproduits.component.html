@@ -29,10 +29,8 @@
                     <a routerLink="/products/{{p.id}}" class ="btn btn-primary m-2">
                     <span class="fa fa-info"></span>
                   </a>
-                  <button class="btn btn-primary m-2" (click)="openDialogUpdate(p.id)">
-                    <span class="fa-solid fa-pen"></span>
-                  </button>
-                  <a class ="btn btn-primary m-2" (click)="updateProductsCompared(p.id)" >
+                  
+                  <a class ="btn btn-primary m-2" (click)="addProductsToCompare(p.id)" >
                     <span class="fa-solid fa-columns"></span>
                   </a>
                 </p>

@@ -9,7 +9,8 @@ import { VendeurService } from 'src/app/vendeur.service';
   styleUrls: ['./signup-vendeur.component.css']
 })
 export class SignupVendeurComponent implements OnInit{
-  
+  userlogin = true;
+    userregister = false;
   constructor(private service: VendeurService, private router: Router) { }
   ngOnInit(): void {
 
@@ -40,18 +41,31 @@ export class SignupVendeurComponent implements OnInit{
       
         this.router.navigate(['/choose']);
       })
-      
-      
-    
-
-    
     
     
   }
  
+ 
+  
+    //show hide div variables
+    
+  
+    //Buttons clicks functionalities 
+    user_register()
+    {
+      this.userlogin = false;
+      this.userregister = true;
+    }
+  
+    user_login()
+    {
+      this.userlogin = true;
+      this.userregister = false;
+    }
+  }
 
 
-}
+
 
 
 

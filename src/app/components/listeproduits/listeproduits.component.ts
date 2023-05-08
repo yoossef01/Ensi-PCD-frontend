@@ -20,6 +20,8 @@ import { Commande } from 'src/app/model/commande';
 import { ClientService } from 'src/app/client.service';
 import { Client } from 'src/app/model/client';
 import { Router } from '@angular/router';
+import { ProductToCompareService } from 'src/app/product-to-compare.service';
+import { ProductToCompare } from 'src/app/model/product-to-compare';
 
 
 
@@ -30,7 +32,6 @@ import { Router } from '@angular/router';
 })
 export class ListeproduitsComponent implements OnInit {
   produits: Produit[] ;
-  public ids:string[]=[]
   private catadded =false;
   produitF!:Produit[];
   nomNewCat:string;
@@ -44,25 +45,20 @@ export class ListeproduitsComponent implements OnInit {
   vendeur:Vendeur;
   client:Client;
   idTemplate : number;
- 
+ productToCompare:ProductToCompare=new ProductToCompare(1,this.produit,{id:0})
    constructor(private service:ProduitService,private sc:CategorieService,public dialog:MatDialog,private router: Router,
-    private commandeService: CommandeService
-    ,private vendeurservice :VendeurService) { }
+    private commandeService: CommandeService,private pc:ProductToCompareService,
+    private clientservice :ClientService,private vendeurservice:VendeurService) { }
 
   ngOnInit(): void {
 
      this.getAll()
-       this.getCurrentVendeur();
-    //  setInterval(() => {
-    //   this.added();
-    // }, 1000);
-    // setInterval(() => {
-    //   this.Catadded();
-    // }, 1000);
+       this.getCurrentClient();
+    
     ;}
-    getCurrentVendeur(){
-      this.vendeurservice.getCurrentVendeur().subscribe(vendeur =>
-      {if(vendeur) this.vendeur=vendeur;console.log("le vendeur "+this.vendeur.id+" est connecté")})}
+    getCurrentClient(){
+      this.clientservice.getCurrentClient().subscribe(client =>
+      {if(client) this.client=client;console.log("le client "+this.client.id+" est connecté")})}
     getAll()
     {
       this.service.getAllProducts().subscribe(data=>{this.produitF=data;this.produits=this.produitF})
@@ -77,38 +73,15 @@ export class ListeproduitsComponent implements OnInit {
     {
      return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
     }
-   //solution provisoire pour l'affichage de liste de produits chaque seconde  
-  added(){
-    if(this.service.added==true){
-      this.getAll();
-    }
-    this.service.added=false;
-  }
-  Catadded(){
-    if(this.catadded==true){
-      this.getAll();
-    }
-    this.catadded=false;
-  }
- 
+  
 
-// ouvert de fenetre de l'ajout du produit
-  openDialog(){
-  let dialogRef = this.dialog.open(DialogBoxComponent, {
-    width: '700px'});
+   
+addProductsToCompare(id:string){
+  this.service.getProduct(id).subscribe(data=>{this.produit=data;
+    this.productToCompare.product=data;
+    this.productToCompare.client.id=this.client.id;console.log(this.productToCompare);
+      this.pc.addProductToCompare(this.productToCompare).subscribe(()=>console.log("produit"+ this.productToCompare +"est à comparer"))})
   
-}
- //ouvert de fenetre de l'update du produit
-openDialogUpdate(id:string){
-  let dialogRef = this.dialog.open(UpdateProductDialogComponent, {
-    width: '700px',
-    data: {id} });
-}    
-updateProductsCompared(id:string){
-  
-  this.ids.push(id);
-  this.service.Idproducts=this.ids;
-  console.log(this.ids)
 }
 
 

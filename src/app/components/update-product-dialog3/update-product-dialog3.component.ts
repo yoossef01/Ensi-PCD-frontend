@@ -2,7 +2,9 @@ import { Component, ElementRef, OnInit,Inject, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { CategorieService } from 'src/app/categorie.service';
+import { DescriptionService } from 'src/app/description.service';
 import { Categorie } from 'src/app/model/categorie';
+import { Description } from 'src/app/model/description';
 
 import { Produit } from 'src/app/model/produit';
 import { ProduitService } from 'src/app/produit.service';
@@ -21,14 +23,16 @@ export class UpdateProductDialog3Component implements OnInit {
     categories!:Categorie[];
    
     categorie: Categorie  =new Categorie(0,"",{id:0}); 
-    
+    description:Description=new Description("","","","","",{id:""});
+
     photo:File;
   constructor(public dialogRef: MatDialogRef<UpdateProductDialog3Component>,
     @Inject(MAT_DIALOG_DATA) public data:any,private service:ProduitService,
-    private sc:CategorieService,private ar:ActivatedRoute) { }
+    private sc:CategorieService,private ar:ActivatedRoute,private ds:DescriptionService,) { }
 
   ngOnInit(): void { this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
-  this.service.getProduct(this.data.id).subscribe(data =>this.prod=data);
+  this.service.getProduct(this.data.id).subscribe(data =>{this.prod=data;
+  this.ds.getDescription(this.prod.id).subscribe(data=>this.description=data)});
   
   console.log(this.prod);
   }

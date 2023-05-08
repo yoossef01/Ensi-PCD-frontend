@@ -111,7 +111,7 @@ export class HomeVendeurComponent implements OnInit{
   );
   }
   navigation() {
-    this.router.navigate(['/listeproduit/'+this.vendeur.id]);
+    this.router.navigate(['/listeproduit1/'+this.vendeur.id]);
   }
   BuildTemplate() {
     let timerInterval: NodeJS.Timeout;

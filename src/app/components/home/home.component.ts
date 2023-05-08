@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Vendeur } from 'src/app/model/vendeur';
 import { VendeurService } from 'src/app/vendeur.service';
 
@@ -11,8 +12,11 @@ import { VendeurService } from 'src/app/vendeur.service';
 export class HomeComponent implements OnInit {
 
 vendeurs:Vendeur[]=[];
+vendeur:Vendeur;
 
-constructor(private vendeurService:VendeurService) { }
+selectedBoutique: string;
+
+constructor(private vendeurService:VendeurService, private router:Router) { }
   
   
 
@@ -20,5 +24,16 @@ constructor(private vendeurService:VendeurService) { }
     this.vendeurService.getAllVendeurs().subscribe(data=>{this.vendeurs=data;console.log(this.vendeurs)})
   }
 
+onBoutiqueSelected(boutique: any) {
+    this.selectedBoutique = boutique.nomboutique;
+    this.getVendeurByNomboutique(this.selectedBoutique)
+  }
+getVendeurByNomboutique(nomboutique : string) {
+  this.vendeurService.getVendeurByNomboutique(nomboutique).subscribe(data=>{this.vendeur=data
+  
+    this.router.navigate(['templateclient/'+data.idTemplate+'/'+data.id]);
+
+  })
+}
 
 }

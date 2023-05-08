@@ -26,7 +26,7 @@ export class Home1Component implements OnInit {
   }
 
   navigation() {
-    this.router.navigate(['/listeproduitclient/'+this.servicevendeur.getIdVendeur()]);
+    this.router.navigate(['/listeproduitclient1/'+this.servicevendeur.getIdVendeur()]);
   }
 
 

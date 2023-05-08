@@ -64,7 +64,7 @@ export class HomeclientComponent implements OnInit {
    }
    getproduitByVendeur()
    {
-    this.service.getProductsByVendeur(this.idVendeur).subscribe(data=>{this.produitF=data;})
+    this.service.getProductsByVendeur(this.idVendeur).subscribe(data=>{this.produitF=data; this.produits=this.produitF})
    }
 
    getCurrentClient(){
@@ -264,12 +264,9 @@ showDescription(): void {
   }
 }
 
-navigate(): void {
-  this.router.navigate(['/deta'])
-}
 
 navigation() {
-  this.router.navigate(['panier/'+this.client.id])
+  this.router.navigate(['Panier/'+this.client.id])
 }
 
 }

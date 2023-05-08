@@ -12,6 +12,7 @@ import { Description } from 'src/app/model/description';
 import { DescriptionService } from 'src/app/description.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-dialog-box',
@@ -28,6 +29,7 @@ produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
 idCategorie:number;
 photo:File;
 categories:Categorie[]=[];
+dat: any[] = [];
 vendeur:Vendeur; 
 suivant:boolean=false;
 precedent:boolean=false;
@@ -35,7 +37,7 @@ description:Description=new Description("","","","","",{id:""});
 
 constructor(public dialogRef: MatDialogRef<DialogBoxComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
 private service:ProduitService,private sc:CategorieService,private vendeurservice :VendeurService,
-private ds:DescriptionService,private router: Router,) { }
+private ds:DescriptionService,private router: Router,private dataservice : DataService) { }
 
 
  ngOnInit(): void {
@@ -48,11 +50,22 @@ private ds:DescriptionService,private router: Router,) { }
     this.sc.getAllCategoriesByVendeur(i).subscribe(data=>{this.categories=data; this.categories=this.categories
     })
   }
+
+  getdata()
+  {
+    this.dataservice.getAllData().subscribe(data=>{
+      for (let a of data) {
+        if (a.product_nom == this.produit.nom)
+         {this.dat.push({id : a.product_prix})}
+      }
+    })
+  }
   
   getCurrentVendeur(){
     this.vendeurservice.getCurrentVendeur().subscribe(vendeur => {if(vendeur) 
     this.vendeur=vendeur;console.log("le vendeur :"+this.vendeur.id+"est connecté");
-    this.getcategoriie(this.vendeur.id)});}
+    this.getcategoriie(this.vendeur.id);
+  });}
   
 
   //selectionner une image a partir de votre bureau ,s'excecuter a l'appui pour ajouter une image de nouveau produit

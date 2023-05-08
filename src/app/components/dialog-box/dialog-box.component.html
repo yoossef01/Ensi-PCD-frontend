@@ -12,12 +12,24 @@
         <mat-error *ngIf="isNomEmpty">Le nom est obligatoire</mat-error>
       </mat-form-field>
       
-  
+
+      <mat-form-field>
+       
+        <mat-label for="categorie">Prix similaire</mat-label>
+        
+        <mat-select id="categorie" name="categorie"(change)="selectCat($event)" [(ngModel)]="produit.categorie.nom" [required]="true" >
+          
+          <mat-option *ngFor="let cat of dat" [value]="cat.id" >{{ cat.id }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      
       <mat-form-field>
 
         <mat-label for="prix">Prix</mat-label>
         <input type="number" id="prix" name="prix" placeholder="Prix" matInput [(ngModel)]="produit.prix" [required]="true">
       </mat-form-field>
+      
+
   
       <mat-form-field>
 
@@ -91,6 +103,7 @@
             En Stock
           </h6>
           <p> <a class="btn btn-primary" id="btn">Acheter Maintenant</a>
+            <button (click)="getdata()">prix similaire</button>
           
         </p>
         <ng-template #repture><h6 style="color: brown"> Rupture de Stock</h6>

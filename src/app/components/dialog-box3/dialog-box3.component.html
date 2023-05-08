@@ -43,6 +43,7 @@
                                 
                                 <a href="#" class="btn btn-light btn-block">
                                     <span class="btn btn-primary">Acheter maintenant</span></a>
+                                                <button (click)="getdata()">prix similaire</button>
                             </p>
                         </div> <!-- info-aside.// -->
                     </aside> <!-- col.// -->
@@ -60,6 +61,16 @@
                 <mat-label for="nom">Nom</mat-label>
                 <input type="text" id="nom" name="nom" placeholder="Nom" matInput  [(ngModel)]="produit.nom" [required]="true">
                 <mat-error *ngIf="isNomEmpty">Le nom est obligatoire</mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+       
+                <mat-label for="categorie">Prix similaire</mat-label>
+                
+                <mat-select id="categorie" name="categorie"(change)="selectCat($event)" [(ngModel)]="produit.categorie.nom" [required]="true" >
+                  
+                  <mat-option *ngFor="let cat of dat" [value]="cat.id" >{{ cat.id }}</mat-option>
+                </mat-select>
               </mat-form-field>
               
           

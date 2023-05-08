@@ -9,24 +9,15 @@
     <div class="my-5">
       <div class="mx-auto w-25 " style="max-width:100%;">
         <h2 class="text-center mb-3">Ajouter Produit</h2>
-        <form #produitForm="ngForm" (submit)="addProduit()">
+        <form #produitForm="ngForm" (submit)="updateProduit()">
          
           <div class="row">
             <div class="col-md-12 form-group mb-3">
               <label for="name" class="form-label">Nom</label>
-              <input id="nom"   type="text" name="nom" class="form-control" placeholder="Name" [(ngModel)]="produit.nom" required>
+              <input id="nom"   type="text" name="nom" class="form-control"  [(ngModel)]="produit.nom" required>
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-md-12 form-group mb-3">
-                <label for="Address" class="form-label">prix similaire</label>
-                <select class="form-select" aria-label="Default select example" id="categorie" name="categorie"(change)="selectCat($event)" [(ngModel)]="produit.categorie.id" required>
-                    <option *ngFor="let cat of dat" [value]="cat.id">{{ cat.id }}</option>
-                  </select>
-
-            </div>
-          </div>
 
         
           <div class="row">
@@ -65,42 +56,12 @@
         </div>
             
          
-          <div class="row">
-            <div class="col-md-12 form-group mb-3">
-              <label for="color" class="form-label">Couleur</label>
-              <input id="color"   type="text" name="nom" class="form-control" placeholder="Couleur" [(ngModel)]="description.color" required>
-            </div>
-          </div>
- 
-          <div class="row">
-            <div class="col-md-12 form-group mb-3">
-              <label for="Matière" class="form-label">Matière</label>
-              <input id="Matière"   type="text" name="nom" class="form-control" placeholder="Matière" [(ngModel)]="description.material" required>
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-md-12 form-group mb-3">
-              <label for="Description" class="form-label">Description courte</label>
-              <input id="Description"   type="text" name="nom" class="form-control" placeholder="Description courte" [(ngModel)]="description.shortDescription" required>
-            </div>
-          </div>
-         
-          <div class="row">
-            <div class="col-md-12 form-group mb-3">
-              <label for="Description" class="form-label">Description longue</label>
-              <input id="Description"   type="text" name="nom" class="form-control" placeholder="Description longue" [(ngModel)]="description.longDescription" required>
-            </div>
-          </div>
-
-         
-
+  
          
           <div class="row">
             <div class="col-md-12 form-group">
               
               <div class="col-md-12 text-end">
-                <button (click)="getdata()">prix similaire</button>
                 <button class="btn btn-danger me-3"><i class="fa-solid fa-ban"></i>&nbsp;Annuler</button>
                 <button class="btn btn-primary" type="submit"><i class="fa-solid fa-save"></i>&nbsp;Enregistrer</button>
             </div>
@@ -117,3 +78,4 @@
     
 </body>
 </html>
+

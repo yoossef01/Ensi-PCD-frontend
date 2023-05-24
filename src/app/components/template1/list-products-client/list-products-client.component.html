@@ -120,8 +120,8 @@
                               En Stock
                             </h6>
                             <p> <a class="btn btn-primary" id="btn" routerLink="/products/{{p.id}}">Acheter Maintenant</a>
-                              <a class ="btn btn-primary m-2">
-                                <span class="fa-solid fa-columns" (click)="addProductsToCompare(p.id)"  (click)="onClick()"></span>
+                              <a class ="btn btn-primary m-2"(click)="addProductsToCompare(p.id)" (click)="onClick()">
+                                <span class="fa-solid fa-columns"   ></span>
                               </a>
                               
                           </p>
@@ -147,8 +147,8 @@
    
           <div class="container" *ngIf="afficherBouton">
           <form class="bouton-premier-plan d-flex">
-            <a class="btn btn-outline-danger" >
-                  <i class="fa fa-columns me-1"></i>
+            <a class="btn btn-outline-danger" routerLink="/comparateur">
+                  <i class="fa fa-columns me-1"  ></i>
                  Comparer
                   <span class="badge bg-danger text-white ms-1 rounded-pill">{{this.produitsComapred.length}}</span>
             </a>

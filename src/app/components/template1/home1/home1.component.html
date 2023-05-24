@@ -31,8 +31,8 @@
                     </div>
                     </div>
                 </nav>
-                <section class="hero-image">
-                    <div class="hero-text">
+                <section class="hero-image" [style.background-image]="'url(' + (templateContent.photo ? 'http://localhost:8080/apitemplate/getimage/' + templateContent.id : './assets/800x400.png') + ')'">
+                    > <div class="hero-text">
                       <h2>Les Meilleurs Produits</h2>
                       <p>Achetez les produits les plus en vogue sur notre site</p>
                       <a  class="btn" id="btn" (click)="navigation()" >Acheter Maintenant</a>

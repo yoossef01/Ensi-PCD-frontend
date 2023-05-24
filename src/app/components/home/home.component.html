@@ -37,8 +37,8 @@
 <h4>Découvrez une sélection de produits de qualité et trouvez ce dont vous avez besoin en quelques clics !</h4>
             <div class="search" >
               <i class="fa fa-search" ></i>
-              <input type="text" class="form-control" placeholder="cherchez un produit, une catégorie ou une marque" >
-              <button class="btn btn-primary">Rechercher</button>
+              <input type="text" [(ngModel)]="recherche" class="form-control" placeholder="recherchez un produit" >
+              <button class="btn btn-primary" (click)="rechercher()" routerLink="/liste">Rechercher</button>
              
           </div>
           <!-- <div ngbDropdown class="dropdown">

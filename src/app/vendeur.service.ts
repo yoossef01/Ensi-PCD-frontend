@@ -15,7 +15,7 @@ export class VendeurService {
  public idvendeur : number;
 
  private idtemplate : number;
-
+public  recherche:string;
  setIdTemplate(idtemplate : number) {
   this.idtemplate= idtemplate;
   localStorage.setItem('idtemplate', idtemplate.toString());

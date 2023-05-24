@@ -54,23 +54,27 @@ export class ListeproduitsComponent implements OnInit {
     private clientservice :ClientService,private vendeurservice:VendeurService) { }
 
   ngOnInit(): void {
-
+//this.texte=this.vendeurservice.recherche;
      this.getAll()
        this.getCurrentClient();
-    
     ;}
     getCurrentClient(){
       this.clientservice.getCurrentClient().subscribe(client =>
       {if(client) this.client=client;console.log("le client "+this.client.id+" est connecté")})}
     getAll()
     {
-      this.service.getAllProducts().subscribe(data=>{this.produitF=data;this.produits=this.produitF})
+      this.service.getAllProducts().subscribe(data=>{this.produitF=data;this.produits=this.produitF;
+        if(this.vendeurservice.recherche){
+        this.produitF=this.filtrer(this.vendeurservice.recherche);console.log(this.vendeurservice.recherche)}
+        else{this.produits=this.produitF;}
+      })
       this.vendeurservice.getAllVendeurs().subscribe(data=>{this.vendeurs=data;this.vendeurF=this.vendeurs;
         console.log(this.vendeurs)})
     }
     //les fonctions de barre de rechreche
   set texte(ch:string)
     {
+    
    this.produitF=this.filtrer(ch);
     }
   filtrer(mot:string)

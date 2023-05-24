@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 
 vendeurs:Vendeur[]=[];
 vendeur:Vendeur;
-
+recherche:string;
 selectedBoutique: string;
 
 constructor(private vendeurService:VendeurService, private router:Router,private elementRef:ElementRef) { }
@@ -23,7 +23,10 @@ constructor(private vendeurService:VendeurService, private router:Router,private
   ngOnInit(): void {
     this.vendeurService.getAllVendeurs().subscribe(data=>{this.vendeurs=data;console.log(this.vendeurs)})
   }
-
+public rechercher():void{
+  this.vendeurService.recherche=this.recherche;
+  console.log(this.vendeurService.recherche);
+}
 onBoutiqueSelected(boutique: any) {
     this.selectedBoutique = boutique.nomboutique;
     this.getVendeurByNomboutique(this.selectedBoutique)

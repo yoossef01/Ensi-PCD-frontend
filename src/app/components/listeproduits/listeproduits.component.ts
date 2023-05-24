@@ -64,9 +64,9 @@ export class ListeproduitsComponent implements OnInit {
     getAll()
     {
       this.service.getAllProducts().subscribe(data=>{this.produitF=data;this.produits=this.produitF;
-        // if(this.vendeurservice.recherche){
-        // this.produitF=this.filtrer(this.vendeurservice.recherche);console.log(this.vendeurservice.recherche)}
-        // else{this.produits=this.produitF;}
+        if(this.vendeurservice.recherche){
+        this.produitF=this.filtrer(this.vendeurservice.recherche);console.log(this.vendeurservice.recherche)}
+        else{this.produits=this.produitF;}
       })
       this.vendeurservice.getAllVendeurs().subscribe(data=>{this.vendeurs=data;this.vendeurF=this.vendeurs;
         console.log(this.vendeurs)})

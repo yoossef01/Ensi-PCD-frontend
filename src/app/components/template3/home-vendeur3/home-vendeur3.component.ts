@@ -63,7 +63,9 @@ export class HomeVendeur3Component implements OnInit{
        };
      }
    }
-
+   navigation1() {
+    this.router.navigate(['/dashboard/'+this.vendeur.id])
+  }
   
   enableEditMode1(): void {
     this.isEditMode1 = true;

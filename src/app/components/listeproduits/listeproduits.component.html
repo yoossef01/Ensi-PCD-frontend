@@ -1,14 +1,55 @@
 
-<div class="container">
-    <div class="row  ">
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroup-sizing-default">Key Word</span>
-        </div>
-        <input type="text"  [(ngModel)]="texte" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-      </div>
-    </div>
 
+  
+  
+ <section class="section-content padding-y">
+  <div class="container">
+  
+  <div class="row">
+      <aside class="col-md-3">
+          
+  <div class="card">
+      <article class="filter-group">
+          <header class="card-header">
+              <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+                  <i class="icon-control fa fa-chevron-down"></i>
+                  <h6 class="title">Boutiques</h6>
+              </a>
+          </header>
+          <div class="filter-content collapse show" id="collapse_1" >
+              <div class="card-body">
+                  <form class="pb-3">
+                    
+                  </form>
+                  
+                  <ul class="item-show-1"  >
+
+                    <div *ngFor="let v of vendeurs">
+                      <label>
+                        <input type="checkbox"  [value]="v.id" [ngModel]="selectedBoutiqueId === v.id" (change)="selectBoutique($event)">
+                        
+                        <a [attr.href]="'templateclient/' + v.idTemplate+'/'+v.id" >{{ v.nom }}</a>
+                      </label>
+                    </div>
+                    </ul>
+  
+              </div> <!-- card-body.// -->
+          </div>
+      </article> <!-- filter-group  .// -->
+      
+      
+       
+  </div> <!-- card.// -->
+  
+      </aside> <!-- col.// -->
+      
+      <main class="col-md-9">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Recherche</span>
+          </div>
+          <input type="text"  [(ngModel)]="texte" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
     <div class="row ">
         <div class="col-sm-4 my-2"  *ngFor="let p of produitF">
             <div class="card" style="width: 18rem;">

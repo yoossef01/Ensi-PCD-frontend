@@ -1,25 +1,30 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#">My shop</a>
+        <a class="navbar-brand" href="#">MyPhone</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-target="#navbarSupportedContent" 
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" aria-current="page"  type="button" >Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page"  type="button" >Page d'acceuil</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Notre boutique</a></li>
                 <li ngbDropdown class="dropdown">
                     <a  ngbDropdownToggle class="nav-link dropdown-toggle"type="button" id="dropdownMenuButton1" aria-expanded="false">Shop</a>
                     <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
                         <li><a routerLink="/listproducts1" ngbDropdownItem type="button" >All Products</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a ngbDropdownItem href="#">Popular Items </a></li>
-                        <li><a ngbDropdownItem href="#">New Arrivals </a></li>
+                        <li><a ngbDropdownItem href="#">Produits populaires </a></li>
                       </ul>
                 </li>
             </ul>
             
-
+            <form class="d-flex">
+              <a class="btn btn-primary rounded-circle" >
+                <i class="bi bi-person-fill me-1"></i>
+                Profile
+                <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
+              </a>
+            </form>
             
                     <!-- <form class="d-flex">
                         <a class="btn btn-outline-dark" href="/Panier">
@@ -94,7 +99,7 @@
                 <hr>
                 </div>
                 <div class="container">
-                <h3 style="font-weight: bold;">PRODUCT</h3>
+                <h3 style="font-weight: bold;">Notre boutique</h3>
                 <ng-container *ngIf="!isEditMode3; else editMode_3"> 
                    <h4 class="flex-container"> <span class="text">
                 {{this.templateContent.description}}
@@ -114,18 +119,18 @@
                     <div class="row">
                         <div class="col-md-4 py-3 py-md-0">
                             <i class="fa-solid fa-cart-shopping"></i>
-                            <h5>Free Shipping</h5>
-                            <p>On order over $100</p>
+                            <h5>Livraison gratuite</h5>
+                            <p>Sur commande supérieure à 100 DT</p>
                         </div>
                         <div class="col-md-4 py-3 py-md-0">
                             <i class="fa-solid fa-truck"></i>
-                            <h5>Fast Delivery</h5>
-                            <p>World wide</p>
+                            <h5>Livraison rapide</h5>
+                            <p>sur toute la Tunisie</p>
                         </div>
                         <div class="col-md-4 py-3 py-md-0">
                             <i class="fa-solid fa-thumbs-up"></i>
-                            <h5>Big Choice</h5>
-                            <p>Of product</p>
+                            <h5>Grand choix</h5>
+                            <p>de produits</p>
                         </div>
                     </div>
                 </div>

@@ -59,7 +59,8 @@
   color: #ffffff;
   text-decoration: none;
   margin-right: 20px;
-  font-size:x-large;
+  font-size:25px;
+  font-family: Comic sans MS;
 }
 
 .links a:last-child {
@@ -67,15 +68,19 @@
 }
 
 .links a:hover {
-  text-decoration: underline;
+  color:cornflowerblue;
 }
 
 /* Style pour les liens d'authentification */
 .auth-links a {
   color: #ffffff;
   text-decoration: none;
-  margin-right: 20px;
-  font-size:x-large;
+  margin-right: 0px;
+  font-size:20px;
+}
+
+.auth-links  {
+ display: flex;
 }
 
 .auth-links a:last-child {
@@ -83,7 +88,7 @@
 }
 
 .auth-links a:hover {
-  text-decoration: underline;
+  color:cornflowerblue;
 }
 
 
@@ -112,8 +117,8 @@ position: absolute;
  border: 2px solid #d6d4d4;
 top:0px;
 right: -1.1px;
-width: 80%;
- /* border-radius: 40px; */
+width: 100%;
+ border-radius: 40px; 
  padding:10px;
 
 }
@@ -145,19 +150,8 @@ width: 80%;
 border-radius: 40px;
   padding: 10px;
 }
-.dropdown button{
-  background: rgb(0, 0, 255);
-border-radius: 40px;
-  padding: 10px;
-  height: 60px;
- 
-}
-.dropdown {
-  width: 80%;
-  position: absolute;
- top:261.5px;
- right: 100px;
-}
+
+
 .section{
   display: flex;
   justify-content: center;
@@ -217,7 +211,7 @@ transition: filter 0.3s ease-in-out;
   width: 40%;
   background-color: #000;
   position: absolute;
-  top:125%;
+  top:135%;
   left: 30%;
   opacity: 20%;
 }
@@ -272,8 +266,9 @@ h4{
   opacity: 0.5;
 }
 .body{
-  height: 1200px;
+  height: 550px;
   background-color: rgb(243, 243, 243);
+  
 }
 
 .build{
@@ -331,3 +326,47 @@ position: absolute;
 top:220px;
 left: -100px;
 } */
+.page-section {
+  padding: 2rem 0;
+}
+.page-section h2.section-heading, .page-section .section-heading.h2 {
+  font-size: 2.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+.page-section h3.section-subheading, .page-section .section-subheading.h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  section {
+    padding: 9rem 0;
+  }
+}
+.text-center {
+  text-align: center !important;
+}
+.page-section h2.section-heading, .page-section .section-heading.h2 {
+  font-size: 2.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+.page-section h3.section-subheading, .page-section .section-subheading.h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  margin-bottom: 4rem;
+}
+.text-muted {
+  --bs-text-opacity: 1;
+  color: #6c757d !important;
+}
+.my-3 {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}

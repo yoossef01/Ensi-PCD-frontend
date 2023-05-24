@@ -16,7 +16,7 @@ vendeur:Vendeur;
 
 selectedBoutique: string;
 
-constructor(private vendeurService:VendeurService, private router:Router) { }
+constructor(private vendeurService:VendeurService, private router:Router,private elementRef:ElementRef) { }
   
   
 
@@ -34,6 +34,10 @@ getVendeurByNomboutique(nomboutique : string) {
     this.router.navigate(['templateclient/'+data.idTemplate+'/'+data.id]);
 
   })
+}
+scrollToService() {
+  const element = this.elementRef.nativeElement.querySelector('#services');
+  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 }

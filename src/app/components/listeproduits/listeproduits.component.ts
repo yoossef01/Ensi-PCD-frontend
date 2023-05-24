@@ -35,7 +35,7 @@ export class ListeproduitsComponent implements OnInit {
   private catadded =false;
   produitF!:Produit[];
   nomNewCat:string;
-  
+  vendor:Vendeur;
   categorieProduit:Categorie=new Categorie(0,"",{id:0}); 
   produit:Produit=new Produit("","",0,0,"",this.categorieProduit,0,{id:0}) ;
   cat:Categorie ;
@@ -45,6 +45,8 @@ export class ListeproduitsComponent implements OnInit {
   vendeur:Vendeur;
   client:Client;
   idTemplate : number;
+  vendeurs:Vendeur[]=[];
+  selectedBoutiqueId:number;
  productToCompare:ProductToCompare=new ProductToCompare(1,this.produit,{id:0})
    constructor(private service:ProduitService,private sc:CategorieService,public dialog:MatDialog,private router: Router,
     private commandeService: CommandeService,private pc:ProductToCompareService,
@@ -62,7 +64,7 @@ export class ListeproduitsComponent implements OnInit {
     getAll()
     {
       this.service.getAllProducts().subscribe(data=>{this.produitF=data;this.produits=this.produitF})
-      this.sc.getAllCategories().subscribe(data=>{this.categories=data; this.categories=this.categories})
+      this.vendeurservice.getAllVendeurs().subscribe(data=>{this.vendeurs=data;console.log(this.vendeurs)})
     }
     //les fonctions de barre de rechreche
   set texte(ch:string)
@@ -95,5 +97,25 @@ getVendeurById(n : number) {
 
 navigation(i : number) {
   this.getVendeurById(i);
+}
+selectBoutique(event: any) {
+  if (event.target.checked) {
+    this.selectedBoutiqueId = parseInt(event.target.value);
+    this.vendeurservice.getVendeurById(this.selectedBoutiqueId).subscribe(data => {
+      this.vendor = data;
+      this.produitF = this.produits.filter(x => x.vendeur.id === this.vendor.id);
+    });
+  } else {
+    this.selectedBoutiqueId = 0;
+    this.produitF = this.produits;
+  }
+}
+getVendeurByNomboutique(nomboutique : string) {
+  
+  this.vendeurservice.getVendeurByNomboutique(nomboutique).subscribe(data=>{this.vendeur=data
+  
+    this.router.navigate(['templateclient/'+data.idTemplate+'/'+data.id]);
+
+  })
 }
 }

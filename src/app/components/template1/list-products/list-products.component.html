@@ -96,6 +96,24 @@
       
       
       <div class="row ">
+        <div type="button" class="col-sm-4 my-2" (click)="openDialog()"  >
+          <div class="card1" style="width: 18rem;">
+              <img class="card-img-top" src="https://via.placeholder.com/150x150" width="50" height= "170" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Nom de produit</h5>
+                <h6 style="color:red">
+  
+                 PrixDT
+                </h6>
+              
+                <p> <a class="btn btn-primary" id="btn">Ajouter un produit</a>
+              </p>
+              
+              </div>
+              
+              
+            </div>
+</div>
           <div class="col-sm-4 my-2"  *ngFor="let p of this.produitF">
               <div class="card" style="width: 18rem;">
                   <img class="card-img-top" src="http://localhost:8080/apiproduit/getimage/{{p.id}}" width="50" height= "170" alt="Card image cap">
@@ -125,24 +143,8 @@
       <ng-template #repture><h6 style="color: brown"> Rupture de Stock</h6>
       </ng-template>
           </div>
-          <div type="button" class="col-sm-4 my-2" (click)="openDialog()"  >
-            <div class="card1" style="width: 18rem;">
-                <img class="card-img-top" src="https://via.placeholder.com/150x150" width="50" height= "170" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Nom de produit</h5>
-                  <h6 style="color:red">
-    
-                   PrixDT
-                  </h6>
-                
-                  <p> <a class="btn btn-primary" id="btn">Ajouter un produit</a>
-                </p>
-                
-                </div>
-                
-                
-              </div>
-</div></div>
+          
+</div>
 
 
 <!-- <div [ngSwitch]="this.selectedValue">

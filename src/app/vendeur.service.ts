@@ -12,7 +12,7 @@ export class VendeurService {
  id:number;
  isLoggedIn = new BehaviorSubject<boolean>(false);
 
- private idvendeur : number;
+ public idvendeur : number;
 
  private idtemplate : number;
 

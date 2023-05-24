@@ -16,25 +16,23 @@
                   <h6 class="title">Boutiques</h6>
               </a>
           </header>
-          <div class="filter-content collapse show" id="collapse_1" >
-              <div class="card-body">
-                  <form class="pb-3">
-                    
-                  </form>
-                  
-                  <ul class="item-show-1"  >
-
-                    <div *ngFor="let v of vendeurs">
-                      <label>
-                        <input type="checkbox"  [value]="v.id" [ngModel]="selectedBoutiqueId === v.id" (change)="selectBoutique($event)">
-                        
-                        <a [attr.href]="'templateclient/' + v.idTemplate+'/'+v.id" >{{ v.nom }}</a>
-                      </label>
-                    </div>
-                    </ul>
-  
-              </div> <!-- card-body.// -->
+          <div class="filter-content collapse show" id="collapse_1">
+            <div class="card-body">
+              <div class="pb-3">
+                <input type="text"  [(ngModel)]="texteBoutique" class="form-control" aria-label="Default" placeholder="Recherche boutique" aria-describedby="inputGroup-sizing-default">
+              </div>
+          
+              <ul class="item-show-1">
+                <div *ngFor="let v of vendeurs">
+                  <label>
+                    <input type="checkbox" [value]="v.id" [ngModel]="selectedBoutiqueId === v.id" (change)="selectBoutique($event)">
+                    <a [attr.href]="'templateclient/' + v.idTemplate + '/' + v.id" (click)="getVendeurByNomboutique(v.nomboutique)">{{ v.nomboutique }}</a>
+                  </label>
+                </div>
+              </ul>
+            </div>
           </div>
+          
       </article> <!-- filter-group  .// -->
       
       

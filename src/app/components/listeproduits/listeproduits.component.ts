@@ -41,6 +41,7 @@ export class ListeproduitsComponent implements OnInit {
   cat:Categorie ;
   idCategorie:number;
   categories:Categorie[]=[];
+  vendeurF:Vendeur[]=[];
   photo:File;
   vendeur:Vendeur;
   client:Client;
@@ -64,7 +65,8 @@ export class ListeproduitsComponent implements OnInit {
     getAll()
     {
       this.service.getAllProducts().subscribe(data=>{this.produitF=data;this.produits=this.produitF})
-      this.vendeurservice.getAllVendeurs().subscribe(data=>{this.vendeurs=data;console.log(this.vendeurs)})
+      this.vendeurservice.getAllVendeurs().subscribe(data=>{this.vendeurs=data;this.vendeurF=this.vendeurs;
+        console.log(this.vendeurs)})
     }
     //les fonctions de barre de rechreche
   set texte(ch:string)
@@ -74,6 +76,14 @@ export class ListeproduitsComponent implements OnInit {
   filtrer(mot:string)
     {
      return this.produits.filter(x=>x.nom.indexOf(mot)!=-1)
+    }
+    set texteBoutique(ch:string)
+    {
+   this.vendeurs=this.filtrerBoutique(ch);
+    }
+  filtrerBoutique(mot:string)
+    {
+     return this.vendeurF.filter(x=>x.nomboutique.indexOf(mot)!=-1)
     }
   
 
@@ -111,10 +121,11 @@ selectBoutique(event: any) {
   }
 }
 getVendeurByNomboutique(nomboutique : string) {
-  
-  this.vendeurservice.getVendeurByNomboutique(nomboutique).subscribe(data=>{this.vendeur=data
-  
-    this.router.navigate(['templateclient/'+data.idTemplate+'/'+data.id]);
+
+  this.vendeurservice.getVendeurByNomboutique(nomboutique).subscribe(data=>{this.vendeur=data;
+  this.vendeurservice.setIdVendeur(data.id);
+  console.log(""+this.vendeurservice.idvendeur)
+   // this.router.navigate(['templateclient/'+data.idTemplate+'/'+data.id]);
 
   })
 }
